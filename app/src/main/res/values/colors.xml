@@ -8,7 +8,7 @@
     <!-- Tab -->
     <color name="tab_bg_color">#fff</color>
     <color name="tab_text">#fff</color>
-    <color name="tab_text_active">#fec400</color>
+    <color name="tab_text_active">#ee5900</color>
 <!--    <color name="tab_text_active">#fec400</color>-->
 
     <!-- Action Bar -->

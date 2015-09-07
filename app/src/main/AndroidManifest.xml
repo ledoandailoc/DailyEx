@@ -40,6 +40,14 @@
             android:name=".activity.BaiTapDiBoActivity"
             android:label="@string/title_activity_bai_tap_di_bo" >
         </activity>
+        <activity
+            android:name=".activity.BaiTapDiBoTheoBuocActivity"
+            android:label="@string/title_activity_bai_tap_di_bo" >
+        </activity>
+        <activity
+            android:name=".activity.BaiTapDiBoTheoThoiGianActivity"
+            android:label="@string/title_activity_bai_tap_di_bo" >
+        </activity>
     </application>
 
 </manifest>

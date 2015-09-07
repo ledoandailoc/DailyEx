@@ -34,6 +34,10 @@ public class LichtapDetailActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lichtap_detail);
+
+		TextView title = (TextView) findViewById(R.id.actionbar_tvTitile);
+		title.setText("Chi Tiết Ngày Tập");
+
 		getSupportActionBar().hide();
 		String arrMaMonTap[] = {"Tất cả môn tập", "Đi bộ", "Chạy bộ", "Đạp xe", "Hít Đất"};
 
@@ -50,7 +54,7 @@ public class LichtapDetailActivity extends AppCompatActivity {
 			spinner_monTap = (Spinner)findViewById(R.id.spinner_monTap);
 			textView_ngayDetail = (TextView)findViewById(R.id.textView_ngayDetail);
 			textView_ngayDetail.setText("Ngày: " + date);
-			ArrayAdapter arrayadapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, arrMaMonTap);
+			ArrayAdapter arrayadapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrMaMonTap);
 			arrayadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner_monTap.setAdapter(arrayadapter);
 			spinner_monTap.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {

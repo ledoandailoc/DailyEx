@@ -1,24 +1,24 @@
 package com.example.ledoa.dailyexsuper.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.ledoa.dailyexsuper.R;
 
-public class BaiTapDiBoActivity extends AppCompatActivity {
+public class BaiTapDiBoTheoBuocActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_baitapdibo);
+        setContentView(R.layout.activity_baitapdibo_buoc);
 
         getSupportActionBar().hide();
 
         TextView title = (TextView) findViewById(R.id.actionbar_tvTitile);
-        title.setText("Loại Bài Tập");
+        title.setText("Bài tập hoàn thành mục tiêu bước đi");
     }
 
     @Override
