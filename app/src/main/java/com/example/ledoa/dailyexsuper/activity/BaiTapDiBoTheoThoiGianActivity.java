@@ -18,7 +18,7 @@ public class BaiTapDiBoTheoThoiGianActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         TextView title = (TextView) findViewById(R.id.actionbar_tvTitile);
-        title.setText("Bài tập hoàn thành mục tiêu thời gian");
+        title.setText("Mục tiêu thời gian");
     }
 
     @Override

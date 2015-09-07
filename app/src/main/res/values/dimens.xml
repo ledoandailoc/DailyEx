@@ -10,7 +10,7 @@
     <dimen name="tab_label_text_size">13sp</dimen>
 
     <!-- Action Bar -->
-    <dimen name="actionbar_height">55dp</dimen>
+    <dimen name="actionbar_height">50dp</dimen>
     <dimen name="actionbar_icon_padding">12dp</dimen>
     <dimen name="actionbar_text_size">20sp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
