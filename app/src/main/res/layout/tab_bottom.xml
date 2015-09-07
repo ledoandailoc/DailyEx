@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tab_height"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/silver2">
+    <RelativeLayout
+        android:layout_marginLeft="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1">
+        <ImageView
+            android:layout_marginTop="3dp"
+            android:layout_width="@dimen/icon_tab_height"
+            android:layout_height="@dimen/icon_tab_height"
+            android:layout_centerInParent="true"
+            android:contentDescription="@null"
+            android:src="@drawable/icon_tab_menu"/>
+    </RelativeLayout>
+
+<LinearLayout
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginRight="6dp"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_weight="0.9">
+
+    <RelativeLayout
+        android:id="@+id/tab_rl_baitap"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_marginTop="3dp"
+            android:id="@+id/tab_iv_baitap"
+            android:layout_width="@dimen/icon_tab_height"
+            android:layout_height="@dimen/icon_tab_height"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@null"
+            android:src="@drawable/icon__tab_baitap" />
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/tab_tv_baitap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tab_iv_baitap"
+            android:layout_centerHorizontal="true"
+            android:text="@string/tab_baitap"
+            android:textColor="@color/tab_text"
+            android:textSize="@dimen/tab_label_text_size" />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/tab_rl_lichtap"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_marginTop="3dp"
+            android:id="@+id/tab_iv_lichtap"
+            android:layout_width="@dimen/icon_tab_height"
+            android:layout_height="@dimen/icon_tab_height"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@null"
+            android:src="@drawable/icon_tab_lichtap" />
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/tab_tv_lichtap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tab_iv_lichtap"
+            android:layout_centerHorizontal="true"
+            android:text="@string/tab_lichtap"
+            android:textColor="@color/tab_text"
+            android:textSize="@dimen/tab_label_text_size" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/tab_rl_luyentap"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_marginTop="3dp"
+            android:id="@+id/tab_iv_luyentap"
+            android:layout_width="@dimen/icon_tab_height"
+            android:layout_height="@dimen/icon_tab_height"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@null"
+            android:src="@drawable/icon_tab_tapluyen" />
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/tab_tv_luyentap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tab_iv_luyentap"
+            android:layout_centerHorizontal="true"
+            android:text="@string/tab_luyentap"
+            android:textColor="@color/tab_text"
+            android:textSize="@dimen/tab_label_text_size" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/tab_rl_mangxahoi"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_marginTop="3dp"
+            android:id="@+id/tab_iv_mangxahoi"
+            android:layout_width="@dimen/icon_tab_height"
+            android:layout_height="@dimen/icon_tab_height"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@null"
+            android:src="@drawable/icon_mangxahoi" />
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/tab_tv_mangxahoi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tab_iv_mangxahoi"
+            android:layout_centerHorizontal="true"
+            android:text="@string/tab_mangxahoi"
+            android:textColor="@color/tab_text"
+            android:textSize="@dimen/tab_label_text_size" />
+
+    </RelativeLayout>
+</LinearLayout>
+
+</LinearLayout>

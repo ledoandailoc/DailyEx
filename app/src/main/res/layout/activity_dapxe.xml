@@ -1,0 +1,172 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:background="@drawable/room2"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.dailyex.MainActivity" >
+
+   <ProgressBar
+       android:id="@+id/progressBar"
+       style="?android:attr/progressBarStyleHorizontal"
+       android:layout_width="wrap_content"
+       android:layout_height="38dp"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentStart="true"
+       android:layout_alignRight="@+id/textView"
+       android:indeterminate="false"
+       android:max="100"
+       android:progress="0"
+       android:progressDrawable="@drawable/theme_progress"
+       android:secondaryProgress="0" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0/0"
+        android:id="@+id/textView"
+        android:textSize="30sp"
+        android:textColor="#060000"
+        android:singleLine="true"
+        android:longClickable="true"
+        android:layout_below="@+id/progressBar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textIsSelectable="false" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_start"
+        android:src="@drawable/start2"
+        android:onClick="btn_start"
+        android:background="#002b172e"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_row="23"
+        android:layout_column="12" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+
+        android:text="Mục tiêu: "
+        android:textColor="#060000"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_vertical"
+        style="@style/AppTheme"
+        android:layout_above="@+id/btn_start"
+        android:layout_alignLeft="@+id/btn_pause"
+        android:layout_alignStart="@+id/btn_pause" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_sobuoc"
+        android:layout_marginLeft="-6dp"
+        android:text="100"
+        android:paddingTop="0dp"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2"
+        android:textColor="#fff" 
+        android:maxLength="4"/>
+
+    <ImageButton
+        android:background="#002b172e"
+        android:layout_marginBottom="5dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/btn_stop"
+        android:onClick="btn_stop"
+        android:src="@drawable/stop"
+        android:layout_alignBottom="@+id/btn_start"
+        android:layout_alignLeft="@+id/btn_pause"
+        android:layout_alignStart="@+id/btn_pause" />
+
+    <ImageView
+        android:visibility="invisible"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="6dp"
+        android:id="@+id/finishIcon"
+        android:src="@drawable/finish_do"
+        android:contentDescription=""
+        android:layout_alignTop="@+id/textView"
+        android:layout_toLeftOf="@+id/textView"
+        android:layout_toStartOf="@+id/textView" />
+
+
+
+    <ImageButton
+        android:background="#002b172e"
+        android:layout_width="50dp"
+        android:layout_marginTop="5px"
+        android:layout_height="50dp"
+        android:id="@+id/btn_pause"
+        android:onClick="btn_pause"
+        android:src="@drawable/pause"
+        android:layout_below="@+id/editText_sobuoc"
+        android:layout_toLeftOf="@+id/btn_start"
+        android:layout_toStartOf="@+id/btn_start" />
+
+    <TextView
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="test"
+        android:id="@+id/test"
+        android:layout_below="@+id/finishIcon"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/TocDo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView"
+        android:layout_below="@+id/textView"
+        android:text="Tốc Độ: ? bước / ?  Phút"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/TrangThai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/finishIcon"
+        android:layout_centerHorizontal="true"
+        android:text="Waiting..."
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#fff"
+        android:textSize="29sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/editText_sobuoc"
+        android:layout_toEndOf="@+id/editText_sobuoc"
+        android:layout_toRightOf="@+id/editText_sobuoc"
+        android:text="bước"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#060000"
+        android:textIsSelectable="true" />
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/TocDo"
+        android:layout_below="@+id/test"
+        android:textSize="80sp" />
+
+</RelativeLayout>

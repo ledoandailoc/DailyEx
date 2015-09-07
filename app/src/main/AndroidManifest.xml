@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ledoa.dailyexsuper" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon_app"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.AppCompat.NoActionBar" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.DiBoActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activity.ChayActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activity.HitDatActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activity.XeDapActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activity.LichtapDetailActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activity.BaiTapDiBoActivity"
+            android:label="@string/title_activity_bai_tap_di_bo" >
+        </activity>
+    </application>
+
+</manifest>

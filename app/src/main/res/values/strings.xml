@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Daily Excercise</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="confirm_exit">Tap back button again to exit app</string>
+
+    <!-- Tab -->
+    <string name="tab_luyentap">Luyện Tập</string>
+    <string name="tab_lichtap">Lịch Tập</string>
+    <string name="tab_baitap">Bài Tập</string>
+    <string name="tab_mangxahoi">Mạng Xã Hội</string>
+
+    <!-- Home Fragment -->
+    <string name="home_title">Home Fragment</string>
+
+    <!-- Activity Fragment -->
+    <string name="activity_title">Activity Fragment</string>
+
+    <!-- Training Fragment -->
+    <string name="training_title">Training Fragment</string>
+
+    <!-- Map Fragment -->
+    <string name="map_title">Map Fragment</string>
+    <string name="title_activity_start_fragment">StartFragment</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="title_activity_pairing_fragment">PairingFragment</string>
+    <string name="title_activity_alert">AlertActivity</string>
+    <string name="title_activity_tranning">TranningActivity</string>
+    <string name="title_activity_bai_tap_di_bo">BaiTapDiBoActivity</string>
+
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_marginTop="7dp"
+        android:id="@+id/imageView_tabtimban"
+        android:layout_width="32.0dip"
+        android:layout_height="32.0dip"
+        android:src="@drawable/icon_tab_timban"
+        />
+</RelativeLayout>
