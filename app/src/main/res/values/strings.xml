@@ -28,5 +28,8 @@
     <string name="title_activity_alert">AlertActivity</string>
     <string name="title_activity_tranning">TranningActivity</string>
     <string name="title_activity_bai_tap_di_bo">BaiTapDiBoActivity</string>
+    <!--Drawable-->
+    <string name="open">DailyExcercise</string>
+    <string name="close">Bye</string>
 
 </resources>

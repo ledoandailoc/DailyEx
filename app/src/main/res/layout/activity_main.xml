@@ -23,17 +23,87 @@
             android:id="@+id/tab_container"
             layout="@layout/tab_bottom" />
 
+
+
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/left_drawer"
-        android:layout_width="280dp"
+    <RelativeLayout
+        android:layout_width="290dp"
+        android:orientation="vertical"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/black"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity = "start"
         android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
-        android:paddingTop="64dp" />
+        android:background="#fff"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/thongtincanhan"
+            android:background="#009688"
+            android:layout_marginBottom="12dp">
+
+            <ImageView
+                android:id="@+id/AvartarLeft"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="17dp"
+                android:layout_marginLeft="12dp"
+                android:src="@drawable/avar_atuan" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AnhtuanUit"
+                android:layout_gravity="center_vertical"
+                android:textSize="23dp"
+                android:textColor="#fff" />
+
+        </LinearLayout>
+
+        <ListView
+            android:background="@color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/left_drawer"
+            android:paddingLeft="9dp"
+            android:paddingRight="9dp"
+            android:divider="#fff"
+            android:dividerHeight="0.01dp"
+            android:layout_below="@+id/thongtincanhan"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ee5900"
+            android:layout_alignParentBottom="true"
+            >
+
+            <ImageView
+                android:id="@+id/AvartarLeft1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="12dp"
+                android:src="@drawable/icon__tab_baitap" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Go PRO!"
+                android:textSize="15dp"
+                android:layout_marginLeft="9dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="#fff" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
 
 </android.support.v4.widget.DrawerLayout>

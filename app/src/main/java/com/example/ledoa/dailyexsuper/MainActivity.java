@@ -1,27 +1,36 @@
 package com.example.ledoa.dailyexsuper;
 
-import android.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.ledoa.dailyexsuper.adapter.LeftAdapter;
 import com.example.ledoa.dailyexsuper.adapter.MainFragmentAdapter;
-import com.example.ledoa.dailyexsuper.fragment.MyFragment;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.ItemMenuLeft;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     RelativeLayout mRlTabLuyenTap, mRlTabLichTap, mRlTabBaiTap, mRlTabMangXaHoi;
     ImageView mIvTabLuyenTap, mIvTabLichTap, mIvTabBaiTap, mIvTabMangXaHoi;
     TextView mTvTabLuyenTap, mTvTabLichTap, mTvTabBaiTap, mTvTabMangXaHoi, mTvActionBarTitle;
+    DrawerLayout drawerLayout;
+    LeftAdapter adapterLeft;
+    List<ItemMenuLeft> listDrawer;
+    ListView ListViewLeft;
 
+    int itemAvatar[] = {R.drawable.icon_timban, R.drawable.icon_thongbao, R.drawable.icon_tab,R.drawable.icon_thongbao,
+            R.drawable.icon_logout};
+    String itemText[] = {"Thông báo mới","Thêm bạn",
+            "Danh bạ","Cài đặt riêng tư","Thoát"};
     AppContants.TAB_TYPE mCurentTab = AppContants.TAB_TYPE.TAB_NONE;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +38,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         mTvActionBarTitle = (TextView) findViewById(R.id.actionbar_tvTitile);
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+
+        ListViewLeft = (ListView)findViewById(R.id.left_drawer);
+
+
+        listDrawer = new ArrayList<ItemMenuLeft>();
+        for(int i=0; i< itemText.length;i++){
+            ItemMenuLeft item = new ItemMenuLeft();
+            item.setHinhAnh(itemAvatar[i]);
+            item.setTenMenu(itemText[i]);
+            listDrawer.add(item);
+        }
+        adapterLeft = new LeftAdapter(this, R.layout.custom_layout, listDrawer);
+
+        ListViewLeft.setAdapter(adapterLeft);
 
         attachFragment();
         attachTab();
