@@ -1,15 +1,19 @@
 package com.example.ledoa.dailyexsuper;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.ledoa.dailyexsuper.activity.DanhBaActivity;
+import com.example.ledoa.dailyexsuper.activity.ThongBaoActivity;
 import com.example.ledoa.dailyexsuper.adapter.LeftAdapter;
 import com.example.ledoa.dailyexsuper.adapter.MainFragmentAdapter;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.ItemMenuLeft;
@@ -53,6 +57,37 @@ public class MainActivity extends AppCompatActivity {
         adapterLeft = new LeftAdapter(this, R.layout.custom_layout, listDrawer);
 
         ListViewLeft.setAdapter(adapterLeft);
+
+        ListViewLeft.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Intent iThongBao = new Intent(MainActivity.this, ThongBaoActivity.class);
+                Intent iThemBan = new Intent(MainActivity.this, ThongBaoActivity.class);
+                Intent iDanhBa = new Intent(MainActivity.this, DanhBaActivity.class);
+                /*Intent iLogin = new Intent(MainActivity.this, Login.class);*/
+
+                switch (position) {
+                    case 0:
+                        startActivity(iThongBao);
+                        break;
+                    case 1:
+                        startActivity(iThemBan);
+                        break;
+                    case 2:
+                        startActivity(iDanhBa);
+                        break;
+                   /* case 5:
+                        startActivity(iLogin);
+                        break;*/
+
+                    default:
+                        break;
+                }
+
+            }
+        });
+
 
         attachFragment();
         attachTab();

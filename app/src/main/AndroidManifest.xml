@@ -48,6 +48,18 @@
             android:name=".activity.BaiTapDiBoTheoThoiGianActivity"
             android:label="@string/title_activity_bai_tap_di_bo" >
         </activity>
+        <activity
+            android:name=".activity.ThongBaoActivity"
+            android:label="@string/title_activity_bai_tap_di_bo" >
+        </activity>
+        <activity
+            android:name=".activity.ThemBanActivity"
+            android:label="@string/title_activity_bai_tap_di_bo" >
+        </activity>
+        <activity
+            android:name=".activity.DanhBaActivity"
+            android:label="@string/title_activity_bai_tap_di_bo" >
+        </activity>
     </application>
 
 </manifest>

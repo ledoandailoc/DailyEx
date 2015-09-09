@@ -1,0 +1,34 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/AvatarThemBan"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/avatar" />
+
+    <TextView
+        android:id="@+id/textViewThemBan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/AvatarThemBan"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/AvatarThemBan"
+        android:text="AnhtuanUit" />
+
+    <Button
+        android:id="@+id/buttonThemBan"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_alignBottom="@+id/AvatarThemBan"
+        android:layout_marginBottom="11dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="11dp"
+        android:text="Kết bạn" 
+        android:textSize="10dp"/>
+
+</RelativeLayout>
