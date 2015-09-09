@@ -23,7 +23,6 @@ public class DanhBaActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_danh_ba);
 
-		
 		listDanhBa = new ArrayList<ItemDanhBa>();
 		listViewDanhBa = (ListView)findViewById(R.id.listViewDanhBa);
 		
