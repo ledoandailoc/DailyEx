@@ -52,7 +52,7 @@
                 android:layout_marginRight="17dp"
                 android:layout_marginBottom="17dp"
                 android:layout_marginLeft="12dp"
-                android:src="@drawable/avar_atuan" />
+                android:src="@drawable/ava1" />
 
             <TextView
                 android:id="@+id/textView1"

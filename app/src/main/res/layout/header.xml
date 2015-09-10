@@ -28,7 +28,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="8dp"
-                    android:src="@drawable/avar_atuan" />
+                    android:src="@drawable/ava1" />
 
                 <EditText
                     android:id="@+id/editText1"
@@ -37,21 +37,21 @@
                     android:layout_alignBottom="@+id/imageView1"
                     android:layout_marginBottom="12dp"
                     android:layout_marginLeft="7dp"
-                    android:layout_toLeftOf="@+id/imageButton1"
+                    android:layout_toLeftOf="@+id/finishIcon"
                     android:layout_toRightOf="@+id/imageView1"
                     android:ems="10" >
 
                     <requestFocus />
                 </EditText>
 
-                <ImageButton
-                    android:id="@+id/imageButton1"
+                <ImageView
+                    android:id="@+id/finishIcon"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="16dp"
-                    android:src="@drawable/go" />
+                    android:src="@drawable/icon_checked" />
 
             </RelativeLayout>
 

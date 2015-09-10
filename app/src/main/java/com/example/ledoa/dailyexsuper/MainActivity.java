@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -107,6 +108,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ImageView tv_tab_menu = (ImageView) findViewById(R.id.icon_tab_menu);
+        tv_tab_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(Gravity.START);
+            }
+        });
 
         attachFragment();
         attachTab();
