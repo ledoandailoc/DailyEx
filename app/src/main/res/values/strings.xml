@@ -32,4 +32,33 @@
     <string name="open">DailyExcercise</string>
     <string name="close">Bye</string>
 
+    <string name="token_builder">Bearer %s</string>
+
+    <string name="error_network_server_timeout">Request timeout</string>
+    <string name="error_network_no_internet">No internet connection</string>
+    <string name="error_network_request_fail">Request fail</string>
+    <string name="error_network_auth_failure_error">Auth failure error</string>
+    <string name="error_network_error">Request error</string>
+    <string name="error_parse_json">Can not get data</string>
+
+    <!-- Drawer Menu -->
+    <string name="drawer_event">EVENT</string>
+    <string name="drawer_notification">NOTIFICATION</string>
+    <string name="drawer_message">MESSAGE</string>
+    <string name="drawer_profile">PROFILE</string>
+    <string name="drawer_logout">LOGOUT</string>
+    <string name="drawer_content_empty" />
+
+    <!-- Forgot Password -->
+    <string name="txtemail">Email</string>
+    <string name="tvForgot">Will we send you a reset password link to your inbox</string>
+    <string name="btnForgot">Forgot</string>
+
+    <!-- Login -->
+    <string name="edtPassword">Password</string>
+    <string name="btnLogin">Login</string>
+    <string name="tvSingupHere">SignUp here</string>
+    <string name="title_activity_message">Message</string>
+
+
 </resources>

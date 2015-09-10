@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/lib/com.horical.siyaplaceandroid.customview.SwipyRefeshLayout.SwipyRefreshLayout"
+    android:id="@+id/rlMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.horical.siyaplaceandroid.customview.SwipyRefeshLayout.SwipyRefreshLayout
+        android:id="@+id/activity_main_swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_container"
+        app:directon="top">
+        <ListView
+            android:id="@+id/lv_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:listSelector="@android:color/transparent"
+            android:stackFromBottom="true" />
+
+    </com.horical.siyaplaceandroid.customview.SwipyRefeshLayout.SwipyRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/rl_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#E0E0E0"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rlInputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <ImageButton
+                android:id="@+id/ib_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/icon_more" />
+
+            <ImageButton
+                android:id="@+id/imgFace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toEndOf="@+id/ib_more"
+                android:layout_toRightOf="@+id/ib_more"
+                android:background="@drawable/icon_emotion" />
+
+
+            <EditText
+                android:id="@+id/edt_chat_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_toEndOf="@+id/imgFace"
+                android:layout_toLeftOf="@+id/btn_chat_send"
+                android:layout_toRightOf="@+id/imgFace"
+                android:layout_toStartOf="@+id/btn_chat_send"
+                android:background="#FFFFFF"
+                android:hint="Insert message"
+                android:padding="5dp"
+                />
+
+            <ImageButton
+                android:id="@+id/btn_chat_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/imgVoice"
+                android:layout_toStartOf="@+id/imgVoice"
+                android:background="@drawable/icon_send" />
+
+            <ImageButton
+                android:id="@+id/imgVoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/icon_voice" />
+
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <com.horical.siyaplaceandroid.customview.AutomaticWrapLayout
+            android:id="@+id/rlLine1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+
+
+        </com.horical.siyaplaceandroid.customview.AutomaticWrapLayout>
+
+        <com.horical.siyaplaceandroid.customview.AutomaticWrapLayout
+            android:id="@+id/rlLine2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+
+
+        </com.horical.siyaplaceandroid.customview.AutomaticWrapLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
+

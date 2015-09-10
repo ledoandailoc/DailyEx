@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:orientation="horizontal"
+    >
+
+    <com.horical.siyaplaceandroid.customview.HexagonImageView2
+        android:id="@+id/iv_avatar_other"
+        android:layout_width="@dimen/chat_fragment_avatar_size"
+        android:layout_height="@dimen/chat_fragment_avatar_size"
+        android:scaleType="centerCrop"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/avt" />
+
+    <TextView
+        android:id="@+id/tvSms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="25dp"
+        android:paddingRight="10dp"
+        android:gravity="left"
+        android:layout_marginLeft="-15dp"
+        android:text="Medium"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="45dp"
+        android:layout_toRightOf="@id/iv_avatar_other"
+        android:layout_toEndOf="@id/iv_avatar_other" />
+
+</RelativeLayout>
