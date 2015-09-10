@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.ledoa.dailyexsuper.R;
 import com.example.ledoa.dailyexsuper.adapter.DanhBaAdapter;
@@ -22,6 +23,9 @@ public class DanhBaActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_danh_ba);
+
+		TextView actionbar_tvTitile = (TextView)findViewById(R.id.actionbar_tvTitile);
+		actionbar_tvTitile.setText("Danh bạ");
 
 		listDanhBa = new ArrayList<ItemDanhBa>();
 		listViewDanhBa = (ListView)findViewById(R.id.listViewDanhBa);

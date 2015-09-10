@@ -90,7 +90,7 @@ public class FragmentLichTap extends Fragment {
 			}
 		});
 
-		datePicker.getCalendarView().setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+		/*datePicker.getCalendarView().setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 			@Override
 			public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
@@ -106,7 +106,7 @@ public class FragmentLichTap extends Fragment {
 				textViewTongThoiGian.setText("Tổng thời gian tập luyện: " + String.valueOf(DoiGioPhutGiay.GiaySangGio(Long.parseLong(String.valueOf(tongThoigian)))));
 
 			}
-		});
+		});*/
 		
 		return view;
 	}
