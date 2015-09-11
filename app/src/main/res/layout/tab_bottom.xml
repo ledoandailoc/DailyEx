@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.1">
         <ImageView
+            android:id="@+id/icon_tab_menu"
             android:layout_marginTop="3dp"
             android:layout_width="@dimen/icon_tab_height"
             android:layout_height="@dimen/icon_tab_height"

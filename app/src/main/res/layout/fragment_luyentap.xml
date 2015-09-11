@@ -67,7 +67,7 @@
         <TableLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
             <TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="0.5">
                 <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="0.5">
-                    <ImageView android:layout_marginTop="3dp" android:layout_gravity="center" android:id="@+id/imageViewDiBo" android:layout_width="100.0sp" android:layout_height="120.0sp" android:src="@drawable/walk" />
+                    <ImageView android:layout_marginTop="15dp" android:layout_gravity="center" android:id="@+id/imageViewDiBo" android:layout_width="100.0dp" android:layout_height="80.0dp" android:src="@drawable/walk" />
                     <TextView android:textAppearance="?android:textAppearanceLarge" android:layout_gravity="center" android:id="@+id/textViewDiBo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Đi Bộ" />
                     <ImageView android:layout_gravity="center" android:id="@+id/ImageViewDiBo" android:background="#002b172e" android:layout_width="50dp" android:layout_height="50dp" android:src="@drawable/open_door_btn" android:onClick="clickButtonDibo" />
                     <LinearLayout android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content">
@@ -76,8 +76,8 @@
                     </LinearLayout>
                     <TextView android:layout_marginBottom="2dp" android:layout_gravity="center_horizontal" android:id="@+id/textView_lvDiBo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lv: 5" />
                 </LinearLayout>
-                <LinearLayout android:orientation="vertical" android:paddingLeft="20.0sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="0.5">
-                    <ImageView android:layout_marginTop="3dp" android:layout_gravity="center" android:id="@+id/imageViewDapXe" android:layout_width="120.0sp" android:layout_height="120.0sp" android:src="@drawable/cycling" />
+                <LinearLayout android:orientation="vertical" android:paddingLeft="20.0dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="0.5">
+                    <ImageView android:layout_marginTop="15dp" android:layout_gravity="center" android:id="@+id/imageViewDapXe" android:layout_width="80.0dp" android:layout_height="80.0dp" android:src="@drawable/cycling" />
                     <TextView android:textAppearance="?android:textAppearanceLarge" android:layout_gravity="center" android:id="@+id/textViewDapXe" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Đạp Xe" />
                     <ImageView android:layout_gravity="center" android:id="@+id/ImageViewDapXe" android:background="#002b172e" android:layout_width="50dp" android:layout_height="50dp" android:src="@drawable/open_door_btn" android:onClick="clickButtonDapXe" />
                     <LinearLayout android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content">
@@ -89,7 +89,7 @@
             </TableRow>
             <TableRow android:id="@+id/tableRow2" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="0.5">
                 <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="0.5">
-                    <ImageView android:layout_marginTop="3dp" android:layout_gravity="center" android:id="@+id/imageViewchayBo" android:layout_width="100.0sp" android:layout_height="120.0sp" android:src="@drawable/running" />
+                    <ImageView android:layout_marginTop="15dp" android:layout_gravity="center" android:id="@+id/imageViewchayBo" android:layout_width="100.0dp" android:layout_height="80.0dp" android:src="@drawable/running" />
                     <TextView android:textAppearance="?android:textAppearanceLarge" android:layout_gravity="center" android:id="@+id/textViewChayBo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Chạy Bộ" />
                     <ImageView android:layout_gravity="center" android:id="@+id/ImageViewChayBo" android:background="#002b172e" android:layout_width="50dp" android:layout_height="50dp" android:src="@drawable/open_door_btn" android:onClick="clickButtonChayBo" />
                     <LinearLayout android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content">
@@ -98,8 +98,8 @@
                     </LinearLayout>
                     <TextView  android:layout_marginBottom="2dp" android:layout_gravity="center_horizontal" android:id="@+id/textView_lvChayBo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lv: 3" />
                 </LinearLayout>
-                <LinearLayout android:orientation="vertical" android:paddingLeft="20.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0.5">
-                    <ImageView android:layout_marginTop="3dp" android:layout_gravity="center" android:id="@+id/imageViewHitDat" android:paddingTop="50.0sp" android:layout_width="120.0dip" android:layout_height="120.0sp" android:src="@drawable/hitdat" />
+                <LinearLayout android:orientation="vertical" android:paddingLeft="20.0dp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0.5">
+                    <ImageView android:layout_marginTop="15dp" android:layout_gravity="center" android:id="@+id/imageViewHitDat" android:paddingTop="50.0dp" android:layout_width="80.0dip" android:layout_height="80.0dp" android:src="@drawable/hitdat" />
                     <TextView android:textAppearance="?android:textAppearanceLarge" android:layout_gravity="center" android:id="@+id/textViewHitDat" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hít Đất" />
                     <ImageView android:layout_gravity="center" android:id="@+id/ImageViewHitDat" android:background="#002b172e" android:layout_width="50dp" android:layout_height="50dp" android:src="@drawable/open_door_btn" android:onClick="clickButtonHitDat" />
                     <LinearLayout android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content">

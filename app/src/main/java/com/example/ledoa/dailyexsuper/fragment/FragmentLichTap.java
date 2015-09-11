@@ -26,7 +26,7 @@ import java.util.Date;
 
 
 
-public class FragmentLichTap extends Fragment {
+public class FragmentLichTap extends Fragment implements DatePicker.OnDateChangedListener{
 	
 	DatabaseHandle databaseHandle;
 
@@ -107,7 +107,8 @@ public class FragmentLichTap extends Fragment {
 
 			}
 		});
-		
+
+
 		return view;
 	}
 	
@@ -126,6 +127,19 @@ public class FragmentLichTap extends Fragment {
 	}
 
 
+	@Override
+	public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+		date = new Date();
+		date.setDate(dayOfMonth);
+		date.setMonth(dayOfMonth);
+		date.setYear(year - 1900);
 
+		textViewHienThi.setText(String.valueOf(ConvertDate.ConvertNgayToString(date)));
+
+		int tongThoigian = databaseHandle.tinhTongThoiGianTapTrongNgay(ConvertDate.ConvertNgayToString(date));
+		textViewMonTap.setText("Môn tập: " + databaseHandle.getTenMonTapTheoNgay(ConvertDate.ConvertNgayToString(date)));
+		textViewTongThoiGian.setText("Tổng thời gian tập luyện: " + String.valueOf(DoiGioPhutGiay.GiaySangGio(Long.parseLong(String.valueOf(tongThoigian)))));
+
+	}
 }
 	
