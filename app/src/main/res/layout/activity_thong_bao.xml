@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/actionbar"
+        layout="@layout/actionbar_top_activity" />
+
+    <ListView
+        android:id="@+id/listViewThongBao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:divider="@drawable/xam"
+        android:dividerHeight="1dp">
+        
+    </ListView>
+
+</LinearLayout>

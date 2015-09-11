@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/daily"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvRama"
+
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="32dp"
+        android:gravity="center" />
+
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_large"
+        android:background="@drawable/txt_border"
+        android:gravity="center"
+        android:hint="@string/txtemail"
+        android:inputType="textEmailAddress"
+        android:singleLine="true"
+        android:text="anhtuan71941@gmail.com" />
+
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_large"
+        android:layout_marginLeft="@dimen/size_large"
+        android:layout_marginRight="@dimen/size_large"
+        android:background="@drawable/txt_border"
+        android:gravity="center"
+        android:hint="@string/edtPassword"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:text="1234" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        style="@style/button_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/forgot_button_border"
+        android:text="@string/btnLogin" />
+    <TextView
+        android:id="@+id/tvSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/size_normal"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/tvSingupHere" />
+
+
+</LinearLayout>

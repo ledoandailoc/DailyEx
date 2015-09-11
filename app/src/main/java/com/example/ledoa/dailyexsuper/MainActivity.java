@@ -1,18 +1,28 @@
 package com.example.ledoa.dailyexsuper;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.ledoa.dailyexsuper.activity.ChatActivity;
+import com.example.ledoa.dailyexsuper.activity.DanhBaActivity;
+import com.example.ledoa.dailyexsuper.activity.LoginActivity;
+import com.example.ledoa.dailyexsuper.activity.MessageActivity;
+import com.example.ledoa.dailyexsuper.activity.ThongBaoActivity;
 import com.example.ledoa.dailyexsuper.adapter.LeftAdapter;
 import com.example.ledoa.dailyexsuper.adapter.MainFragmentAdapter;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.ItemMenuLeft;
+import com.example.ledoa.dailyexsuper.util.UserPref;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +49,15 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         mTvActionBarTitle = (TextView) findViewById(R.id.actionbar_tvTitile);
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-
+        LinearLayout lMessage = (LinearLayout)findViewById(R.id.lMessage);
         ListViewLeft = (ListView)findViewById(R.id.left_drawer);
+        lMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MessageActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         listDrawer = new ArrayList<ItemMenuLeft>();
@@ -53,6 +70,43 @@ public class MainActivity extends AppCompatActivity {
         adapterLeft = new LeftAdapter(this, R.layout.custom_layout, listDrawer);
 
         ListViewLeft.setAdapter(adapterLeft);
+        final UserPref userPref = new UserPref();
+        ListViewLeft.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Intent iThongBao = new Intent(MainActivity.this, ThongBaoActivity.class);
+                Intent iThemBan = new Intent(MainActivity.this, ThongBaoActivity.class);
+                Intent iDanhBa = new Intent(MainActivity.this, DanhBaActivity.class);
+                Intent iLogin = new Intent(MainActivity.this, LoginActivity.class);
+                Intent iChat = new Intent(MainActivity.this, ChatActivity.class);
+
+                switch (position) {
+                    case 0:
+                        startActivity(iThongBao);
+                        break;
+                    case 1:
+                        startActivity(iThemBan);
+                        break;
+                    case 2:
+                        startActivity(iDanhBa);
+                        break;
+                    case 3:
+                        startActivity(iChat);
+                        break;
+                    case 4:
+                        UserPref userPref = new UserPref();
+                        userPref.setUser(null);
+                        startActivity(iLogin);
+                        break;
+
+                    default:
+                        break;
+                }
+
+            }
+        });
+
 
         attachFragment();
         attachTab();

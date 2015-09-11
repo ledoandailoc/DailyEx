@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+    <ImageView
+        android:id="@+id/AvatarDanhBa"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:foregroundGravity="center_vertical"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+
+        android:src="@drawable/avar_atuan" />
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/AvatarDanhBa">
+        <TextView
+            android:id="@+id/textViewDanhBa"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="5dp"
+            android:text="AnhtuanUit"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            />
+        <TextView
+            android:id="@+id/textViewDanhBa2"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="22dp"
+            android:text="Ktx khu B" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

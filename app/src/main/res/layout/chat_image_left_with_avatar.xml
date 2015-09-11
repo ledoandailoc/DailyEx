@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <com.horical.siyaplaceandroid.customview.HexagonImageView2
+        android:id="@+id/iv_avatar_other"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/avt" />
+
+    <ImageView
+        android:id="@+id/iv_picture_other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="-15dp"
+        android:layout_marginRight="45dp"
+        android:layout_toEndOf="@id/iv_avatar_other"
+        android:layout_toRightOf="@id/iv_avatar_other"
+
+        android:gravity="left"
+
+        android:adjustViewBounds="true"/>
+
+</RelativeLayout>

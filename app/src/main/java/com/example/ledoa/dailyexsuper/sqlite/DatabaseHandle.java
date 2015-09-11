@@ -284,7 +284,7 @@ public class DatabaseHandle extends SQLiteOpenHelper {
 				.toString());
 
 
-		/*getWritableDatabase().execSQL((new StringBuilder())
+		getWritableDatabase().execSQL((new StringBuilder())
 				.append("INSERT INTO ")
 				.append(TABLE_BAITAP)
 				.append(" (LoaiMucTieu, TenBaiTap, LoaiBaiTap, MucTieu, HoanThanh)")
@@ -299,7 +299,7 @@ public class DatabaseHandle extends SQLiteOpenHelper {
 				.append(" ('TG', 'Đi bộ 1h', 'DB', 3600, 1),")
 				.append(" ('TG', 'Đi bộ 1h 30 phút ', 'DB', 5400, 0),")
 				.append(" ('TG', 'Đi bộ 2h', 'DB', 7200, 0);")
-				.toString());*/
+				.toString());
 	}
 
 	@Override

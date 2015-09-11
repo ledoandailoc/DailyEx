@@ -82,6 +82,7 @@
             android:layout_height="50dp"
             android:background="#ee5900"
             android:layout_alignParentBottom="true"
+            android:id="@+id/lMessage"
             >
 
             <ImageView
@@ -90,17 +91,18 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="12dp"
-                android:src="@drawable/icon__tab_baitap" />
+                android:src="@drawable/icon_comment" />
 
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Go PRO!"
-                android:textSize="15dp"
+                android:text="MESSAGE"
+                android:textSize="16dp"
                 android:layout_marginLeft="9dp"
                 android:layout_gravity="center_vertical"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                android:textStyle="bold"/>
 
         </LinearLayout>
     </RelativeLayout>
