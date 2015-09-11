@@ -1,58 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:id="@+id/rl_baitap_buoc">
+    android:id="@+id/rl_baitap_buoc"
+    android:layout_below="@+id/actionbar"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true">
 
-    <ImageView
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+    <TextView
+        android:layout_centerVertical="true"
+        android:layout_marginTop="3dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="290dp"
-        android:layout_marginEnd="290dp"
-        android:src="@drawable/icon_buoc"/>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="107dp"
-        android:layout_marginStart="107dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bài Tập Theo Bước"
-            android:id="@+id/textView5"
-            android:textColor="#000"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            />
-
-        <TextView
-            android:layout_marginTop="3dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hoàn thành các bài tập với số bước qui định tăng dần"
-            android:id="@+id/textView4"
-            android:textColor="#5c5c5c"
-            />
-    </LinearLayout>
-
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/tv_muctieu"
+        android:text="Hoàn thành 500 bước đi"
+        android:id="@+id/tv_tenbaitap"
+        android:textColor="#3c3c3c"
+        />
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/imageView3"
         android:src="@drawable/icon_next2"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:textColor="#ee5900"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="500"
+        android:textSize="30dp"
+        android:id="@+id/tv_muctieu"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:visibility="invisible"
+        android:layout_marginLeft="5dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/iv_checked"
+        android:src="@drawable/icon_checked"
+        android:layout_toRightOf="@+id/tv_tenbaitap"
+        android:layout_centerVertical="true"
+        />
+</RelativeLayout>
+
 </RelativeLayout>

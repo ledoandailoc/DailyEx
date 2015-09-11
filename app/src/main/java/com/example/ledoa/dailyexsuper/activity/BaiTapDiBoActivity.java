@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,6 +39,14 @@ public class BaiTapDiBoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(BaiTapDiBoActivity.this, BaiTapDiBoTheoThoiGianActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        ImageView ivBack = (ImageView) findViewById(R.id.iv_back);
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

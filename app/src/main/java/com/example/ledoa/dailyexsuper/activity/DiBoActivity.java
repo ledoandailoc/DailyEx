@@ -2,6 +2,7 @@ package com.example.ledoa.dailyexsuper.activity;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -15,9 +16,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.ledoa.dailyexsuper.R;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.BaiTap;
+import com.example.ledoa.dailyexsuper.sqlite.DatabaseHandle;
 import com.example.ledoa.dailyexsuper.util.DoiGioPhutGiay;
 
 public class DiBoActivity extends Activity implements SensorEventListener {
@@ -46,10 +50,15 @@ public class DiBoActivity extends Activity implements SensorEventListener {
     int SoLanLac = 0;
     int SoLanChay = 0;
     int MucTieu = 100;
+    int MucTieuThoiGian;
+    String IdBaiTap ;
+    boolean mucTieuTG = false;
     long time = 0;
     long TongThoiGian = 0;
     String ButtonVuaNhan = "aaa";
-	@Override
+
+    DatabaseHandle databaseHandle;
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dibo);
@@ -58,6 +67,12 @@ public class DiBoActivity extends Activity implements SensorEventListener {
         if (bundle != null)
         {
             MucTieu = bundle.getInt("soBuoc");
+            MucTieuThoiGian = bundle.getInt("soThoiGian");
+            IdBaiTap = bundle.getString("IdBaiTap");
+        }
+        if (MucTieuThoiGian > 0){
+            MucTieu = MucTieuThoiGian;
+            mucTieuTG = true;
         }
 
 			v = (TextView) findViewById(R.id.textView);
@@ -77,7 +92,44 @@ public class DiBoActivity extends Activity implements SensorEventListener {
 	        accelerometer= sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 	        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
+            ImageView ivBack = (ImageView) findViewById(R.id.iv_back);
+            ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        databaseHandle = new DatabaseHandle(this);
+
         v.setText(SoLanLac + "/" + MucTieu);
+
+        if (mucTieuTG == true){
+            test.setVisibility(View.VISIBLE);
+            choChronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+                @Override
+                public void onChronometerTick(Chronometer chronometer) {
+                    time = choChronometer.getBase() - SystemClock.elapsedRealtime();
+                    TongThoiGian = -time / 1000;
+                    v.setText(TongThoiGian + "/" + MucTieu);
+                    progresss_bar.setProgress(Integer.parseInt(String.valueOf(TongThoiGian)));
+                    if (TongThoiGian == MucTieu) {
+                        status.setText("Finish");
+                        finish_icon.setVisibility(View.VISIBLE);
+                        tocdo.setText(SoLanLac + " Bước / " + DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
+
+                        choChronometer.stop();
+                        finish = true;
+                        databaseHandle.updateBaiTap(IdBaiTap);
+
+
+                    }
+
+                }
+            });
+            v.setText(SoLanLac + "/" + MucTieu);
+            progresss_bar.setProgress(SoLanLac);
+        }
 
 	}
 
@@ -87,26 +139,35 @@ public class DiBoActivity extends Activity implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         float luc = TinhLuc(event);
 
-        if (luc >= 1.2 && click == true ) {
+        if (luc >= 1.2 && click == true && finish != true) {
             long thoiGianSauKhiLac = event.timestamp;
 
-            if (((thoiGianSauKhiLac - thoiGianTruocKhiLac) / 1000000) < 1000) return;
+            if (((thoiGianSauKhiLac - thoiGianTruocKhiLac) / 1000000) < 800) return;
             test.setText(String.valueOf((thoiGianSauKhiLac - thoiGianTruocKhiLac) / 1000000));
-            if (SoLanLac >= MucTieu) return;
-            SoLanLac++;
-            if (SoLanLac == MucTieu) {
-                status.setText("Finish");
-                finish_icon.setVisibility(View.VISIBLE);
-                time = choChronometer.getBase() - SystemClock.elapsedRealtime();
-                TongThoiGian = -time / 1000;
-                tocdo.setText(SoLanLac + " Bước / " + DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
-                choChronometer.stop();
-                finish = true;
-            }
+
+                if (SoLanLac >= MucTieu) return;
+                SoLanLac++;
+                test.setText(String.valueOf(SoLanLac));
+                if (SoLanLac == MucTieu) {
+                    status.setText("Finish");
+                    finish_icon.setVisibility(View.VISIBLE);
+                    time = choChronometer.getBase() - SystemClock.elapsedRealtime();
+                    TongThoiGian = -time / 1000;
+                    tocdo.setText(SoLanLac + " Bước / " + DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
+                    choChronometer.stop();
+                    finish = true;
+                    if (!IdBaiTap.equals("")) {
+                        databaseHandle.updateBaiTap(IdBaiTap);
+                    }
+                }
             v.setText(SoLanLac + "/" + MucTieu);
+            test.setText(String.valueOf(SoLanLac) + " bước");
             progresss_bar.setProgress(SoLanLac);
+
+
             thoiGianTruocKhiLac = thoiGianSauKhiLac;
         }
+        else return;
     }
 
     @Override
@@ -157,7 +218,8 @@ public class DiBoActivity extends Activity implements SensorEventListener {
             tocdo.setText(SoLanLac + " Bước / " + DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
 		}
         
-        test.setText(String.valueOf(TongThoiGian));
+
+
        /* time = 0;
         choChronometer.setBase(SystemClock.elapsedRealtime());*/
         choChronometer.stop();

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+import com.example.ledoa.dailyexsuper.sqlite.DTO.BaiTap;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.LanTap;
 
 import java.util.ArrayList;
@@ -25,6 +26,14 @@ public class DatabaseHandle extends SQLiteOpenHelper {
 	public static String KEY_TOCDOCAONHAT = "TocDoCaoNhat";
 	public static String KEY_TOCDOTRUNGBINH = "TocDoTrungBinh";
 	public static String KEY_CALO = "Calo";
+
+	public static String TABLE_BAITAP = "BaiTap";
+	public static String KEY_LOAIMUCTIEU = "LoaiMucTieu";
+	public static String KEY_IDBAITAP = "IdBaiTap";
+	public static String KEY_TENBAITAP = "TenBaiTap";
+	public static String KEY_LOAIBAITAP = "LoaiBaiTap";
+	public static String KEY_MUCTIEU = "MucTieu";
+	public static String KEY_HOANTHANH = "HoanThanh";
 	
 	public static String KEY_TINHTHOIGIAN = "TinhThoiGian";
 	Context context;
@@ -195,6 +204,66 @@ public class DatabaseHandle extends SQLiteOpenHelper {
 		db.close();
 	}
 
+	/*Truy van bai tap*/
+
+	public List<BaiTap> getBaiTapTheoLoai(String loaibaitap, String loaimuctieu) {
+		List<BaiTap> list = new ArrayList<BaiTap>();
+		SQLiteDatabase db = this.getReadableDatabase();
+		String sql = "select distinct * from " + TABLE_BAITAP + " where (" + KEY_LOAIBAITAP + " like '"+ loaibaitap +"'"
+				+ " and " + KEY_LOAIMUCTIEU + " like '"+ loaimuctieu +"')";
+
+		Cursor cursor = db.rawQuery(sql, null);
+		cursor.moveToFirst();
+		while(!cursor.isAfterLast()){
+			BaiTap baiTap = new BaiTap();
+
+			baiTap.setId(Integer.parseInt(cursor.getString(0)));
+			baiTap.setLoaiMucTieu(cursor.getString(1));
+			baiTap.setTenBaiTap(cursor.getString(2));
+			baiTap.setLoaiBaiTap(cursor.getString(3));
+			baiTap.setMucTieu(Integer.parseInt(cursor.getString(4)));
+			baiTap.setHoanThanh(Integer.parseInt(cursor.getString(5)));
+
+			list.add(baiTap);
+
+			cursor.moveToNext();
+		}
+
+		return list;
+	}
+
+	public BaiTap getBaiTapTheoId(int id) {
+		List<BaiTap> list = new ArrayList<BaiTap>();
+		SQLiteDatabase db = this.getReadableDatabase();
+		String sql = "select distinct * from " + TABLE_BAITAP + " where (" + KEY_IDBAITAP + " like '"+ id + "')";
+
+		Cursor cursor = db.rawQuery(sql, null);
+		cursor.moveToFirst();
+			BaiTap baiTap = new BaiTap();
+
+			baiTap.setId(Integer.parseInt(cursor.getString(0)));
+			baiTap.setLoaiMucTieu(cursor.getString(1));
+			baiTap.setTenBaiTap(cursor.getString(2));
+			baiTap.setLoaiBaiTap(cursor.getString(3));
+			baiTap.setMucTieu(Integer.parseInt(cursor.getString(4)));
+			baiTap.setHoanThanh(Integer.parseInt(cursor.getString(5)));
+
+			list.add(baiTap);
+
+			cursor.moveToNext();
+
+
+		return baiTap;
+	}
+
+	public void updateBaiTap(String id) {
+		List<BaiTap> list = new ArrayList<BaiTap>();
+		SQLiteDatabase db = this.getReadableDatabase();
+		String sql = "UPDATE " + TABLE_BAITAP + " SET " + KEY_HOANTHANH + " = 1" +  " where (" + KEY_TENBAITAP + " like '"+ id + "')";
+
+		db.execSQL(sql);
+	}
+
 	public void autoInsertDataBase()
 	{
 		getWritableDatabase().execSQL((new StringBuilder())
@@ -207,16 +276,39 @@ public class DatabaseHandle extends SQLiteOpenHelper {
 				.append(" ('01-07-2015 11:22:33', 'CB', 500, 2, 3.0, 1.5, 0),")
 				.append(" ('01-07-2015 11:22:33', 'DX', 600, 2, 3.0, 1.5, 0),")
 				.append(" ('01-07-2015 11:22:33', 'HD', 200, 2, 3.0, 1.5, 0),")
-				.append(" ('01-07-2015 11:22:33', 'DX', 400, 2, 3.0, 1.5, 0),").append(" ('08-07-2015 11:22:33', 'DB', 2000, 2, 3.0, 1.5, 0),").append(" ('09-07-2015 11:22:33', 'DB', 3600, 2, 3.0, 1.5, 0),").append(" ('15-07-2015 11:22:33', 'DB', 1000, 2, 3.0, 1.5, 0),").append(" ('31-07-2015 11:22:33', 'CB', 500, 2, 3.0, 1.0, 0);").toString());
+				.append(" ('01-07-2015 11:22:33', 'DX', 400, 2, 3.0, 1.5, 0),")
+				.append(" ('08-07-2015 11:22:33', 'DB', 2000, 2, 3.0, 1.5, 0),")
+				.append(" ('09-07-2015 11:22:33', 'DB', 3600, 2, 3.0, 1.5, 0),")
+				.append(" ('15-07-2015 11:22:33', 'DB', 1000, 2, 3.0, 1.5, 0),")
+				.append(" ('31-07-2015 11:22:33', 'CB', 500, 2, 3.0, 1.0, 0);")
+				.toString());
+
+
+		/*getWritableDatabase().execSQL((new StringBuilder())
+				.append("INSERT INTO ")
+				.append(TABLE_BAITAP)
+				.append(" (LoaiMucTieu, TenBaiTap, LoaiBaiTap, MucTieu, HoanThanh)")
+				.append(" VALUES")
+				.append(" ('B', 'Đi bộ 100 bước', 'DB', 100, 1),")
+				.append(" ('B', 'Đi bộ 200 bước', 'DB', 200, 1),")
+				.append(" ('B', 'Đi bộ 300 bước', 'DB', 300, 0),")
+				.append(" ('B', 'Đi bộ 400 bước', 'DB', 400, 0),")
+				.append(" ('B', 'Đi bộ 500 bước', 'DB', 400, 0),")
+
+				.append(" ('TG', 'Đi bộ 30 phút', 'DB', 5, 0),")
+				.append(" ('TG', 'Đi bộ 1h', 'DB', 3600, 1),")
+				.append(" ('TG', 'Đi bộ 1h 30 phút ', 'DB', 5400, 0),")
+				.append(" ('TG', 'Đi bộ 2h', 'DB', 7200, 0);")
+				.toString());*/
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		//db.execSQL("drop table if exists " + TABLE_MONTAP);
 		String taoBangLienHe = "create table " + TABLE_MONTAP
-				+ " ( " 
-				+ KEY_ID +" Integer primary key, " 
-				+ KEY_IDMONTAP + " text, " 
+				+ " ( "
+				+ KEY_ID + " Integer primary key, "
+				+ KEY_IDMONTAP + " text, "
 				+ KEY_NGAYTAP + " text, "
 				+ KEY_TONGTHOIGIAN + " Integer, "
 				+ KEY_SODONGTAC + " Integer, "
@@ -224,12 +316,25 @@ public class DatabaseHandle extends SQLiteOpenHelper {
 				+ KEY_TOCDOTRUNGBINH + " Real, "
 				+ KEY_CALO + " Integer"
 				+ " ) ";
+
+		String taoBangBaiTap = "create table " + TABLE_BAITAP
+				+ " ( "
+				+ KEY_IDBAITAP +" Integer primary key, "
+				+ KEY_LOAIMUCTIEU +" text, "
+				+ KEY_TENBAITAP + " text, "
+				+ KEY_LOAIBAITAP + " text, "
+				+ KEY_MUCTIEU + " Integer, "
+				+ KEY_HOANTHANH + " Integer "
+				+ " ) ";
+
 		db.execSQL(taoBangLienHe);
+		db.execSQL(taoBangBaiTap);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("drop table if exists " + TABLE_MONTAP);
+		db.execSQL("drop table if exists " + TABLE_BAITAP);
 		onCreate(db);
 	}
 

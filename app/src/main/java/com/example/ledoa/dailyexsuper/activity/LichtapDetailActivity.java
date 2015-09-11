@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -58,10 +59,9 @@ public class LichtapDetailActivity extends AppCompatActivity {
 			arrayadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner_monTap.setAdapter(arrayadapter);
 			spinner_monTap.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
-				public void onItemSelected(AdapterView adapterview, View view, int i, long l)
-				{
+				public void onItemSelected(AdapterView adapterview, View view, int i, long l) {
 					list = new ArrayList();
-					switch (i){
+					switch (i) {
 						case 0:
 							list = databaseHandle.getLanTapTheoNgay(date);
 							break;
@@ -82,11 +82,18 @@ public class LichtapDetailActivity extends AppCompatActivity {
 					listView.setAdapter(adapter);
 				}
 
-				public void onNothingSelected(AdapterView adapterview)
-				{
+				public void onNothingSelected(AdapterView adapterview) {
 				}
 			});
-	}
+		ImageView ivBack = (ImageView) findViewById(R.id.iv_back);
+		ivBack.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});}
+
+
 
 
 

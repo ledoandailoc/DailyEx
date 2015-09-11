@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="item_finish">#009688</color>
     <color name="transparent">#00000000</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
@@ -9,7 +10,6 @@
     <color name="tab_bg_color">#fff</color>
     <color name="tab_text">#fff</color>
     <color name="tab_text_active">#ee5900</color>
-<!--    <color name="tab_text_active">#fec400</color>-->
 
     <!-- Action Bar -->
     <color name="action_bar_bg_color">#3f51b5</color>
