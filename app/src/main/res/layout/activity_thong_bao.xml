@@ -7,13 +7,19 @@
         android:id="@+id/actionbar"
         layout="@layout/actionbar_top_activity" />
 
-    <ListView
-        android:id="@+id/listViewThongBao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:divider="@drawable/xam"
-        android:dividerHeight="1dp">
-        
-    </ListView>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#fff">
+        <ListView
+            android:id="@+id/lvThongBao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            >
+        </ListView>
+    </LinearLayout>
 
 </LinearLayout>

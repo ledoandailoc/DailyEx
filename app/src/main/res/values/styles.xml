@@ -16,4 +16,14 @@
         <item name="android:textStyle">bold</item>
         <item name="android:background">#ee5900</item>
     </style>
+
+
+    <style name="tv_daily">
+    <item name="android:textSize">100dp</item>
+    <item name="android:textColor">@color/app_main_color</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:text">DAILY</item>
+
+
+    </style>
 </resources>

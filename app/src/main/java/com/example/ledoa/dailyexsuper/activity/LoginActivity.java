@@ -8,6 +8,7 @@ import com.example.ledoa.dailyexsuper.MainActivity;
 import com.example.ledoa.dailyexsuper.R;
 import com.example.ledoa.dailyexsuper.base.BaseFragmentActivity;
 import com.example.ledoa.dailyexsuper.fragment.LoginFragment;
+import com.example.ledoa.dailyexsuper.fragment.SignUpFragment;
 import com.example.ledoa.dailyexsuper.listener.LoginListener;
 
 public class LoginActivity extends BaseFragmentActivity implements LoginListener {
@@ -33,6 +34,17 @@ public class LoginActivity extends BaseFragmentActivity implements LoginListener
         setContentView(R.layout.activity_login);
 
     }
+
+    @Override
+    public void onShowSignupFragment() {
+        if (isExistSignUpFragment()) {
+            onBackPressed();
+        } else {
+            SignUpFragment fragment = SignUpFragment.newInstance();
+            showFragment(fragment);
+        }
+    }
+
 
     @Override
     public void onShowLoginFragment() {

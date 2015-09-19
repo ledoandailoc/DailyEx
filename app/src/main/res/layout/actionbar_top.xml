@@ -15,6 +15,7 @@
         android:id="@+id/actionbar_tvTitile"
         android:textColor="#fff"
         android:textSize="20dp"
+        android:textStyle="bold"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/imageView"
         android:layout_toEndOf="@+id/imageView" />

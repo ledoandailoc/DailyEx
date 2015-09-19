@@ -26,7 +26,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="Message"
-                android:id="@+id/editText"
+                android:id="@+id/edt_chat_message"
                 />
 
             <Button
@@ -34,13 +34,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gửi"
-                android:id="@+id/button" />
+                android:id="@+id/mBtnSend" />
         </LinearLayout>
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/listView"
+            android:listSelector="@android:color/transparent"
             android:layout_above="@+id/linearLayout5" />
     </RelativeLayout>
 

@@ -21,7 +21,6 @@ public class User implements Serializable {
     public boolean isFollow;
     public String token;
     public boolean isOnline;
-    public boolean isPicked;
 
     public User() {
         statistic = new Statistic();
@@ -73,5 +72,4 @@ public class User implements Serializable {
             this.isOnline = json.getBoolean("isOnline");
         }
     }
-
 }

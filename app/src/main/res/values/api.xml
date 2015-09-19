@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <string name="base_url">http://128.199.83.113:3000</string>
+        <string name="base_url">http://192.168.163.1:3000</string>
     <!--  <string name="base_url">http://192.168.0.110:3000</string>-->
     <string name="api_signup">/users/signup</string>
     <string name="api_login">/users/login</string>
@@ -13,4 +13,7 @@
     <string name="api_get_event_by_id">/events/getEventById/</string>
     <string name="api_upload_file">/files/uploadFile</string>
     <string name="api_get_chat_history">/users/getChatHistory</string>
+    <string name="api_get_contact">/users/getContact</string>
+
+
 </resources>

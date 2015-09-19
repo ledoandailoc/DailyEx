@@ -26,6 +26,11 @@ public class ApiLink {
         return MainApplication.getContext().getString(R.string.base_url) + MainApplication.getContext().getString(R.string.api_get_all_user);
     }
 
+    public static String getContactLink() {
+        return MainApplication.getContext().getString(R.string.base_url) + MainApplication.getContext().getString(R.string.api_get_contact);
+    }
+
+
     public static String getRoomMessageByRoomIdLink() {
         return MainApplication.getContext().getString(R.string.base_url) + MainApplication.getContext().getString(R.string.api_get_room_message_by_room_id);
     }

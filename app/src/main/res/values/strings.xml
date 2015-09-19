@@ -56,9 +56,16 @@
 
     <!-- Login -->
     <string name="edtPassword">Password</string>
-    <string name="btnLogin">Login</string>
-    <string name="tvSingupHere">SignUp here</string>
+    <string name="btnLogin">Đăng nhập</string>
+    <string name="tvSingupHere">Đăng ký tại đây</string>
     <string name="title_activity_message">Message</string>
+    <string name="title_activity_cai_dat">CaiDatActivity</string>
+    <string name="title_activity_nhan_tin">NhanTinActivity</string>
+
+    <!-- Signup -->
+    <string name="signup_username_empty">Username can not empty</string>
+    <string name="title_activity_user_profile">UserProfileActivity</string>
+
 
 
 </resources>

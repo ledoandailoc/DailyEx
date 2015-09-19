@@ -16,4 +16,15 @@
     <color name="action_bar_bg_selected">#6470b5</color>
     <color name="action_bar_title_color">#fff</color>
 
+    <color name="isOnline">#6166AE</color>
+    <color name="isOffline">#c9c8c7</color>
+
+    <!--Color APP-->
+    <color name="app_green">#33e054</color>
+    <color name="app_brown">#c9c8c7</color>
+    <color name="app_green_ms">#13AA39</color>
+    <color name="app_blue_ms">#044143</color>
+    <color name="app_red">#f00000</color>
+    <color name="app_main_color">#009688</color>
+
 </resources>

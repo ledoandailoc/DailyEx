@@ -2,6 +2,7 @@
 package com.example.ledoa.dailyexsuper.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -9,36 +10,57 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ledoa.dailyexsuper.R;
-import com.example.ledoa.dailyexsuper.sqlite.DTO.ItemThongBao;
+import com.example.ledoa.dailyexsuper.caches.ImageLoaderUtil;
+import com.example.ledoa.dailyexsuper.customview.CircleImageView;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.User;
 
-import java.util.List;
+import java.util.ArrayList;
 
+public class ThongBaoAdapter extends ArrayAdapter<User> {
+	private Context context;
+	private ArrayList<User> mList;
 
-public class ThongBaoAdapter extends ArrayAdapter<ItemThongBao> {
-
-	Context context;
-	int resource;
-	List<ItemThongBao> objects;
-	public ThongBaoAdapter(Context context, int resource, List<ItemThongBao> objects) {
-		super(context, resource, objects);
+	public ThongBaoAdapter(Context context, ArrayList<User> list) {
+		super(context, 0, list);
 		this.context = context;
-		this.resource = resource;
-		this.objects = objects;
+		this.mList = list;
 	}
-	
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View view = View.inflate(context, resource, null);
-		
-		ImageView avatar = (ImageView)view.findViewById(R.id.AvatarThongBao);
-		TextView text = (TextView)view.findViewById(R.id.textViewThongBao);
-		
-		ItemThongBao item = objects.get(position);
-		avatar.setImageResource(item.getAvatar());
-		text.setText(item.getText());
-		
-		return view;
+		ViewHolder viewHolder;
+		if (convertView == null) {
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.row_user, parent, false);
+			viewHolder = new ViewHolder(convertView);
+			convertView.setTag(viewHolder);
+		} else {
+			viewHolder = (ViewHolder) convertView.getTag();
+		}
+
+		viewHolder.tvId.setText("ID Number: " + mList.get(position)._id);
+		viewHolder.tvUsername.setText(mList.get(position).username);
+		if (mList.get(position).avatar != null) {
+			ImageLoaderUtil.display(mList.get(position).avatar, viewHolder.ivUseravatar);
+		} else {
+			viewHolder.ivUseravatar.setImageResource(R.drawable.avt);
+		}
+
+
+		return convertView;
 	}
 
-	
+	public class ViewHolder {
+
+		public TextView tvId;
+		public TextView tvUsername;
+		public CircleImageView ivUseravatar;
+
+		public ViewHolder(View rootView) {
+			tvId = (TextView) rootView.findViewById(R.id.tv_id);
+			tvUsername = (TextView) rootView.findViewById(R.id.tv_username);
+			ivUseravatar = (CircleImageView) rootView.findViewById(R.id.iv_avatar_user);
+		}
+	}
+
 }

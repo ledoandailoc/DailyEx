@@ -1,223 +1,219 @@
 package com.example.ledoa.dailyexsuper.activity;
 
 import android.app.Activity;
-import android.net.Uri;
+
 import android.os.Bundle;
 
-import android.os.Handler;
-
-import android.support.annotation.Nullable;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.PopupWindow;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ledoa.dailyexsuper.MainApplication;
 import com.example.ledoa.dailyexsuper.R;
 import com.example.ledoa.dailyexsuper.adapter.MessageAdapter;
-import com.example.ledoa.dailyexsuper.listener.MainListener;
+import com.example.ledoa.dailyexsuper.connection.ApiLink;
+import com.example.ledoa.dailyexsuper.connection.base.Method;
+import com.example.ledoa.dailyexsuper.connection.request.GetListMessageByUserIdRequest;
+import com.example.ledoa.dailyexsuper.connection.response.ChatResponse;
+import com.example.ledoa.dailyexsuper.connection.response.ListMessageResponse;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.Chat;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.Data;
-import com.example.ledoa.dailyexsuper.sqlite.DTO.User;
-import com.example.ledoa.dailyexsuper.util.CommonUtils;
-import com.example.ledoa.dailyexsuper.util.Constant;
 
-import org.json.JSONArray;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.User;
+
+import com.example.ledoa.dailyexsuper.util.Constant;
+import com.example.ledoa.dailyexsuper.util.UserPref;
+import com.github.nkzawa.socketio.client.Socket;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 
 public class ChatActivity extends Activity {
-
-    private static final String ARG_LIST_USER = "key_list_user";
-    private static final String ARG_LIST_RECENT = "key_list_recent";
-    private static final String ARG_LIST_FRIEND = "key_list_friend";
-    private static final String GET_MESSAGE_BY_USER_ID = "key_get_message_by_userId";
-    private static final String GET_MESSAGE_BY_ROOM_ID = "key_get_message_by_roomId";
-
-    private MainListener mListener;
-    private ArrayList<Data> mList = new ArrayList<>();
-    private MessageAdapter mAdapter;
-    private ListView mLvMessage;
+    List<User> mListUser;
     private EditText mEdtMessage;
-    private ImageButton mBtnSend;
-    private boolean checkHideMore = true;
-
-    private TextView tvTitle;
-    private ImageButton ibAddUser;
-    private String mRoomId;
+    private User mCurrentUser;
+    private Socket mSocket;
+    private ArrayList<Chat> mList = new ArrayList<>();
+    Button mBtnSend;
+    String receiverId;
+    ListView mLvMessage;
+    private MessageAdapter mAdapter;
     private String userIDrequest;
-    private List<User> mListUser;
-    private List<User> mListFriends;
-    private List<User> mListPickedFriends;
+    UserPref userPref;
+    private GetListMessageByUserIdRequest mGetListMessageByUserIdRequest;
 
-
-
-    private ListView mlvPopupListFriends;
-    private GridView mgvPickerFriends;
-    private PopupWindow mPopupListFriends = new PopupWindow();
-    private View popupView;
-
-    private Uri mImageCaptureUri;
-    private String path;
-    private String timeStamp;
-    private String mGetMessageStyle;
-    private String title = "";
-
-
-
-
-
+    private EventBus mBus = EventBus.getDefault();
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_chat);
+        TextView title  = (TextView)findViewById(R.id.actionbar_tvTitile);
+        title.setText("Tin nhắn");
 
-        mEdtMessage = (EditText)findViewById(R.id.edt_chat_message);
-        mBtnSend = (ImageButton)findViewById(R.id.btn_chat_send);
-        mLvMessage = (ListView)findViewById(R.id.lv_chat);
-        //mLvMessage.setDivider(null);
+        receiverId = getIntent().getExtras().getString("UserId");
+        mBtnSend = (Button)findViewById(R.id.mBtnSend);
+        mLvMessage = (ListView)findViewById(R.id.listView);
         mAdapter = new MessageAdapter(this, mList);
-        //mLvMessage.setAdapter(mAdapter);
+        mLvMessage.setAdapter(mAdapter);
+        userPref = new UserPref();
+        mCurrentUser = userPref.getUser();
 
- /*       mLvMessage.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                mEdtMessage.clearFocus();
-                Log.d("Touch layout", null, null);
-
-                checkHideMore = true;
-                return false;
-            }
-        });*/
-     /*   mEdtMessage.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (!checkHideMore) {
-                    checkHideMore = true;
-                }
-                return false;
-            }
-        });*/
- /*       mBtnSend.setOnClickListener(new View.OnClickListener() {
+        mBtnSend.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendTextMessage();
-                if (mRoomId != null) {
-                    mList.clear();
-                }
             }
-        });*/
+        });
+        getMessageHistoryByUserId();
+
+        mBus.register(this);
+
+
+    }
+
+    private void getMessageHistoryByUserId() {
+
+        userIDrequest = receiverId;
+        mGetListMessageByUserIdRequest = new GetListMessageByUserIdRequest(Method.GET, ApiLink.getRoomMessageByUserIdLink() + userIDrequest, null, null) {
+
+            @Override
+            protected void onStart() {
+
+            }
+
+            @Override
+            protected void onSuccess(ListMessageResponse entity, int statusCode, String message) {
+                mList.clear();
+                //Collections.reverse(entity.data);
+                mList.addAll(entity.data);
+                buildTypeDisplay();
+                mAdapter.notifyDataSetChanged();
+
+                        //mLvMessage.smoothScrollToPosition(mList.size());
+
+                mLvMessage.setSelection(mList.size()-1);
+            }
+
+            @Override
+            protected void onError(int statusCode, String message) {
+                Toast.makeText(ChatActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        };
+        mGetListMessageByUserIdRequest.execute();
+    }
+
+    public void onEvent(ChatResponse chatResponse) {
+
+        Chat data = chatResponse.data;
+
+        mList.add(data);
+        buildTypeDisplay();
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mAdapter.notifyDataSetChanged();
+                mLvMessage.smoothScrollToPosition(mList.size());
+            }
+        });
 
     }
 
 
+    private void buildTypeDisplay() {
+        if(mList.size() < 1)
+            Toast.makeText(ChatActivity.this, "New room", Toast.LENGTH_SHORT).show();
+
+        for (int i = 0; i < mList.size(); i++) {
+
+            if (true) {
+                if (i == 0) {
+                    if (mList.get(i).user._id.equals(mCurrentUser._id)) {
+                        mList.get(i).message.type = Constant.CHAT_TYPE_TEXT_RIGHT_WITH_AVATAR;
+                    } else {
+                        mList.get(i).message.type = Constant.CHAT_TYPE_TEXT_LEFT_WITH_AVATAR;
+                    }
+                } else {
+                    if (mList.get(i).user._id.equals(mCurrentUser._id)) {
+                        if (mList.get(i).user._id.equals(mList.get(i - 1).user._id)) {
+                            mList.get(i - 1).message.type = Constant.CHAT_TYPE_TEXT_RIGHT_WITHOUT_AVATAR;
+                            mList.get(i).message.type = Constant.CHAT_TYPE_TEXT_RIGHT_WITH_AVATAR;
+                        } else {
+                            mList.get(i).message.type = Constant.CHAT_TYPE_TEXT_RIGHT_WITH_AVATAR;
+                        }
+                    } else {
+                        if (mList.get(i).user._id.equals(mList.get(i - 1).user._id)) {
+                            mList.get(i - 1).message.type = Constant.CHAT_TYPE_TEXT_LEFT_WITHOUT_AVATAR;
+                            mList.get(i).message.type = Constant.CHAT_TYPE_TEXT_LEFT_WITH_AVATAR;
+                        } else {
+                            mList.get(i).message.type = Constant.CHAT_TYPE_TEXT_LEFT_WITH_AVATAR;
+                        }
+                    }
+                }
+            }
+        }
+    }
     private void sendTextMessage() {
-       /* if (mEdtMessage.getText().toString().trim().length() == 0) {
+        mListUser =  new ArrayList<User>();
+        mEdtMessage = (EditText)findViewById(R.id.edt_chat_message);
+
+        mCurrentUser = userPref.getUser();
+        mSocket = MainApplication.getMySocket().getSocket();
+
+        if (mEdtMessage.getText().toString().trim().length() == 0) {
             Toast.makeText(this, "Please type your message", Toast.LENGTH_SHORT).show();
         } else {
             JSONObject messageObject = new JSONObject();
             try {
                 // send chat to server by socket
-                messageObject.put("senderId", mCurrentUser._id);
-                if (mListUser.size() > 2) {
-                    messageObject.put("isGroup", true);
-                } else {
-                    messageObject.put("isGroup", false);
-                }
+                messageObject.put("userId", mCurrentUser._id);
+
                 messageObject.put("message", mEdtMessage.getText().toString().trim());
-                messageObject.put("type", Constant.CHAT_TYPE_TEXT);
+
                 messageObject.put("senderName", mCurrentUser.username);
-
-                if (mRoomId != null) {
-                    messageObject.put("roomId", mRoomId);
-                } else {
-                    JSONArray memberArray = new JSONArray();
-                    for (User user : mListUser) {
-                        memberArray.put(user._id);
-                    }
-                    messageObject.put("members", memberArray);
-                }
-
-                String sequence = String.valueOf(CommonUtils.getCurrentTimeMillis());
-                messageObject.put("sequence", sequence);
+                messageObject.put("targetId", receiverId);
 
 
 
+                //String sequence = String.valueOf(CommonUtils.getCurrentTimeMillis());
+
+
+                mSocket.emit(Constant.SOCKET_EVENT_CHAT, messageObject);
+                // add item into list
+                Data data = new Data();
+
+                data.message = mEdtMessage.getText().toString().trim();
+                data.userId = mCurrentUser._id;
+                //data.sequence = sequence;
+              /*  mList.add(data);
                 buildTypeDisplay();
-                getApplication().runOnUiThread(new Runnable() {
+                this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mAdapter.notifyDataSetChanged();
                         mLvMessage.smoothScrollToPosition(mList.size());
                     }
-                });
+                });*/
                 // reset text in edit text
                 mEdtMessage.setText(null);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }*/
-    }
-
-
-
-
-
-    private void buildTypeDisplay() {
-        for (int i = 0; i < mList.size(); i++) {
-            if (mList.get(i).type == Constant.CHAT_TYPE_TEXT) {
-                if (i == 0) {
-                    if (true) {
-                        mList.get(i).typeDisplay = Constant.CHAT_TYPE_TEXT_RIGHT_WITH_AVATAR;
-                    } else {
-                        mList.get(i).typeDisplay = Constant.CHAT_TYPE_TEXT_LEFT_WITH_AVATAR;
-                    }
-                } else {
-                    if (false) {
-                        if (mList.get(i).user._id.equals(mList.get(i - 1).user._id)) {
-                            mList.get(i).typeDisplay = Constant.CHAT_TYPE_TEXT_RIGHT_WITHOUT_AVATAR;
-                        } else {
-                            mList.get(i).typeDisplay = Constant.CHAT_TYPE_TEXT_RIGHT_WITH_AVATAR;
-                        }
-                    } else {
-                        if (mList.get(i).user._id.equals(mList.get(i - 1).user._id)) {
-                            mList.get(i - 1).typeDisplay = Constant.CHAT_TYPE_TEXT_LEFT_WITHOUT_AVATAR;
-                            mList.get(i).typeDisplay = Constant.CHAT_TYPE_TEXT_LEFT_WITH_AVATAR;
-                        } else {
-                            mList.get(i).typeDisplay = Constant.CHAT_TYPE_TEXT_LEFT_WITH_AVATAR;
-                        }
-                    }
-                }
-            } else if (mList.get(i).type == Constant.CHAT_TYPE_IMAGE) {
-                if (true) {
-                    mList.get(i).typeDisplay = Constant.CHAT_TYPE_IMAGE_RIGHT_WITH_AVATAR;
-                } else {
-                    mList.get(i).typeDisplay = Constant.CHAT_TYPE_IMAGE_LEFT_WITH_AVATAR;
-                }
-            }
         }
     }
 
-
-
-
-    public List<User> getListMembers() {
-        return mListUser;
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
     }
-
-
-
-
 }
-
-

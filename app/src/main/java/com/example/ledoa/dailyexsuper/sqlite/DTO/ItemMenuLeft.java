@@ -1,25 +1,21 @@
 package com.example.ledoa.dailyexsuper.sqlite.DTO;
 
-/**
- * Created by Tuan on 06/10/15.
- */
 public class ItemMenuLeft {
-    int HinhAnh;
-    String TenMenu;
+    int image;
+    String text;
 
-    public int getHinhAnh() {
-        return HinhAnh;
+    public void setImage(int image) {
+        this.image = image;
     }
 
-    public String getTenMenu() {
-        return TenMenu;
+    public void setText(String text) {
+        this.text = text;
+    }
+    public int getImage() {
+        return image;
     }
 
-    public void setHinhAnh(int i) {
-        this.HinhAnh = i;
-    }
-
-    public void setTenMenu(String s) {
-        this.TenMenu=s;
+    public String getText() {
+        return text;
     }
 }

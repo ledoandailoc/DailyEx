@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="@dimen/chat_fragment_padding_size">
 
     <TextView
         android:id="@+id/tvSms"
@@ -10,16 +12,18 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/iv_avatar_myself"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="45dp"
         android:layout_marginRight="-10dp"
         android:layout_toLeftOf="@id/iv_avatar_myself"
         android:layout_toStartOf="@id/iv_avatar_myself"
-        android:layout_marginLeft="45dp"
+        android:background="@drawable/bg_arrow_right_top"
         android:gravity="right"
         android:paddingLeft="10dp"
         android:paddingRight="25dp"
-        android:text="Medium" />
+        android:text="Medium"
+        android:textSize="@dimen/chat_fragment_text_size" />
 
-    <com.horical.siyaplaceandroid.customview.HexagonImageView2
+    <com.example.ledoa.dailyexsuper.customview.CircleImageView
         android:id="@+id/iv_avatar_myself"
         android:layout_width="@dimen/chat_fragment_avatar_size"
         android:layout_height="@dimen/chat_fragment_avatar_size"
@@ -27,5 +31,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
-        android:src="@drawable/avt" />
+        android:src="@drawable/personal_chat_icon_128x128"
+        app:border_color="@color/isOffline"
+        app:border_width="@dimen/chat_fragment_border_avatar_size" />
 </RelativeLayout>
