@@ -14,6 +14,7 @@
     <string name="api_upload_file">/files/uploadFile</string>
     <string name="api_get_chat_history">/users/getChatHistory</string>
     <string name="api_get_contact">/users/getContact</string>
+    <string name="api_get_notify">/activities/getActivitiesByUserId</string>
 
 
 </resources>

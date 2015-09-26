@@ -7,28 +7,21 @@ import java.io.Serializable;
 
 public class Statistic implements Serializable {
 
-    public int joiningEvent;
-    public int joinedEvent;
-    public int following;
-    public int followers;
+    public int comments;
+    public int likes;
 
     public Statistic() {
 
     }
 
     public Statistic(JSONObject json) throws JSONException {
-        if (json.has("joiningEvent")) {
-            this.joiningEvent = json.getInt("joiningEvent");
+        if (json.has("comments")) {
+            this.comments = json.getInt("comments");
         }
-        if (json.has("joinedEvent")) {
-            this.joinedEvent = json.getInt("joinedEvent");
+        if (json.has("likes")) {
+            this.likes = json.getInt("likes");
         }
-        if (json.has("following")) {
-            this.following = json.getInt("following");
-        }
-        if (json.has("followers")) {
-            this.followers = json.getInt("followers");
-        }
+
     }
 
 }

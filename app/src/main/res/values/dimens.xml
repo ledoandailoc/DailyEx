@@ -33,6 +33,6 @@
     <!-- Message Fragment -->
     <dimen name="message_fragment_user_avatar_size">50dp</dimen>
     <dimen name="message_fragment_user_name_text_size">20dp</dimen>
-    <dimen name="message_fragment_id_text_size">10dp</dimen>
+    <dimen name="message_fragment_id_text_size">12dp</dimen>
     <dimen name="message_fragment_user_avatar_border_size">3dp</dimen>
 </resources>

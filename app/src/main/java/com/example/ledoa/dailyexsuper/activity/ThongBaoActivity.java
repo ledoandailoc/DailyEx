@@ -11,22 +11,24 @@ import android.widget.Toast;
 
 import com.example.ledoa.dailyexsuper.R;
 import com.example.ledoa.dailyexsuper.adapter.ThongBaoAdapter;
-import com.example.ledoa.dailyexsuper.adapter.UserAdapter;
 import com.example.ledoa.dailyexsuper.connection.ApiLink;
 import com.example.ledoa.dailyexsuper.connection.base.Method;
+import com.example.ledoa.dailyexsuper.connection.request.GetListThongBaoRequest;
 import com.example.ledoa.dailyexsuper.connection.request.GetListUserRequest;
-import com.example.ledoa.dailyexsuper.connection.response.ListUserResponse;
+import com.example.ledoa.dailyexsuper.connection.response.ListThongBaoResponse;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.FriendsList;
-import com.example.ledoa.dailyexsuper.sqlite.DTO.User;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.ThongBao;
+import com.github.nkzawa.socketio.client.Socket;
 
 import java.util.ArrayList;
 
 public class ThongBaoActivity extends Activity {
-	ArrayList<User> mUserList = new ArrayList<>();
+	ArrayList<ThongBao> mUserList = new ArrayList<>();
 	ThongBaoAdapter mThongBaoAdapter;
 	FriendsList friendsList;
-	GetListUserRequest mGetListUserRequest;
+	GetListThongBaoRequest mGetListUserRequest;
 	ListView mLvThongBao;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,13 +43,13 @@ public class ThongBaoActivity extends Activity {
 	private void getListThongBao() {
 		mLvThongBao = (ListView)findViewById(R.id.lvThongBao);
 
-		mGetListUserRequest = new GetListUserRequest(Method.GET, ApiLink.getContactLink(), null, null) {
+		mGetListUserRequest = new GetListThongBaoRequest(Method.GET, ApiLink.getListThongBao(), null, null) {
 			@Override
 			protected void onStart() {
 			}
 
 			@Override
-			protected void onSuccess(ListUserResponse entity, int statusCode, String message) {
+			protected void onSuccess(ListThongBaoResponse entity, int statusCode, String message) {
 				mUserList.clear();
 				mUserList.addAll(entity.data);
 				friendsList = new FriendsList();
@@ -63,16 +65,6 @@ public class ThongBaoActivity extends Activity {
 		};
 		mGetListUserRequest.execute();
 
-		mLvThongBao.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent iMessage = new Intent(ThongBaoActivity.this, ChatActivity.class);
-				Bundle mBundle = new Bundle();
-				mBundle.putString("UserId", mUserList.get(position)._id);
-				iMessage.putExtras(mBundle);
-				startActivity(iMessage);
-			}
-		});
 
 	}
 

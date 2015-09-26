@@ -66,14 +66,6 @@ public class ThemBanActivity extends Activity {
 		};
 		mGetListUserRequest.execute();
 
-		mLvThemBan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				mSocket = MainApplication.getMySocket().getSocket();
-				mSocket.emit("addFriend", mUserList.get(position)._id);
-			}
-		});
-
 	}
 
 }

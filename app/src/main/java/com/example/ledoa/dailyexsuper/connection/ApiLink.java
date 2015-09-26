@@ -39,6 +39,10 @@ public class ApiLink {
         return MainApplication.getContext().getString(R.string.base_url) + MainApplication.getContext().getString(R.string.api_get_room_message_by_user_id);
     }
 
+    public static String getListThongBao() {
+        return MainApplication.getContext().getString(R.string.base_url) + "/activities/getActivities";
+    }
+
     public static String createEventLink() {
         return MainApplication.getContext().getString(R.string.base_url) + MainApplication.getContext().getString(R.string.api_create_event);
     }

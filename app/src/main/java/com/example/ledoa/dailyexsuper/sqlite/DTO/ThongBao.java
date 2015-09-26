@@ -3,70 +3,35 @@ package com.example.ledoa.dailyexsuper.sqlite.DTO;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ThongBao {
+import java.io.Serializable;
+
+public class ThongBao implements Serializable{
 	public String _id;
-	public String username;
-	public String country;
-	public int __v;
-	public Statistic statistic;
-	public String createdAt;
-	public int role;
-	public int gender;
-	public boolean isPublicSeen;
-	public int status;
-	public String avatar;
-	public boolean isFollow;
-	public String token;
-	public boolean isOnline;
+	public User user;
+	public Friend friend;
+	public News news;
 
 	public ThongBao() {
-		statistic = new Statistic();
+		user = new User();
+		friend = new Friend();
+		news = new News();
 	}
 
 	public ThongBao(JSONObject json) throws JSONException {
-		statistic = new Statistic();
-
-		if (json.has("_id")) {
+		if(json.has("_id")){
 			this._id = json.getString("_id");
 		}
-		if (json.has("username")) {
-			this.username = json.getString("username");
+		user = new User();
+		if(json.has("_userId")){
+			user = new User(new JSONObject(json.getString("_userId")));
 		}
-		if (json.has("country")) {
-			this.country = json.getString("country");
+		friend = new Friend();
+		if(json.has("_friendId")){
+			friend = new Friend(new JSONObject(json.getString("_friendId")));
 		}
-		if (json.has("__v")) {
-			this.__v = json.getInt("__v");
-		}
-		if (json.has("statistic")) {
-			this.statistic = new Statistic(new JSONObject(json.getString("statistic")));
-		}
-		if (json.has("createdAt")) {
-			this.createdAt = json.getString("createdAt");
-		}
-		if (json.has("role")) {
-			this.role = json.getInt("role");
-		}
-		if (json.has("gender")) {
-			this.gender = json.getInt("gender");
-		}
-		if (json.has("isPublicSeen")) {
-			this.isPublicSeen = json.getBoolean("isPublicSeen");
-		}
-		if (json.has("status")) {
-			this.status = json.getInt("status");
-		}
-		if (json.has("avatar")) {
-			this.avatar = json.getString("avatar");
-		}
-		if (json.has("isFollow")) {
-			this.isFollow = json.getBoolean("isFollow");
-		}
-		if (json.has("token")) {
-			this.token = json.getString("token");
-		}
-		if (json.has("isOnline")) {
-			this.isOnline = json.getBoolean("isOnline");
+		news = new News();
+		if(json.has("_newsId")){
+			news = new News(new JSONObject(json.getString("_newsId")));
 		}
 	}
 }

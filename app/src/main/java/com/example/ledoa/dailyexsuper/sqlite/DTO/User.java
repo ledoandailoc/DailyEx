@@ -23,7 +23,7 @@ public class User implements Serializable {
     public boolean isOnline;
 
     public User() {
-        statistic = new Statistic();
+
     }
 
     public User(JSONObject json) throws JSONException {
