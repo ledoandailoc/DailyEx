@@ -13,6 +13,7 @@ public class News implements Serializable {
     public String title;
     public String thumbnail;
     public Statistic statistic;
+    public String createdAt;
 
     public News(){
         statistic = new Statistic();
@@ -31,8 +32,11 @@ public class News implements Serializable {
         if(json.has("title")){
             this.title = json.getString(("title"));
         }
-        if(json.has("thumbnail")){
-            this.thumbnail = json.getString("thumbnail");
+        if(json.has("thumbnails")){
+            this.thumbnail = json.getString("thumbnails");
+        }
+        if(json.has("createdAt")){
+            this.createdAt = json.getString("createdAt");
         }
         if(json.has("statistic")){
             statistic = new Statistic(new JSONObject(json.getString("statistic")));

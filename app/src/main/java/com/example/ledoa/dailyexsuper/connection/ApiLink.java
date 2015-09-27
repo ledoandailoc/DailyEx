@@ -43,6 +43,14 @@ public class ApiLink {
         return MainApplication.getContext().getString(R.string.base_url) + "/activities/getActivities";
     }
 
+    public static String getListNews() {
+        return MainApplication.getContext().getString(R.string.base_url) + "/news/getAllNews";
+    }
+
+    public static String isLike() {
+        return MainApplication.getContext().getString(R.string.base_url) + "/likes";
+    }
+
     public static String createEventLink() {
         return MainApplication.getContext().getString(R.string.base_url) + MainApplication.getContext().getString(R.string.api_create_event);
     }

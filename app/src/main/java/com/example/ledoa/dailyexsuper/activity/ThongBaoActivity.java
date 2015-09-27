@@ -52,10 +52,12 @@ public class ThongBaoActivity extends Activity {
 			protected void onSuccess(ListThongBaoResponse entity, int statusCode, String message) {
 				mUserList.clear();
 				mUserList.addAll(entity.data);
+				String s = entity.data.get(0).user._id.toString();
 				friendsList = new FriendsList();
 				mThongBaoAdapter = new ThongBaoAdapter(getApplicationContext(), mUserList);
 				mThongBaoAdapter.notifyDataSetChanged();
 				mLvThongBao.setAdapter(mThongBaoAdapter);
+				Toast.makeText(getApplicationContext(), "Get failed with error: " + s, Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
