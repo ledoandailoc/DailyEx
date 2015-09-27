@@ -11,6 +11,7 @@ public class PublicData implements Serializable {
     public String commentId;
 
     public PublicData(){
+
     }
 
     public PublicData(JSONObject json) throws JSONException {

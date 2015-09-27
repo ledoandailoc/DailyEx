@@ -47,6 +47,16 @@ public class ApiLink {
         return MainApplication.getContext().getString(R.string.base_url) + "/news/getAllNews";
     }
 
+    public static String getListComment() {
+        return MainApplication.getContext().getString(R.string.base_url) + "/comments/getComments";
+    }
+
+    public static String addComment() {
+        return MainApplication.getContext().getString(R.string.base_url) + "/comments/createComment";
+    }
+
+
+
     public static String isLike() {
         return MainApplication.getContext().getString(R.string.base_url) + "/likes";
     }

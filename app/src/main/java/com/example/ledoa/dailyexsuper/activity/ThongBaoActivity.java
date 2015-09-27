@@ -25,7 +25,6 @@ import java.util.ArrayList;
 public class ThongBaoActivity extends Activity {
 	ArrayList<ThongBao> mUserList = new ArrayList<>();
 	ThongBaoAdapter mThongBaoAdapter;
-	FriendsList friendsList;
 	GetListThongBaoRequest mGetListUserRequest;
 	ListView mLvThongBao;
 
@@ -53,7 +52,6 @@ public class ThongBaoActivity extends Activity {
 				mUserList.clear();
 				mUserList.addAll(entity.data);
 				String s = entity.data.get(0).user._id.toString();
-				friendsList = new FriendsList();
 				mThongBaoAdapter = new ThongBaoAdapter(getApplicationContext(), mUserList);
 				mThongBaoAdapter.notifyDataSetChanged();
 				mLvThongBao.setAdapter(mThongBaoAdapter);

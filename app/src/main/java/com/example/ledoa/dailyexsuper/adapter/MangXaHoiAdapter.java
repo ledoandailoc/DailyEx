@@ -2,6 +2,8 @@
 package com.example.ledoa.dailyexsuper.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ledoa.dailyexsuper.R;
+import com.example.ledoa.dailyexsuper.activity.CommentActivity;
 import com.example.ledoa.dailyexsuper.caches.ImageLoaderUtil;
 
 import com.example.ledoa.dailyexsuper.connection.ApiLink;
@@ -60,13 +63,25 @@ public class MangXaHoiAdapter extends ArrayAdapter<News> {
 			viewHolder.tv_like_comment.setText(like_comment.likes + " likes" + " " + like_comment.comments + " comments");
 
 			if (mList.get(position).thumbnail != null) {
-				ImageLoaderUtil.display(mList.get(position).thumbnail, viewHolder.im_thumbnail);
+				ImageLoaderUtil.display(mList.get(position).thumbnail, viewHolder.iv_thumbnail);
 			}
 
-			viewHolder.im_like.setOnClickListener(new View.OnClickListener() {
+			viewHolder.iv_like.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					getIsLike(mList.get(position)._id);
+				}
+			});
+
+			viewHolder.iv_comment.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent iComment = new Intent(context, CommentActivity.class);
+					Bundle mBundle = new Bundle();
+					mBundle.putString("newsId", mList.get(position)._id);
+					mBundle.putInt("likes", mList.get(position).statistic.likes);
+					iComment.putExtras(mBundle);
+					context.startActivity(iComment);
 				}
 			});
 			return convertView;
@@ -75,17 +90,17 @@ public class MangXaHoiAdapter extends ArrayAdapter<News> {
 		public class ViewHolder {
 
 			public TextView tv_title, tv_thoigian, tv_like_comment, tv_description;
-			public ImageView im_avatar, im_thumbnail, im_like, im_comment;
+			public ImageView iv_avatar, iv_thumbnail, iv_like, iv_comment;
 
 			public ViewHolder(View rootView) {
 				tv_title = (TextView)rootView.findViewById(R.id.tv_title);
 				tv_description = (TextView)rootView.findViewById(R.id.tv_description);
 				tv_thoigian = (TextView)rootView.findViewById(R.id.tv_thoigian);
 				tv_like_comment = (TextView)rootView.findViewById(R.id.tv_like_comment);
-				im_avatar = (ImageView)rootView.findViewById(R.id.im_avatar);
-				im_thumbnail = (ImageView)rootView.findViewById(R.id.im_thumbnail);
-				im_like = (ImageView)rootView.findViewById(R.id.im_like);
-				im_comment = (ImageView)rootView.findViewById(R.id.im_comment);
+				iv_avatar = (ImageView)rootView.findViewById(R.id.iv_avatar_user);
+				iv_thumbnail = (ImageView)rootView.findViewById(R.id.iv_thumbnail);
+				iv_like = (ImageView)rootView.findViewById(R.id.iv_like);
+				iv_comment = (ImageView)rootView.findViewById(R.id.iv_comment);
 			}
 		}
 
@@ -100,10 +115,11 @@ public class MangXaHoiAdapter extends ArrayAdapter<News> {
 
 				@Override
 				protected void onSuccess(LikesResponse entity, int statusCode, String message) {
-
-					Toast.makeText(getContext(), "Đã like.", Toast.LENGTH_SHORT).show();
-
-
+					if(true) {
+						Toast.makeText(getContext(), "đã thích", Toast.LENGTH_SHORT).show();
+					}	else {
+						Toast.makeText(getContext(), "bỏ thích", Toast.LENGTH_SHORT).show();
+					}
 				}
 
 				@Override

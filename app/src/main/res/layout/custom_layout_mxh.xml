@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
 
@@ -30,11 +31,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <ImageView
-                android:id="@+id/im_avatar"
-                android:layout_width="50dp"
-                android:layout_height="50dp"              
-                android:src="@drawable/icon_app" />
+                <com.example.ledoa.dailyexsuper.customview.CircleImageView
+                    android:id="@+id/iv_avatar_user"
+                    android:layout_width="@dimen/message_fragment_user_avatar_size"
+                    android:layout_height="@dimen/message_fragment_user_avatar_size"
+                    app:border_color="@color/app_brown"
+                    app:border_width="@dimen/message_fragment_user_avatar_border_size"
+                    android:src="@drawable/avt" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -75,7 +78,7 @@
      
 
                   <ImageView
-                android:id="@+id/im_thumbnail"
+                android:id="@+id/iv_thumbnail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/bg6" />
@@ -109,7 +112,7 @@
            >
 
            <ImageView
-               android:id="@+id/im_like"
+               android:id="@+id/iv_like"
                android:layout_width="22dp"
                android:layout_height="22dp"
                android:src="@drawable/icon_like"
@@ -126,7 +129,7 @@
                android:layout_marginTop="2dp"/>
 
            <ImageView
-               android:id="@+id/im_comment"
+               android:id="@+id/iv_comment"
                android:layout_width="22dp"
                android:layout_height="22dp"
                android:src="@drawable/icon_comment" 

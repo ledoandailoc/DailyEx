@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import android.widget.TextView;
@@ -44,7 +45,7 @@ public class ChatActivity extends Activity {
     private User mCurrentUser;
     private Socket mSocket;
     private ArrayList<Chat> mList = new ArrayList<>();
-    Button mBtnSend;
+    ImageView mBtnSend;
     String receiverId;
     ListView mLvMessage;
     private MessageAdapter mAdapter;
@@ -61,7 +62,7 @@ public class ChatActivity extends Activity {
         title.setText("Tin nhắn");
 
         receiverId = getIntent().getExtras().getString("UserId");
-        mBtnSend = (Button)findViewById(R.id.mBtnSend);
+        mBtnSend = (ImageView)findViewById(R.id.mBtnSend);
         mLvMessage = (ListView)findViewById(R.id.listView);
         mAdapter = new MessageAdapter(this, mList);
         mLvMessage.setAdapter(mAdapter);
