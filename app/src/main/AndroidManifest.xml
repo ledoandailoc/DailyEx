@@ -104,6 +104,10 @@
             android:name=".activity.CommentActivity"
             android:label="@string/title_activity_comment" >
         </activity>
+        <activity
+            android:name=".activity.DetailNewsActivity"
+            android:label="@string/title_activity_detail_news" >
+        </activity>
     </application>
 
 </manifest>

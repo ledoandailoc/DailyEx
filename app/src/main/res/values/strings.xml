@@ -66,6 +66,7 @@
     <string name="signup_username_empty">Username can not empty</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_comment">CommentActivity</string>
+    <string name="title_activity_detail_news">DetailNewsActivity</string>
 
 
 

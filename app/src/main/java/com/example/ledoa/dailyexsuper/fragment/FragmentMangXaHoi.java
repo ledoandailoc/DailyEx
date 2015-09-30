@@ -11,20 +11,13 @@ import android.widget.Toast;
 
 import com.example.ledoa.dailyexsuper.R;
 import com.example.ledoa.dailyexsuper.adapter.MangXaHoiAdapter;
-import com.example.ledoa.dailyexsuper.adapter.ThongBaoAdapter;
 import com.example.ledoa.dailyexsuper.connection.ApiLink;
 import com.example.ledoa.dailyexsuper.connection.base.Method;
 import com.example.ledoa.dailyexsuper.connection.request.GetListNewsRequest;
-import com.example.ledoa.dailyexsuper.connection.request.GetListThongBaoRequest;
 import com.example.ledoa.dailyexsuper.connection.response.ListNewsResponse;
-import com.example.ledoa.dailyexsuper.connection.response.ListThongBaoResponse;
-import com.example.ledoa.dailyexsuper.sqlite.DTO.FriendsList;
-import com.example.ledoa.dailyexsuper.sqlite.DTO.ItemMxh;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.News;
-import com.example.ledoa.dailyexsuper.sqlite.DTO.ThongBao;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class FragmentMangXaHoi extends Fragment {

@@ -68,20 +68,29 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_description"
+            android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="AnhtuanUit da thay doi hinh dai dien :D"
+            android:text="Thể dục mỗi ngày."
             android:layout_marginTop="10dp"
             android:layout_marginBottom="8dp" />
 
      
 
                   <ImageView
+                      android:scaleType="centerCrop"
                 android:id="@+id/iv_thumbnail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
                 android:src="@drawable/bg6" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="8dp" />
       
       
 
