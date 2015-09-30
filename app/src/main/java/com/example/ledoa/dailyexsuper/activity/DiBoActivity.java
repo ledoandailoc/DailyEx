@@ -96,12 +96,18 @@ public class DiBoActivity extends Activity implements SensorEventListener {
 
 	        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 	        accelerometer= sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
             ImageView ivBack = (ImageView) findViewById(R.id.iv_back);
             ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (IdChuongTrinhGiamCan > 0)
+                {
+                    Intent intent = new Intent(DiBoActivity.this, BaiTapGiamCanActivity.class);
+                    startActivity(intent);
+                }
+                else
                 finish();
             }
         });
@@ -138,7 +144,7 @@ public class DiBoActivity extends Activity implements SensorEventListener {
 
                 }
             });
-            v.setText(SoLanLac + "/" + MucTieu + " s");
+            v.setText(SoLanLac + "/" + MucTieu + "s");
             progresss_bar.setProgress(SoLanLac);
         }
 

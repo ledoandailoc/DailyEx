@@ -26,6 +26,7 @@ import com.example.ledoa.dailyexsuper.connection.response.ChatResponse;
 import com.example.ledoa.dailyexsuper.socketio.MySocket;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.Chat;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.ItemMenuLeft;
+import com.example.ledoa.dailyexsuper.sqlite.DatabaseHandle;
 import com.example.ledoa.dailyexsuper.util.UserPref;
 
 import java.util.ArrayList;
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         MainApplication.setMySocket(new MySocket(this));
         MainApplication.getMySocket().connectSocket();
         mUserPref = new UserPref();
+
+        DatabaseHandle databaseHandle = new DatabaseHandle(this);
+        databaseHandle.autoInsertDataBase();
 
         attachMenuHeader();
         attachMenu();
