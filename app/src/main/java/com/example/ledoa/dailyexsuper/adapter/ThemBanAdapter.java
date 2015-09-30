@@ -1,97 +1,82 @@
 package com.example.ledoa.dailyexsuper.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ledoa.dailyexsuper.MainApplication;
 import com.example.ledoa.dailyexsuper.R;
-import com.example.ledoa.dailyexsuper.sqlite.DTO.ItemThemBan;
+import com.example.ledoa.dailyexsuper.caches.ImageLoaderUtil;
+import com.example.ledoa.dailyexsuper.customview.CircleImageView;
+import com.example.ledoa.dailyexsuper.socketio.MySocket;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.User;
+import com.github.nkzawa.socketio.client.Socket;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class ThemBanAdapter extends ArrayAdapter<ItemThemBan> {
-    Context context;
-    int resID;
-    List<ItemThemBan> objects;
-    int result;
-    
-    
-    public ThemBanAdapter(Context context, int resource, List<ItemThemBan> objects) {
-        super(context, resource, objects);
+public class ThemBanAdapter extends ArrayAdapter<User> {
+    private Context context;
+    private ArrayList<User> mList;
+    private Socket mSocket;
+
+    public ThemBanAdapter(Context context, ArrayList<User> list) {
+        super(context, 0, list);
         this.context = context;
-        this.resID = resource;
-        this.objects = objects;
+        this.mList = list;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        View view = View.inflate(context, resID, null);
-        ImageView avatar = (ImageView) view.findViewById(R.id.AvatarThemBan);
-        TextView text = (TextView) view.findViewById(R.id.textViewThemBan);
-        final Button button = (Button)view.findViewById(R.id.buttonThemBan);
-        
-        final ItemThemBan item = objects.get(position);
-
-        //avatar.setImageResource(item.getAvatar());
-        text.setText(item.getText());
-        avatar.setImageBitmap(item.getAvatar());
-        button.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				AsyncAddfreind addfreind =new AsyncAddfreind();
-				addfreind.execute(item.getMyAccountId(),item.getFriendAccountId());
-				 
-					 button.setText("Hủy kết bạn");
-					 button.setEnabled(false);
-				 
-				
-			}
-		});
-        
-        return view;
-    }
-    public static Bitmap decodeBase64(String input)
-	{
-	    byte[] decodedByte = Base64.decode(input, 0);
-	    return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
-	}
-    
-    public class AsyncAddfreind extends AsyncTask<Integer, Void, Integer> {
-
-        @Override
-        protected Integer doInBackground(Integer... params) {
-
-            return 1;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final ViewHolder viewHolder;
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.custom_layout_themban, parent, false);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            if(integer > 0){
-            	//button.setText("Hủy yêu cầu");
-            	result=integer;
-            	 Toast.makeText(context, "Gui loi moi ket ban thanh cong!", Toast.LENGTH_SHORT).show();
+        viewHolder.tvId.setText("ID: "+mList.get(position)._id);
+        viewHolder.tvUsername.setText(mList.get(position).username);
+        if (mList.get(position).avatar != null) {
+            ImageLoaderUtil.display(mList.get(position).avatar, viewHolder.ivUseravatar);
+        } else {
+            viewHolder.ivUseravatar.setImageResource(R.drawable.avt);
+        }
+
+        viewHolder.btThemBan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSocket = MainApplication.getMySocket().getSocket();
+                mSocket.emit("addFriend", mList.get(position)._id);
+                viewHolder.btThemBan.setVisibility(View.INVISIBLE);
+                Toast.makeText(context, "Đã gửi yêu cầu kết bạn thành công.", Toast.LENGTH_SHORT).show();
             }
-               
-            else
-            {
-            	
-                Toast.makeText(context, "Gui loi moi that bai!", Toast.LENGTH_SHORT).show();
-            }
+        });
+
+        return convertView;
+    }
+
+    public class ViewHolder {
+
+        public TextView tvId;
+        public TextView tvUsername;
+        public CircleImageView ivUseravatar;
+        public Button btThemBan;
+
+        public ViewHolder(View rootView) {
+            tvId = (TextView) rootView.findViewById(R.id.tv_id);
+            tvUsername = (TextView) rootView.findViewById(R.id.tv_username);
+            ivUseravatar = (CircleImageView) rootView.findViewById(R.id.iv_avatar_user);
+            btThemBan = (Button) rootView.findViewById(R.id.btThemBan);
+            btThemBan.setText("Thêm");
         }
     }
-    
-   
+
 }

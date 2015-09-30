@@ -14,7 +14,7 @@
         android:layout_marginRight="28dp"
 
         android:src="@drawable/hinhanh"
-        android:id="@+id/imageView"
+        android:id="@+id/imageView_Left"
          />
 
     <TextView

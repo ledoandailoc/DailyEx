@@ -7,18 +7,18 @@ import android.view.MenuItem;
 
 import com.example.ledoa.dailyexsuper.R;
 
-public class MessageActivity extends AppCompatActivity {
+public class UserProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message);
+        setContentView(R.layout.activity_user_profile);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_message, menu);
+        getMenuInflater().inflate(R.menu.menu_user_profile, menu);
         return true;
     }
 

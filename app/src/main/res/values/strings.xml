@@ -56,15 +56,23 @@
 
     <!-- Login -->
     <string name="edtPassword">Password</string>
-    <string name="btnLogin">Login</string>
-    <string name="tvSingupHere">SignUp here</string>
+    <string name="btnLogin">Đăng nhập</string>
+    <string name="tvSingupHere">Đăng ký tại đây</string>
     <string name="title_activity_message">Message</string>
     <string name="title_activity_bai_tap_giam_can">BaiTapGiamCanActivity</string>
     <string name="title_activity_tao_chuong_trinh_giam_can">TaoChuongTrinhGiamCanActivity</string>
-    <string name="title_activity_thong_tin_chuong_trinh_giam_can">
-        ThongTinChuongTrinhGiamCanActivity
-    </string>
+    <string name="title_activity_thong_tin_chuong_trinh_giam_can">ThongTinChuongTrinhGiamCanActivity</string>
     <string name="title_activity_chuong_trinh_tang_suc_ben">ChuongTrinhTangSucBenActivity</string>
+
+    <string name="title_activity_cai_dat">CaiDatActivity</string>
+    <string name="title_activity_nhan_tin">NhanTinActivity</string>
+
+    <!-- Signup -->
+    <string name="signup_username_empty">Username can not empty</string>
+    <string name="title_activity_user_profile">UserProfileActivity</string>
+    <string name="title_activity_comment">CommentActivity</string>
+    <string name="title_activity_detail_news">DetailNewsActivity</string>
+
 
 
 </resources>

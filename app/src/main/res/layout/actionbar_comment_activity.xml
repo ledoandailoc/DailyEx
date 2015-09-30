@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/actionbar_height"
+    android:background="@color/app_main_color"
+    android:id="@+id/relativeLayout"
+    >
+
+    <TextView
+        android:paddingLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Luyện Tập"
+        android:id="@+id/actionbar_tvTitile"
+        android:textColor="#000"
+        android:textSize="21dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/imageView6"
+        android:layout_toEndOf="@+id/imageView6" />
+
+
+    <ImageView
+        android:layout_marginLeft="9dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/imageView6"
+        android:src="@drawable/icon_like"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/iv_back"
+        android:layout_toEndOf="@+id/iv_back" />
+</RelativeLayout>

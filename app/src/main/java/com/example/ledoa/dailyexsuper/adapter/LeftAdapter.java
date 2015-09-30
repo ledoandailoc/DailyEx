@@ -29,13 +29,13 @@ public class LeftAdapter extends ArrayAdapter<ItemMenuLeft> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view = View.inflate(context, resID, null);
-        ImageView hinhanh = (ImageView) view.findViewById(R.id.imageView);
+        ImageView hinhanh = (ImageView) view.findViewById(R.id.imageView_Left);
         TextView noidung = (TextView) view.findViewById(R.id.contentDrawer);
 
         ItemMenuLeft item = objects.get(position);
 
-        hinhanh.setImageResource(item.getHinhAnh());
-        noidung.setText(item.getTenMenu());
+        hinhanh.setImageResource(item.getImage());
+        noidung.setText(item.getText());
         return view;
     }
 }

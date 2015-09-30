@@ -1,148 +1,72 @@
 package com.example.ledoa.dailyexsuper.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ledoa.dailyexsuper.R;
 import com.example.ledoa.dailyexsuper.adapter.ThongBaoAdapter;
-import com.example.ledoa.dailyexsuper.sqlite.DTO.ItemThongBao;
+import com.example.ledoa.dailyexsuper.connection.ApiLink;
+import com.example.ledoa.dailyexsuper.connection.base.Method;
+import com.example.ledoa.dailyexsuper.connection.request.GetListThongBaoRequest;
+import com.example.ledoa.dailyexsuper.connection.request.GetListUserRequest;
+import com.example.ledoa.dailyexsuper.connection.response.ListThongBaoResponse;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.FriendsList;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.ThongBao;
+import com.github.nkzawa.socketio.client.Socket;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ThongBaoActivity extends Activity {
-
-	String itemText[] = {"AnhtuanUit da gui loi moi ket ban cho ban",
-			"LeLoc da gui loi moi ket ban cho ban", "Ngoc Man da ru ban choi Excercise"};
-	ArrayList<ItemThongBao> listThongBao;
-	ListView listViewThongBao;
-	ThongBaoAdapter adapterTB;
-	List<ItemThongBao> resultNotify;
+	ArrayList<ThongBao> mUserList = new ArrayList<>();
+	ThongBaoAdapter mThongBaoAdapter;
+	GetListThongBaoRequest mGetListUserRequest;
+	ListView mLvThongBao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_thong_bao);		
-		
-		/*getActionBar().setBackgroundDrawable(getResources().getDrawable(
-		        R.drawable.theme));*/
+		setContentView(R.layout.activity_thong_bao);
 
-		listThongBao = new ArrayList<ItemThongBao>();
-		listViewThongBao= (ListView)findViewById(R.id.listViewThongBao);
-		
-		
-		 for(int i=0; i< itemText.length;i++){
-	            ItemThongBao item = new ItemThongBao();
-	            
-	            item.setText(itemText[i]);
-	            listThongBao.add(item);
-	        }	 
-		 adapterTB = new ThongBaoAdapter(ThongBaoActivity.this, R.layout.custom_layout_thongbao, listThongBao);
-		 listViewThongBao.setAdapter(adapterTB);
-		 
-		 AsyncCheckNotify asyncCheckNotify = new AsyncCheckNotify();
-		 asyncCheckNotify.execute(10);
-		 
-		 listViewThongBao.setOnItemClickListener(new OnItemClickListener() {
+		TextView actionbar_tvTitile = (TextView)findViewById(R.id.actionbar_tvTitile);
+		actionbar_tvTitile.setText("Thông báo");
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					final int position, long id) {
-				AlertDialog.Builder b=new AlertDialog.Builder(ThongBaoActivity.this);
-				 
-				b.setTitle("Thông báo");
-				b.setMessage("Lời mời kết bạn");
-				b.setPositiveButton("Chấp nhận", new DialogInterface. OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which)
-				{
-				/*finish();*/
-				
-					AsyncAcceptFreind asyncAcceptFreind = new AsyncAcceptFreind();
-					asyncAcceptFreind.execute(listThongBao.get(position).getId());
-					listThongBao.remove(position);
-					adapterTB.notifyDataSetChanged();
-					
-				}});
-				b.setNegativeButton("Hủy yêu cầu", new DialogInterface.OnClickListener() {
-							
-				@Override
-
-				public void onClick(DialogInterface dialog, int which)
-
-				{
-					listThongBao.remove(position);
-					adapterTB.notifyDataSetChanged();
-				dialog.cancel();
-			
-
-				}
-
-				});
-
-				b.create().show();
-				
-			}
-		});
+		getListThongBao();
 	}
 
+	private void getListThongBao() {
+		mLvThongBao = (ListView)findViewById(R.id.lvThongBao);
 
-	 public class  AsyncCheckNotify extends AsyncTask<Integer, Void, List<ItemThongBao>> {
+		mGetListUserRequest = new GetListThongBaoRequest(Method.GET, ApiLink.getListThongBao(), null, null) {
+			@Override
+			protected void onStart() {
+			}
 
-	        @Override
-	        protected List<ItemThongBao> doInBackground(Integer... params) {
-	            return null;
-	        }
-	        @Override
-	        protected void onPostExecute(List<ItemThongBao> result) {
-	            super.onPostExecute(result);
-	            resultNotify = result;
-	            listThongBao.clear();
-	            /*for(int i = 0; i< result.size(); i++){
-	                if(result.get(i).getNotify().toString().equals("Hello"))
-	                {
-	                	ItemThongBao item = new ItemThongBao();	    	            
-	    	            item.setText(result.get(i).getSender().toString()+" da gui cho ban loi moi ket ban!");
-	    	            item.setId(result.get(i).getId());
-	    	            listThongBao.add(item);                	
-	                }
-	              *//*  else
-	                {
-		                ItemThongBao item = new ItemThongBao();	    	            
-	    	            item.setText(result.get(i).getSender().toString()+" da chap nhan loi moi ket ban!");
-	    	            listThongBao.add(item);	
-	                }*//*
-	                adapterTB = new ThongBaoAdapter(ThongBaoActivity.this, R.layout.custom_layout_thongbao, listThongBao);
-	       		 listViewThongBao.setAdapter(adapterTB);
-	            }*/
-	        }
-	    }
-	 
-		public class AsyncAcceptFreind extends AsyncTask<Integer, Void, Integer> {
+			@Override
+			protected void onSuccess(ListThongBaoResponse entity, int statusCode, String message) {
+				mUserList.clear();
+				mUserList.addAll(entity.data);
+				String s = entity.data.get(0).user._id.toString();
+				mThongBaoAdapter = new ThongBaoAdapter(getApplicationContext(), mUserList);
+				mThongBaoAdapter.notifyDataSetChanged();
+				mLvThongBao.setAdapter(mThongBaoAdapter);
+				Toast.makeText(getApplicationContext(), "Get failed with error: " + s, Toast.LENGTH_SHORT).show();
+			}
 
-	        @Override
-	        protected Integer doInBackground(Integer... params) {
-	            return 1;
-	        }
+			@Override
+			protected void onError(int statusCode, String message) {
+				Toast.makeText(getApplicationContext(), "Get failed with error: " + message, Toast.LENGTH_SHORT).show();
+			}
+		};
+		mGetListUserRequest.execute();
 
-	        @Override
-	        protected void onPostExecute(Integer integer) {
-	            super.onPostExecute(integer);
-	            if(integer > 0)
-	                Toast.makeText(getApplicationContext(), "Da chap nhan loi moi ket ban!", Toast.LENGTH_SHORT).show();
-	            else
-	            {
-	                Toast.makeText(getApplicationContext(), "Tu choi loi moi ket ban!", Toast.LENGTH_SHORT).show();
-	            }
-	            
-	        }
-	    }   
+
+	}
+
 }
+

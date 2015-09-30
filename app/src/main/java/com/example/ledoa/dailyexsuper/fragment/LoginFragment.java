@@ -2,6 +2,7 @@ package com.example.ledoa.dailyexsuper.fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -33,7 +34,6 @@ public class LoginFragment extends BaseFragment {
     private EditText mEdtEmail, mEditPassword;
     private Button mBtnLogin;
     private TextView mTvSignup;
-
     private LoginRequest mLoginRequest;
 
     public static LoginFragment newInstance() {
@@ -59,6 +59,12 @@ public class LoginFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 signIn();
+            }
+        });
+        mTvSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onShowSignupFragment();
             }
         });
 
@@ -119,9 +125,7 @@ public class LoginFragment extends BaseFragment {
         String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(email);
-
         return matcher.matches();
-
     }
 
     @Override

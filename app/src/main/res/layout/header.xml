@@ -28,7 +28,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="8dp"
-                    android:src="@drawable/ava1" />
+                    android:src="@drawable/avt" />
 
                 <EditText
                     android:id="@+id/editText1"

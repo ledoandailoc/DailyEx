@@ -4,55 +4,58 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ledoa.dailyexsuper.R;
-import com.example.ledoa.dailyexsuper.adapter.DanhBaAdapter;
-import com.example.ledoa.dailyexsuper.sqlite.DTO.ItemDanhBa;
+import com.example.ledoa.dailyexsuper.adapter.UserAdapter;
+import com.example.ledoa.dailyexsuper.connection.ApiLink;
+import com.example.ledoa.dailyexsuper.connection.base.Method;
+import com.example.ledoa.dailyexsuper.connection.request.GetListUserRequest;
+import com.example.ledoa.dailyexsuper.connection.response.ListUserResponse;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.User;
 
 import java.util.ArrayList;
 
 public class DanhBaActivity extends Activity {
 
-	String itemText[] = {"AnhtuanUit", "LeLoc", "Ngoc Man"};
-	ArrayList<ItemDanhBa> listDanhBa;
-	ListView listViewDanhBa;
-	DanhBaAdapter adapterDB;
+	private ArrayList<User> mUserList = new ArrayList<>();
+	UserAdapter mUserAdapter;
+	GetListUserRequest mGetListUserRequest;
+	ListView mLvDanhBa;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_danh_ba);
+		TextView title = (TextView) findViewById(R.id.actionbar_tvTitile);
+		title.setText("Danh bạ");
 
-		listDanhBa = new ArrayList<ItemDanhBa>();
-		listViewDanhBa = (ListView)findViewById(R.id.listViewDanhBa);
-		
-		
-		 for(int i=0; i< itemText.length;i++){
-	            ItemDanhBa item = new ItemDanhBa();
-	            
-	            item.setText(itemText[i]);
-	            listDanhBa.add(item);
-	        }	 
-		 adapterDB = new DanhBaAdapter(DanhBaActivity.this, R.layout.custom_layout_danhba, listDanhBa);
-		 listViewDanhBa.setAdapter(adapterDB);
-		 
-		 AsyncGetContacts asyncGetContacts = new AsyncGetContacts();
-		 asyncGetContacts.execute(10,1);
+		getListUsers();
 	}
-	
-	public class  AsyncGetContacts extends AsyncTask<Integer , Void, ArrayList<ItemDanhBa>> {
-        @Override
-        protected ArrayList<ItemDanhBa> doInBackground(Integer... params) {
-      
-            return null;
-        }
-        @Override
-        protected void onPostExecute(ArrayList<ItemDanhBa> players) {
-            super.onPostExecute(players);
-           /* listDanhBa =  players;
-            adapterDB = new DanhBaAdapter(DanhBaActivity.this, R.layout.custom_layout_danhba, listDanhBa);
-            listViewDanhBa.setAdapter(adapterDB);*/
-           
-        }
-    }
+
+	private void getListUsers() {
+		mLvDanhBa = (ListView) findViewById(R.id.lvDanhBa);
+		mGetListUserRequest = new GetListUserRequest(Method.GET, ApiLink.getContactLink(), null, null) {
+			@Override
+			protected void onStart() {
+			}
+
+			@Override
+			protected void onSuccess(ListUserResponse entity, int statusCode, String message) {
+				mUserList.clear();
+				mUserList.addAll(entity.data);
+				mUserAdapter = new UserAdapter(getApplicationContext(), mUserList);
+				mUserAdapter.notifyDataSetChanged();
+				mLvDanhBa.setAdapter(mUserAdapter);
+			}
+
+			@Override
+			protected void onError(int statusCode, String message) {
+				Toast.makeText(getApplicationContext(), "Get failed with error: " + message, Toast.LENGTH_SHORT).show();
+			}
+		};
+		mGetListUserRequest.execute();
+
+	}
 }

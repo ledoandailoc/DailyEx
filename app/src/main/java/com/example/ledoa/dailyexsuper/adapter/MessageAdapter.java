@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ledoa.dailyexsuper.R;
-import com.example.ledoa.dailyexsuper.sqlite.DTO.Data;
+import com.example.ledoa.dailyexsuper.caches.ImageLoaderUtil;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.Chat;
 import com.example.ledoa.dailyexsuper.util.Constant;
 
 import java.util.ArrayList;
@@ -18,9 +19,9 @@ import java.util.ArrayList;
 public class MessageAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<Data> mList;
+    private ArrayList<Chat> mList;
 
-    public MessageAdapter(Context context, ArrayList<Data> list) {
+    public MessageAdapter(Context context, ArrayList<Chat> list) {
         this.context = context;
         this.mList = list;
     }
@@ -42,7 +43,7 @@ public class MessageAdapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        return mList.get(position).typeDisplay;
+        return mList.get(position).message.type;
     }
 
     @Override
@@ -66,7 +67,7 @@ public class MessageAdapter extends BaseAdapter {
                 }
                 viewHolder1.tvMessage.setText(mList.get(position).message.message);
                 if (mList.get(position).user.avatar != null) {
-                    //ImageLoaderUtil.display(mList.get(position).user.avatar, viewHolder1.imAvatarChat);
+                    ImageLoaderUtil.display(mList.get(position).user.avatar, viewHolder1.imAvatarChat);
                 } else {
                     viewHolder1.imAvatarChat.setImageResource(R.drawable.avt);
                 }
@@ -83,7 +84,7 @@ public class MessageAdapter extends BaseAdapter {
                 }
                 viewHolder2.tvMessage.setText(mList.get(position).message.message);
                 if (mList.get(position).user.avatar != null) {
-                    //.display(mList.get(position).user.avatar, viewHolder2.imAvatarChat);
+                    ImageLoaderUtil.display(mList.get(position).user.avatar, viewHolder2.imAvatarChat);
                 } else {
                     viewHolder2.imAvatarChat.setImageResource(R.drawable.avt);
                 }
@@ -112,7 +113,7 @@ public class MessageAdapter extends BaseAdapter {
                 }
                 viewHolder4.tvMessage.setText(mList.get(position).message.message);
                 break;
-            case Constant.CHAT_TYPE_IMAGE_LEFT_WITH_AVATAR:
+           /* case Constant.CHAT_TYPE_IMAGE_LEFT_WITH_AVATAR:
                 final ViewHolderChatImageLeftWithAvatar viewHolder5;
                 if (convertView == null) {
                     LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -145,7 +146,7 @@ public class MessageAdapter extends BaseAdapter {
                     viewHolder6.imAvatarChat.setImageResource(R.drawable.avt);
                 }
                 //ImageLoaderUtil.display(mList.get(position).file.thumbnail, viewHolder6.ivPicture);
-                break;
+                break;*/
         }
 
         return convertView;
@@ -187,7 +188,7 @@ public class MessageAdapter extends BaseAdapter {
         }
     }
 
-    public class ViewHolderChatImageLeftWithAvatar {
+  /*  public class ViewHolderChatImageLeftWithAvatar {
         ImageView ivPicture;
         ImageView imAvatarChat;
 
@@ -195,9 +196,9 @@ public class MessageAdapter extends BaseAdapter {
             ivPicture = (ImageView) rootView.findViewById(R.id.iv_picture_other);
             imAvatarChat = (ImageView) rootView.findViewById(R.id.iv_avatar_other);
         }
-    }
+    }*/
 
-    public class ViewHolderChatImageRightWithAvatar {
+/*    public class ViewHolderChatImageRightWithAvatar {
         ImageView ivPicture;
         ImageView imAvatarChat;
 
@@ -205,5 +206,5 @@ public class MessageAdapter extends BaseAdapter {
             ivPicture = (ImageView) rootView.findViewById(R.id.iv_picture_myself);
             imAvatarChat = (ImageView) rootView.findViewById(R.id.iv_avatar_myself);
         }
-    }
+    }*/
 }

@@ -11,7 +11,7 @@
         android:paddingLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Luyện Tập"
+        android:text="Luyá»‡n Táº­p"
         android:id="@+id/actionbar_tvTitile"
         android:textColor="#fff"
         android:textSize="20dp"

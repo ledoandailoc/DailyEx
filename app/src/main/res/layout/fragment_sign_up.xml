@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <TextView
+        style="@style/tv_daily"
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:gravity="center" />
@@ -15,8 +16,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:background="@drawable/edit_text_border"
         android:gravity="center"
-        android:hint="Username"
+        android:hint="Tên đăng nhập"
         android:inputType="text"
         android:singleLine="true" />
 
@@ -27,6 +29,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="7dp"
+        android:background="@drawable/edit_text_border"
         android:gravity="center"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -39,8 +42,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="7dp"
+        android:background="@drawable/edit_text_border"
         android:gravity="center"
-        android:hint="Password"
+        android:hint="Mật khẩu"
         android:inputType="textPassword"
         android:singleLine="true" />
 
@@ -51,8 +55,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="7dp"
+        android:background="@drawable/edit_text_border"
         android:gravity="center"
-        android:hint="Phone number"
+        android:hint="Số điện thoại"
         android:inputType="phone"
         android:singleLine="true" />
 
@@ -63,8 +68,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="7dp"
+        android:background="@drawable/edit_text_border"
         android:gravity="center"
-        android:hint="Country"
+        android:hint="Quê quán"
         android:singleLine="true" />
 
     <RadioGroup
@@ -80,26 +86,32 @@
             android:id="@+id/rbNone"
             android:layout_width="80dp"
             android:layout_height="match_parent"
+            android:background="@drawable/segmented_left"
             android:button="@null"
             android:checked="true"
             android:gravity="center"
-            android:text="None" />
+            android:text="Không"
+            android:textColor="@drawable/segmented_text_color" />
 
         <RadioButton
             android:id="@+id/rbMale"
             android:layout_width="80dp"
             android:layout_height="match_parent"
+            android:background="@drawable/segmented_center"
             android:button="@null"
             android:gravity="center"
-            android:text="Male" />
+            android:text="Nam"
+            android:textColor="@drawable/segmented_text_color" />
 
         <RadioButton
             android:id="@+id/rbFemale"
             android:layout_width="80dp"
             android:layout_height="match_parent"
+            android:background="@drawable/segmented_right"
             android:button="@null"
             android:gravity="center"
-            android:text="Female" />
+            android:text="Nữ"
+            android:textColor="@drawable/segmented_text_color" />
     </RadioGroup>
 
     <Button
@@ -109,17 +121,9 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:background="@drawable/forgot_button_border"
-        android:text="Sign Up"
+        android:text="Đăng ký"
         android:textColor="#ffffff" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="By clicked on Sign Up\n you agreed with Terms and Privacy"
-        android:textSize="13dp"/>
 
     <TextView
         android:id="@+id/tvSignIn"
@@ -128,6 +132,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="Log in here"/>
+        android:text="Đăng nhập tại đây"/>
 
 </LinearLayout>

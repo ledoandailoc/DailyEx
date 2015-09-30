@@ -86,11 +86,27 @@
         </activity>
         <activity
             android:name=".activity.ChatActivity"
-            android:label="@string/title_activity_bai_tap_di_bo" >
+            android:label="@string/title_activity_message" >
         </activity>
         <activity
-            android:name=".activity.MessageActivity"
-            android:label="@string/title_activity_message" >
+            android:name=".activity.CaiDatActivity"
+            android:label="@string/title_activity_cai_dat" >
+        </activity>
+        <activity
+            android:name=".activity.NhanTinActivity"
+            android:label="@string/title_activity_nhan_tin" >
+        </activity>
+        <activity
+            android:name=".activity.UserProfileActivity"
+            android:label="@string/title_activity_user_profile" >
+        </activity>
+        <activity
+            android:name=".activity.CommentActivity"
+            android:label="@string/title_activity_comment" >
+        </activity>
+        <activity
+            android:name=".activity.DetailNewsActivity"
+            android:label="@string/title_activity_detail_news" >
         </activity>
         <activity
             android:name=".activity.BaiTapGiamCanActivity"

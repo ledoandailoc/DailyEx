@@ -89,24 +89,6 @@ public class FragmentLichTap extends Fragment implements DatePicker.OnDateChange
 			}
 		});
 
-		datePicker.getCalendarView().setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-			@Override
-			public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-
-				date = new Date();
-				date.setDate(dayOfMonth);
-				date.setMonth(month);
-				date.setYear(year - 1900);
-
-				textViewHienThi.setText(String.valueOf(ConvertDate.ConvertNgayToString(date)));
-
-				int tongThoigian = databaseHandle.tinhTongThoiGianTapTrongNgay(ConvertDate.ConvertNgayToString(date));
-				textViewMonTap.setText("Môn tập: " + databaseHandle.getTenMonTapTheoNgay(ConvertDate.ConvertNgayToString(date)));
-				textViewTongThoiGian.setText("Tổng thời gian tập luyện: " + String.valueOf(DoiGioPhutGiay.GiaySangGio(Long.parseLong(String.valueOf(tongThoigian)))));
-
-			}
-		});
-
 
 		return view;
 	}
