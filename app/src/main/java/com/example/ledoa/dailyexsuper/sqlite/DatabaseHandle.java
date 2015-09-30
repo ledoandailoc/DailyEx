@@ -104,10 +104,10 @@ public class DatabaseHandle extends SQLiteOpenHelper {
 				.append(" ('B', 'Đi bộ 400 bước', 'DB', 400, 0),")
 				.append(" ('B', 'Đi bộ 500 bước', 'DB', 400, 0),")
 
-				.append(" ('TG', 'Đi bộ 30 phút', 'DB', 5, 0),")
-				.append(" ('TG', 'Đi bộ 1h', 'DB', 3600, 1),")
-				.append(" ('TG', 'Đi bộ 1h 30 phút ', 'DB', 5400, 0),")
-				.append(" ('TG', 'Đi bộ 2h', 'DB', 7200, 0);")
+				.append(" ('TG', 'Đi bộ 20 phút', 'DB', 1200, 0),")
+				.append(" ('TG', 'Đi bộ 30 phút', 'DB', 1800, 1),")
+				.append(" ('TG', 'Đi bộ 40 phút ', 'DB', 2400, 0),")
+				.append(" ('TG', 'Đi bộ 50 phút', 'DB', 3000, 0);")
 				.toString());
 
 		getWritableDatabase().execSQL((new StringBuilder())

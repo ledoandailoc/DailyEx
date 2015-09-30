@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         DatabaseHandle databaseHandle = new DatabaseHandle(this);
         databaseHandle.autoInsertDataBase();
 
+        attachActionbar();
         attachMenuHeader();
         attachMenu();
         attachFragment();
@@ -91,6 +92,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
+    public void attachActionbar() {
+        ImageView mIvMusic = (ImageView) findViewById(R.id.iv_music);
+        mIvMusic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("android.intent.action.MUSIC_PLAYER");
+                startActivity(intent);
+            }
+        });
+    }
+
     public void attachMenu() {
         mIntentThongbao = new Intent(MainActivity.this, ThongBaoActivity.class);
         mIntentThemBan = new Intent(MainActivity.this, ThemBanActivity.class);
