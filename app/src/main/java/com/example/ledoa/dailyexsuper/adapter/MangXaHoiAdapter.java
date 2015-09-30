@@ -80,21 +80,26 @@ public class MangXaHoiAdapter extends ArrayAdapter<News> {
 				@Override
 				public void onClick(View v) {
 					Intent iComment = new Intent(context, CommentActivity.class);
-					Bundle extras = iComment.getExtras();
-					extras.putString("title", mList.get(position).title);
-					extras.putString("description", mList.get(position).description);
-					extras.putString("content", mList.get(position).content);
-					extras.putString("thumbnail", mList.get(position).thumbnail);
+					Bundle mBundle = new Bundle();
+					mBundle.putString("newsId", mList.get(position)._id);
+					mBundle.putInt("likes", mList.get(position).statistic.likes);
+					iComment.putExtras(mBundle);
 					context.startActivity(iComment);
 				}
 			});
 			viewHolder.tv_title.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent iDetail = new Intent(context, DetailNewsActivity.class);
+					Intent iComment = new Intent(context, DetailNewsActivity.class);
+					Bundle mBundle = new Bundle();
+					mBundle.putString("title", mList.get(position).title);
+					mBundle.putString("description", mList.get(position).description);
+					mBundle.putString("content", mList.get(position).content);
+					mBundle.putString("thumbnail", mList.get(position).thumbnail);
 
-					iDetail.putExtra("News", mList.get(position));
-					context.startActivity(iDetail);
+					mBundle.putInt("likes", mList.get(position).statistic.likes);
+					iComment.putExtras(mBundle);
+					context.startActivity(iComment);
 				}
 			});
 			return convertView;
