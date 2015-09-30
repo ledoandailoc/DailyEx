@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:paddingLeft="10dp"
+android:paddingRight="10dp"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
+    android:weightSum="1">
+
+<LinearLayout
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:layout_width="70dp"
+        android:layout_height="81dp"
+        android:id="@+id/iv_icon_tangsucben"
+        android:src="@drawable/icon_giamcan"
+        android:layout_weight="0.10" />
+    <TextView
+        android:textSize="15dp"
+        android:textColor="#ee5900"
+        android:layout_gravity="center_horizontal"
+        android:text="70kg -> 60kg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_cannangmuctieu" />
+
+</LinearLayout>
+<LinearLayout
+    android:layout_marginTop="2dp"
+    android:layout_weight="0.4"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical"
+    android:layout_width="160dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:id="@+id/linearLayout4">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chương trình đi bộ giảm cân"
+        android:id="@+id/tv_tenchuongtrinh"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        />
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_marginTop="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ngày tạo: 15/8/2015"
+        android:id="@+id/tv_ngaytao"
+        android:textColor="#000"
+        />
+
+    <TextView
+        android:layout_marginTop="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nội dung: đi bộ mỗi ngày 1 giờ trong vòng 56 ngày"
+        android:id="@+id/tv_noidungchuongtrinh"
+        android:textColor="#3c3c3c"
+        />
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/iv_checked"
+            android:src="@drawable/icon_unfinish"
+            android:layout_toRightOf="@+id/tv_tenbaitap"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiến độ"
+            android:id="@+id/tv_tiendo1" />
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20/56 ngày"
+            android:id="@+id/tv_tiendo" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

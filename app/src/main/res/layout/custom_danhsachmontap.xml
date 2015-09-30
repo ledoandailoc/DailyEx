@@ -55,7 +55,7 @@
             android:id="@+id/textView_tongthoigian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/imageView2"
+            android:layout_above="@+id/iv_icon_tangsucben"
             android:layout_alignParentRight="true"
             android:text="Tổng thời gian"
 			/>

@@ -21,6 +21,7 @@
         android:allowBackup="true"
         android:icon="@drawable/icon_app"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
         <activity
             android:name=".activity.SplashActivity"
@@ -90,6 +91,22 @@
         <activity
             android:name=".activity.MessageActivity"
             android:label="@string/title_activity_message" >
+        </activity>
+        <activity
+            android:name=".activity.BaiTapGiamCanActivity"
+            android:label="@string/title_activity_bai_tap_giam_can" >
+        </activity>
+        <activity
+            android:name=".activity.TaoChuongTrinhGiamCanActivity"
+            android:label="@string/title_activity_tao_chuong_trinh_giam_can" >
+        </activity>
+        <activity
+            android:name=".activity.ThongTinChuongTrinhGiamCanActivity"
+            android:label="@string/title_activity_thong_tin_chuong_trinh_giam_can" >
+        </activity>
+        <activity
+            android:name=".activity.ChuongTrinhTangSucBenActivity"
+            android:label="@string/title_activity_chuong_trinh_tang_suc_ben" >
         </activity>
     </application>
 

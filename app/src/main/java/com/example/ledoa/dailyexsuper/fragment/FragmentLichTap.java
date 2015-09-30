@@ -50,7 +50,6 @@ public class FragmentLichTap extends Fragment implements DatePicker.OnDateChange
 		view = inflater.inflate(R.layout.fragment_lichtap, container,false);
 
 		databaseHandle = new DatabaseHandle(getActivity());
-		databaseHandle.autoInsertDataBase();
 
 		imageButtonChiTiet = (ImageButton) view.findViewById(R.id.imageButton_chitiet);
 		/*calendarView = (CalendarView) view.findViewById(R.id.ca);*/

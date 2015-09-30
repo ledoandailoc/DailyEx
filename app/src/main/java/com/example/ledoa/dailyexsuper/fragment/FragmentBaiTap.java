@@ -7,16 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 import com.example.ledoa.dailyexsuper.R;
-import com.example.ledoa.dailyexsuper.adapter.BaiTapAdapter;
+import com.example.ledoa.dailyexsuper.adapter.TranningPlanAdapter;
 
 public class FragmentBaiTap extends Fragment {
 
 	View view;
-	String argMonTap[] = {"Đi Bộ", "Chạy Bộ", "Đạp Xe", "Hít Đất"};
-	int argImg[] = {R.drawable.training_walk,R.drawable.training_run,R.drawable.training_cycle,R.drawable.training_pushup};
+	String argMonTap[] = {"Dành cho người mới bắt đầu", "Chương trình tăng sức bền", "Chương trình giảm cân"};
+	int argImg[] = {R.drawable.training_walk,R.drawable.training_run,R.drawable.training_cycle};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,7 +25,7 @@ public class FragmentBaiTap extends Fragment {
 
 		ListView listView = (ListView) view.findViewById(R.id.listView_tranning);
 
-		BaiTapAdapter adapter = new BaiTapAdapter(context, R.layout.item_training_plan, argMonTap, argImg);
+		TranningPlanAdapter adapter = new TranningPlanAdapter(context, R.layout.item_training_plan, argMonTap, argImg);
 		listView.setAdapter(adapter);
 
 		return view;

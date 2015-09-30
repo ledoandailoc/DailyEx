@@ -42,7 +42,7 @@ public class BaiTapDiBoActivity extends AppCompatActivity {
             }
         });
 
-        ImageView ivBack = (ImageView) findViewById(R.id.iv_back);
+        RelativeLayout ivBack = (RelativeLayout) findViewById(R.id.iv_back);
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

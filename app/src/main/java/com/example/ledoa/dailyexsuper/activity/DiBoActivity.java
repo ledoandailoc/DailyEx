@@ -52,6 +52,7 @@ public class DiBoActivity extends Activity implements SensorEventListener {
     int MucTieu = 100;
     int MucTieuThoiGian;
     String IdBaiTap ;
+    int IdChuongTrinhGiamCan;
     boolean mucTieuTG = false;
     long time = 0;
     long TongThoiGian = 0;
@@ -62,6 +63,7 @@ public class DiBoActivity extends Activity implements SensorEventListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dibo);
+        v = (TextView) findViewById(R.id.textView);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null)
@@ -69,13 +71,17 @@ public class DiBoActivity extends Activity implements SensorEventListener {
             MucTieu = bundle.getInt("soBuoc");
             MucTieuThoiGian = bundle.getInt("soThoiGian");
             IdBaiTap = bundle.getString("IdBaiTap");
+            IdChuongTrinhGiamCan = bundle.getInt("IdChuongTrinhGiamCan");
         }
         if (MucTieuThoiGian > 0){
             MucTieu = MucTieuThoiGian;
             mucTieuTG = true;
         }
+        else {
+            v.setText(SoLanLac + "/" + MucTieu + " bước");
+        }
 
-			v = (TextView) findViewById(R.id.textView);
+
 	        btn_start = (ImageButton) findViewById(R.id.btn_start);
 	        btn_pause = (ImageButton) findViewById(R.id.btn_pause);
 	        btn_stop = (ImageButton) findViewById(R.id.btn_stop);
@@ -90,7 +96,7 @@ public class DiBoActivity extends Activity implements SensorEventListener {
 
 	        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 	        accelerometer= sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-	        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
             ImageView ivBack = (ImageView) findViewById(R.id.iv_back);
             ivBack.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +108,7 @@ public class DiBoActivity extends Activity implements SensorEventListener {
 
         databaseHandle = new DatabaseHandle(this);
 
-        v.setText(SoLanLac + "/" + MucTieu);
+
 
         if (mucTieuTG == true){
             test.setVisibility(View.VISIBLE);
@@ -111,7 +117,7 @@ public class DiBoActivity extends Activity implements SensorEventListener {
                 public void onChronometerTick(Chronometer chronometer) {
                     time = choChronometer.getBase() - SystemClock.elapsedRealtime();
                     TongThoiGian = -time / 1000;
-                    v.setText(TongThoiGian + "/" + MucTieu);
+                    v.setText(TongThoiGian + "/" + MucTieu + "s");
                     progresss_bar.setProgress(Integer.parseInt(String.valueOf(TongThoiGian)));
                     if (TongThoiGian == MucTieu) {
                         status.setText("Finish");
@@ -120,14 +126,19 @@ public class DiBoActivity extends Activity implements SensorEventListener {
 
                         choChronometer.stop();
                         finish = true;
-                        databaseHandle.updateBaiTap(IdBaiTap);
 
+                        if (IdBaiTap != null) {
+                            databaseHandle.updateBaiTap(IdBaiTap);
+                        }
+                        else if(IdChuongTrinhGiamCan >= 0){
 
+                            databaseHandle.updateChuongTrinhGiamCan(IdChuongTrinhGiamCan);
+                        }
                     }
 
                 }
             });
-            v.setText(SoLanLac + "/" + MucTieu);
+            v.setText(SoLanLac + "/" + MucTieu + " s");
             progresss_bar.setProgress(SoLanLac);
         }
 

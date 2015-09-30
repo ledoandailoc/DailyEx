@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ledoa.dailyexsuper.activity.BaiTapGiamCanActivity"
+    >
+
+    <include
+        android:id="@+id/actionbar"
+        layout="@layout/actionbar_top_activity" />
+
+    <Button
+        android:background="#009688"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tạo chương trình tập mới"
+        android:textSize="20dp"
+        android:textColor="#fff"
+        android:id="@+id/btn_taochuongtrinhgiamcan"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lv_chuongtrinhgiamcan"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/actionbar"
+        android:layout_above="@+id/btn_taochuongtrinhgiamcan" />
+
+</RelativeLayout>

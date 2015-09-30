@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -85,7 +86,7 @@ public class LichtapDetailActivity extends AppCompatActivity {
 				public void onNothingSelected(AdapterView adapterview) {
 				}
 			});
-		ImageView ivBack = (ImageView) findViewById(R.id.iv_back);
+		RelativeLayout ivBack = (RelativeLayout) findViewById(R.id.iv_back);
 		ivBack.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

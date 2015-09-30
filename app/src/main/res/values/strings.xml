@@ -59,6 +59,12 @@
     <string name="btnLogin">Login</string>
     <string name="tvSingupHere">SignUp here</string>
     <string name="title_activity_message">Message</string>
+    <string name="title_activity_bai_tap_giam_can">BaiTapGiamCanActivity</string>
+    <string name="title_activity_tao_chuong_trinh_giam_can">TaoChuongTrinhGiamCanActivity</string>
+    <string name="title_activity_thong_tin_chuong_trinh_giam_can">
+        ThongTinChuongTrinhGiamCanActivity
+    </string>
+    <string name="title_activity_chuong_trinh_tang_suc_ben">ChuongTrinhTangSucBenActivity</string>
 
 
 </resources>
