@@ -38,6 +38,8 @@ public class MangXaHoiAdapter extends ArrayAdapter<News> {
 		private ArrayList<News> mList;
 		private com.example.ledoa.dailyexsuper.sqlite.DTO.Statistic like_comment;
 		private IsLikeRequest mIsLikeRequest;
+		Intent iComment;
+		Bundle mBundle;
 
 
 		public MangXaHoiAdapter(Context context, ArrayList<News> list) {
@@ -61,7 +63,7 @@ public class MangXaHoiAdapter extends ArrayAdapter<News> {
 			viewHolder.tv_thoigian.setText(mList.get(position).createdAt);
 			viewHolder.tv_title.setText(mList.get(position).title);
 			//viewHolder.tv_description.setText(mList.get(position).description);
-			viewHolder.tv_content.setText(mList.get(position).content);
+			viewHolder.tv_content.setText(mList.get(position).content.toString().substring(0,70) + " ...Còn tiếp");
 			like_comment = mList.get(position).statistic;
 			viewHolder.tv_like_comment.setText(like_comment.likes + " likes" + " " + like_comment.comments + " comments");
 
@@ -87,18 +89,26 @@ public class MangXaHoiAdapter extends ArrayAdapter<News> {
 					context.startActivity(iComment);
 				}
 			});
+
+			iComment = new Intent(context, DetailNewsActivity.class);
+			mBundle = new Bundle();
+			mBundle.putString("title", mList.get(position).title);
+			mBundle.putString("description", mList.get(position).description);
+			mBundle.putString("content", mList.get(position).content);
+			mBundle.putString("thumbnail", mList.get(position).thumbnail);
+
+			mBundle.putInt("likes", mList.get(position).statistic.likes);
+			iComment.putExtras(mBundle);
 			viewHolder.tv_title.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent iComment = new Intent(context, DetailNewsActivity.class);
-					Bundle mBundle = new Bundle();
-					mBundle.putString("title", mList.get(position).title);
-					mBundle.putString("description", mList.get(position).description);
-					mBundle.putString("content", mList.get(position).content);
-					mBundle.putString("thumbnail", mList.get(position).thumbnail);
+					context.startActivity(iComment);
+				}
+			});
 
-					mBundle.putInt("likes", mList.get(position).statistic.likes);
-					iComment.putExtras(mBundle);
+			viewHolder.tv_content.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
 					context.startActivity(iComment);
 				}
 			});

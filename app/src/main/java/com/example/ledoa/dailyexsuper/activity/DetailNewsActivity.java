@@ -57,7 +57,9 @@ public class DetailNewsActivity extends AppCompatActivity {
             iv_comment = (ImageView)findViewById(R.id.iv_comment);
 
             tv_title.setText(title);
-            tv_description.setText(description);
+
+
+            tv_description.setText(description.replace("\\n","\n"));
             tv_content.setText(content);
             if (thumbnail != null) {
                 ImageLoaderUtil.display(thumbnail, iv_thumbnail);
