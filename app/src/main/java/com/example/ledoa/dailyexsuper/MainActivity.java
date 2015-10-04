@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void attachMenu() {
         mIntentThongbao = new Intent(MainActivity.this, ThongBaoActivity.class);
-        mIntentThemBan = new Intent(MainActivity.this, ThemBanActivity.class);
+        mIntentThemBan = new Intent(MainActivity.this, MapsActivity.class);
         mIntentDanhBa = new Intent(MainActivity.this, DanhBaActivity.class);
         mIntenLogin = new Intent(MainActivity.this, LoginActivity.class);
         mIntentCaiDat = new Intent(MainActivity.this, CaiDatActivity.class);
