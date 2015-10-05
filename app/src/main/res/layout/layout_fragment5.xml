@@ -1,15 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#868686" >
+    android:background="#DEDFE4" >
 
     <ListView
         android:id="@+id/listViewMxh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" 
-        android:layout_marginLeft="12dp">
+        android:layout_alignParentTop="true"
+        android:scrollbarThumbVertical="@color/transparent">
     </ListView>
 
 </RelativeLayout>

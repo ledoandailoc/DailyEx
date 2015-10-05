@@ -33,8 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    int mIconMenuLeft[] = {R.drawable.icon_timban, R.drawable.icon_thongbao, R.drawable.icon_tab,
-            R.drawable.icon_thongbao, R.drawable.icon_logout};
+    int mIconMenuLeft[] = {R.drawable.icon_thongbao, R.drawable.icon_tab_timban_nau, R.drawable.icon_danhba,
+            R.drawable.icon_caidat, R.drawable.icon_logout};
     String mTextMenuLeft[] = {"Thông báo mới","Thêm bạn", "Danh bạ","Cài đặt riêng tư","Thoát"};
 
     TextView mTvTabLuyenTap, mTvTabLichTap, mTvTabBaiTap, mTvTabMangXaHoi, mTvActionBarTitle, mTvUsernameMenuLeft;
