@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +43,9 @@ public class ThemBanAdapter extends ArrayAdapter<User> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.tvId.setText("ID: "+mList.get(position)._id);
+        viewHolder.tvChieuCao.setText(mList.get(position).latitude);
+        viewHolder.tvCanNang.setText(mList.get(position).longitude);
+        //viewHolder.tvId.setText("ID: "+mList.get(position)._id);
         viewHolder.tvUsername.setText(mList.get(position).username);
         if (mList.get(position).avatar != null) {
             ImageLoaderUtil.display(mList.get(position).avatar, viewHolder.ivUseravatar);
@@ -65,16 +68,17 @@ public class ThemBanAdapter extends ArrayAdapter<User> {
 
     public class ViewHolder {
 
-        public TextView tvId;
+        public TextView tvId, tvChieuCao, tvCanNang;
         public TextView tvUsername;
         public CircleImageView ivUseravatar;
         public Button btThemBan;
-
         public ViewHolder(View rootView) {
             tvId = (TextView) rootView.findViewById(R.id.tv_id);
             tvUsername = (TextView) rootView.findViewById(R.id.tv_username);
             ivUseravatar = (CircleImageView) rootView.findViewById(R.id.iv_avatar_user);
             btThemBan = (Button) rootView.findViewById(R.id.btThemBan);
+            tvChieuCao = (TextView)rootView.findViewById(R.id.tvChieuCao);
+            tvCanNang = (TextView)rootView.findViewById(R.id.tvCanNang);
             btThemBan.setText("Thêm");
         }
     }

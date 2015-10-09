@@ -1,6 +1,88 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:map="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:id="@+id/map"
-    tools:context="com.example.ledoa.dailyexsuper.MapsActivity"
-    android:name="com.google.android.gms.maps.SupportMapFragment" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        />
+    <LinearLayout
+        android:id="@+id/layout_search"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:alpha="0.9">
+
+
+
+        <EditText
+            android:id="@+id/et_InputTextSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:hint="Google"
+            android:layout_gravity="center"
+            android:textAlignment="gravity"
+            android:textSize="20sp"
+            android:singleLine="true"
+            android:paddingLeft="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/iVSearch"
+            android:layout_width="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="40dp"
+           />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btNomal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nomal"
+        android:layout_below="@+id/layout_search"
+        android:layout_marginLeft="10dp"
+        />
+    <Button
+        android:id="@+id/btSatellite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Satellite"
+        android:layout_below="@+id/layout_search"
+        android:layout_marginLeft="110dp"
+        />
+    <Button
+        android:id="@+id/btMyLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My location"
+        android:layout_below="@+id/layout_search"
+        android:layout_marginLeft="200dp"
+        />
+    <LinearLayout
+        android:layout_marginTop="75dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_Distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distance Duration"
+            android:layout_marginLeft="250dp"
+            android:background="#3333FF"
+            android:visibility="gone"
+            android:layout_marginTop="40dp"
+            />
+    </LinearLayout>
+</RelativeLayout>

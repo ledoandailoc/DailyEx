@@ -20,6 +20,7 @@ public class User implements Serializable {
     public String avatar;
     public boolean isFollow;
     public String token;
+    public String latitude, longitude;
     public boolean isOnline;
 
     public User() {
@@ -31,6 +32,13 @@ public class User implements Serializable {
 
         if (json.has("_id")) {
             this._id = json.getString("_id");
+        }
+
+        if (json.has("latitude")) {
+            this.latitude = json.getString("latitude");
+        }
+        if (json.has("longitude")) {
+            this.longitude = json.getString("longitude");
         }
         if (json.has("username")) {
             this.username = json.getString("username");

@@ -37,8 +37,77 @@
         android:layout_alignStart="@+id/tv_username"
         android:layout_below="@+id/tv_username"
         android:textColor="#808080"
-        android:text="Id number"
         android:textSize="@dimen/message_fragment_id_text_size" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_id"
+        android:layout_toRightOf="@+id/iv_avatar_user"
+        android:layout_marginLeft="10dp"
+        >
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/icon_male"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"
+        android:layout_below="@+id/tv_id"
+        android:layout_toRightOf="@+id/iv_avatar_user"
+        android:layout_marginLeft="10dp"
+
+        >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/gioitinh"
+            android:background="#022E54">
+            <ImageView
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/icon_chieucao"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text=" 1m71 "
+                android:textSize="11dp"
+                android:textColor="#fff"
+                android:id="@+id/tvChieuCao"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/gioitinh"
+            android:layout_marginLeft="5dp"
+            android:background="#C61F26">
+            <ImageView
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/icon_cannang"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text=" 65 "
+                android:textSize="11dp"
+                android:textColor="#fff"
+                android:id="@+id/tvCanNang"/>
+        </LinearLayout>
+    </RelativeLayout>
 
     <Button
         android:layout_width="wrap_content"
