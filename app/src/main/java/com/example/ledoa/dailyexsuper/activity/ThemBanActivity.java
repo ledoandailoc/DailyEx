@@ -12,7 +12,9 @@ import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,17 +58,39 @@ public class ThemBanActivity extends FragmentActivity {
 	String duration = "";
 	Location myLocation;
 	Handler handler;
-	Runnable mHandlerTask;
-	Boolean bool = false;
+	Runnable mHandlerTask,  mHandlerTask_Check;
+	Boolean bool = false, success = false;
+	Button btConnect;
+	TextView mTvConnect, tvProgressBar, title;
+	ImageView mIvConnect;
+	RelativeLayout rlErrorConnect, loadingPanel;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_them_ban);
 		setUpMapIfNeeded();
 		statusCheck();
-		TextView title  = (TextView)findViewById(R.id.actionbar_tvTitile);
+		title  = (TextView)findViewById(R.id.actionbar_tvTitile);
 		title.setText("Thêm bạn");
 
+
+		mIvConnect = (ImageView)findViewById(R.id.ivConnect);
+		btConnect = (Button)findViewById(R.id.btConnect);
+		mTvConnect = (TextView)findViewById(R.id.tvConnect);
+		tvProgressBar = (TextView)findViewById(R.id.tvProgressBar);
+		rlErrorConnect = (RelativeLayout)findViewById(R.id.rlErrorConnect);
+		loadingPanel = (RelativeLayout)findViewById(R.id.loadingPanel);
+
+		rlErrorConnect.setVisibility(View.GONE);
+
+		btConnect.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				stopRepeatingTask();
+				rlErrorConnect.setVisibility(View.GONE);
+				startRepeatingTask();
+			}
+		});
 
 		handler = new Handler();
 		handler.postDelayed(mHandlerTask = new Runnable() {
@@ -78,11 +102,19 @@ public class ThemBanActivity extends FragmentActivity {
 				handler.postDelayed(this, 2000);
 			}
 		}, 2000);
-		handler.postDelayed(new Runnable() {
+		handler.postDelayed(mHandlerTask_Check = new Runnable() {
 
 			@Override
 			public void run() {
-				if (!distance.equals("")) {
+				if(bool) {
+					loadingPanel.setVisibility(View.GONE);
+					handler.removeCallbacks(mHandlerTask);
+					rlErrorConnect.setVisibility(View.VISIBLE);
+					bool = false;
+				} else if (success) {
+					loadingPanel.setVisibility(View.GONE);
+				} else if (!distance.equals("")){
+					loadingPanel.setVisibility(View.GONE);
 					handler.removeCallbacks(mHandlerTask);
 				}
 				handler = new Handler();
@@ -90,19 +122,25 @@ public class ThemBanActivity extends FragmentActivity {
 			}
 		}, 2000);
 
-
-		Button zzz = (Button)findViewById(R.id.zzz);
-		zzz.setVisibility(View.GONE);
 	}
 	@Override
 	protected void onPause() {
-		handler.removeCallbacks(mHandlerTask);
+		stopRepeatingTask();
 		super.onPause();
 	}
 
-	public void Stop(){
-		handler.removeCallbacks(mHandlerTask);
+	void startRepeatingTask()
+	{
+		mHandlerTask.run();
+		mHandlerTask_Check.run();
 	}
+
+	void stopRepeatingTask()
+	{
+		handler.removeCallbacks(mHandlerTask);
+		handler.removeCallbacks(mHandlerTask_Check);
+	}
+
 	public void statusCheck()
 	{
 		final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -132,6 +170,9 @@ public class ThemBanActivity extends FragmentActivity {
 	}
 
 	private void getListUsers() {
+		loadingPanel.setVisibility(View.GONE);
+		tvProgressBar.setText("Đang tìm kiếm người dùng gần bạn...");
+		loadingPanel.setVisibility(View.VISIBLE);
 		mLvThemBan = (ListView)findViewById(R.id.lvThemBan);
 
 		mGetListUserRequest = new GetListUserRequest(Method.GET, ApiLink.getAllUserLink(), null, null) {
@@ -154,12 +195,15 @@ public class ThemBanActivity extends FragmentActivity {
 				if(!distance.equals("")) {
 					mThemBanAdapter = new ThemBanAdapter(getApplicationContext(), mUserList);
 					mThemBanAdapter.notifyDataSetChanged();
+
 					handler.removeCallbacks(mHandlerTask);
+					success = true;
 					mLvThemBan.setAdapter(mThemBanAdapter);
 				}
 			}
 			@Override
 			protected void onError(int statusCode, String message) {
+				bool = true;
 				Toast.makeText(getApplicationContext(), "Get failed with error: " + message, Toast.LENGTH_SHORT).show();
 			}
 		};
@@ -181,12 +225,9 @@ public class ThemBanActivity extends FragmentActivity {
 		myLocation = mMap.getMyLocation();
 		try {
 			if (myLocation != null) {
-
 				dLatitude = myLocation.getLatitude();
 				dLongitude = myLocation.getLongitude();
-				bool = true;
 				getListUsers();
-				findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 			} else {
 
 			}
@@ -329,8 +370,4 @@ public class ThemBanActivity extends FragmentActivity {
 		mMap.setMyLocationEnabled(true);
 
 	}
-
-
-
-
 }

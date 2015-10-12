@@ -1,11 +1,12 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <include
         android:id="@+id/actionbar"
-        layout="@layout/actionbar_top_activity" />
+        layout="@layout/actionbar_top_activity"
+        />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="0dp"
@@ -15,18 +16,47 @@
         />
 
 
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/zzz"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"/>
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:id="@+id/rlErrorConnect"
+       android:layout_below="@+id/actionbar">
+       <ImageView
+           android:layout_width="150dp"
+           android:layout_height="150dp"
+           android:src="@drawable/icon_thongtin"
+           android:id="@+id/ivConnect"
+           android:layout_marginTop="150dp"
+           android:layout_centerHorizontal="true"
+           />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Chưa tải được danh sách tìm quanh đây."
+           android:gravity="center"
+           android:paddingLeft="50dp"
+           android:paddingRight="50dp"
+           android:textSize="15dp"
+           android:layout_marginTop="26dp"
+           android:layout_below="@+id/ivConnect"
+           android:id="@+id/tvConnect"/>
+       <Button
+           android:background="@drawable/button_themban"
+           android:layout_width="130dp"
+           android:layout_height="30dp"
+           android:layout_below="@+id/tvConnect"
+           android:layout_centerHorizontal="true"
+           android:textColor="@color/app_main_color"
+           android:layout_marginTop="26dp"
+           android:id="@+id/btConnect"
+           android:text="Tải lại"
+           />
+   </RelativeLayout>
         <ListView
             android:id="@+id/lvThemBan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/zzz"
+            android:layout_below="@+id/actionbar"
             android:scrollbarThumbVertical="@color/transparent"
             >
         </ListView>
@@ -34,11 +64,21 @@
     <RelativeLayout
         style="@style/GenericProgressBackground"
         android:id="@+id/loadingPanel"
+        android:layout_below="@+id/actionbar"
         >
         <ProgressBar
+            android:id="@+id/pbConnect"
             style="@style/GenericProgressIndicator"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pbConnect"
+            android:id="@+id/tvProgressBar"
+            android:text="Đang xác định vị trí của bạn..."
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"/>
 
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>
