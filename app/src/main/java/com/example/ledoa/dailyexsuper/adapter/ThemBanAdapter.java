@@ -18,6 +18,8 @@ import com.example.ledoa.dailyexsuper.socketio.MySocket;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.User;
 import com.github.nkzawa.socketio.client.Socket;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class ThemBanAdapter extends ArrayAdapter<User> {
@@ -46,6 +48,7 @@ public class ThemBanAdapter extends ArrayAdapter<User> {
         viewHolder.tvChieuCao.setText(mList.get(position).latitude);
         viewHolder.tvCanNang.setText(mList.get(position).longitude);
         //viewHolder.tvId.setText("ID: "+mList.get(position)._id);
+        viewHolder.tvDistanceTime.setText(mList.get(position).latitude +" | " + mList.get(position).longitude );
         viewHolder.tvUsername.setText(mList.get(position).username);
         if (mList.get(position).avatar != null) {
             ImageLoaderUtil.display(mList.get(position).avatar, viewHolder.ivUseravatar);
@@ -68,7 +71,7 @@ public class ThemBanAdapter extends ArrayAdapter<User> {
 
     public class ViewHolder {
 
-        public TextView tvId, tvChieuCao, tvCanNang;
+        public TextView tvId, tvChieuCao, tvCanNang, tvDistanceTime;
         public TextView tvUsername;
         public CircleImageView ivUseravatar;
         public Button btThemBan;
@@ -79,6 +82,7 @@ public class ThemBanAdapter extends ArrayAdapter<User> {
             btThemBan = (Button) rootView.findViewById(R.id.btThemBan);
             tvChieuCao = (TextView)rootView.findViewById(R.id.tvChieuCao);
             tvCanNang = (TextView)rootView.findViewById(R.id.tvCanNang);
+            tvDistanceTime = (TextView)rootView.findViewById(R.id.tv_distance_time);
             btThemBan.setText("Thêm");
         }
     }

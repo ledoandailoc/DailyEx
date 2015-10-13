@@ -24,8 +24,11 @@ import com.example.ledoa.dailyexsuper.adapter.ThemBanAdapter;
 import com.example.ledoa.dailyexsuper.connection.ApiLink;
 import com.example.ledoa.dailyexsuper.connection.base.Method;
 import com.example.ledoa.dailyexsuper.connection.request.GetListUserRequest;
+import com.example.ledoa.dailyexsuper.connection.request.LoginRequest;
 import com.example.ledoa.dailyexsuper.connection.response.ListUserResponse;
+import com.example.ledoa.dailyexsuper.connection.response.LoginResponse;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.User;
+import com.example.ledoa.dailyexsuper.util.UserPref;
 import com.github.nkzawa.socketio.client.Socket;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -59,11 +62,13 @@ public class ThemBanActivity extends FragmentActivity {
 	Location myLocation;
 	Handler handler;
 	Runnable mHandlerTask,  mHandlerTask_Check;
-	Boolean bool = false, success = false;
-	Button btConnect;
+	Boolean bool = false, success = false, stop = false;
+	Button btConnect, btXoaVitri;
 	TextView mTvConnect, tvProgressBar, title;
-	ImageView mIvConnect;
+	ImageView mIvConnect, mIvMenuLocation;;
 	RelativeLayout rlErrorConnect, loadingPanel;
+	UserPref mUserPref;
+	LoginRequest mLoginRequest;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,7 +77,7 @@ public class ThemBanActivity extends FragmentActivity {
 		statusCheck();
 		title  = (TextView)findViewById(R.id.actionbar_tvTitile);
 		title.setText("Thêm bạn");
-
+		mUserPref = new UserPref();
 
 		mIvConnect = (ImageView)findViewById(R.id.ivConnect);
 		btConnect = (Button)findViewById(R.id.btConnect);
@@ -80,8 +85,28 @@ public class ThemBanActivity extends FragmentActivity {
 		tvProgressBar = (TextView)findViewById(R.id.tvProgressBar);
 		rlErrorConnect = (RelativeLayout)findViewById(R.id.rlErrorConnect);
 		loadingPanel = (RelativeLayout)findViewById(R.id.loadingPanel);
+		mIvMenuLocation = (ImageView)findViewById(R.id.iv_menu_location);
+		btXoaVitri = (Button)findViewById(R.id.bt_xoa_vitri);
 
 		rlErrorConnect.setVisibility(View.GONE);
+
+		btXoaVitri.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				btXoaVitri.setVisibility(View.GONE);
+				mIvMenuLocation.setVisibility(View.VISIBLE);
+				buildAlertMessageDeleteLocation();
+			}
+		});
+
+
+		mIvMenuLocation.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mIvMenuLocation.setVisibility(View.GONE);
+				btXoaVitri.setVisibility(View.VISIBLE);
+			}
+		});
 
 		btConnect.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -112,10 +137,10 @@ public class ThemBanActivity extends FragmentActivity {
 					rlErrorConnect.setVisibility(View.VISIBLE);
 					bool = false;
 				} else if (success) {
-					loadingPanel.setVisibility(View.GONE);
-				} else if (!distance.equals("")){
-					loadingPanel.setVisibility(View.GONE);
 					handler.removeCallbacks(mHandlerTask);
+					loadingPanel.setVisibility(View.GONE);
+				} else if (stop) {
+					loadingPanel.setVisibility(View.GONE);
 				}
 				handler = new Handler();
 				handler.postDelayed(this, 2000);
@@ -151,6 +176,23 @@ public class ThemBanActivity extends FragmentActivity {
 			CreateLocation();
 		}
 	}
+	private void buildAlertMessageDeleteLocation() {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Bạn có muốn xóa vị trí để khỏi bị làm phiền.")
+				.setCancelable(false)
+				.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+					public void onClick(final DialogInterface dialog,  final int id) {
+						addLocation();
+					}
+				})
+				.setNegativeButton("Bỏ qua", new DialogInterface.OnClickListener() {
+					public void onClick(final DialogInterface dialog, final int id) {
+						dialog.cancel();
+					}
+				});
+		final AlertDialog alert = builder.create();
+		alert.show();
+	}
 	private void buildAlertMessageNoGps() {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Vui lòng bật chức năng xác định vị trí trong phần cài đặt để tìm bạn quanh đây.")
@@ -185,11 +227,27 @@ public class ThemBanActivity extends FragmentActivity {
 				//mUserList.addAll(entity.data);
 				for(int i=0; i< entity.data.size(); i++){
 					if(entity.data.get(i).latitude != null && entity.data.get(i).latitude != "null"){
-						CheckDistance(entity.data.get(i).latitude, entity.data.get(i).longitude);
+						//CheckDistance(entity.data.get(i).latitude, entity.data.get(i).longitude);
+						double lat=Double.parseDouble(entity.data.get(i).latitude);
+						double lng=Double.parseDouble(entity.data.get(i).longitude);
+						double dX = lat - dLatitude;
+						double dY = lng - dLongitude;
+						int dis = (int)(Math.sqrt( ( dX*dX ) + ( dY*dY ) )*100000);
+						String min = String.valueOf(dis / 400) + "phút";
+						if(dis < 950){
+							distance = String.valueOf(
+									dis - dis%50 + 50
+							) + "m";
+						} else {
+							distance = String.valueOf(
+									((double)(dis/100))/10
+							) + "km";
+						}
 						entity.data.get(i).latitude = distance;
-						entity.data.get(i).longitude = duration;
-						Toast.makeText(ThemBanActivity.this, entity.data.get(i).latitude, Toast.LENGTH_SHORT).show();
+						entity.data.get(i).longitude = min;
+						Toast.makeText(ThemBanActivity.this, String.valueOf(dLatitude) + " "+ String.valueOf(dLongitude), Toast.LENGTH_LONG).show();	Toast.makeText(ThemBanActivity.this, String.valueOf(dLatitude) + " "+ String.valueOf(dLongitude), Toast.LENGTH_LONG).show();
 						mUserList.add(entity.data.get(i));
+						success = true;
 					}
 				}
 				if(!distance.equals("")) {
@@ -197,7 +255,7 @@ public class ThemBanActivity extends FragmentActivity {
 					mThemBanAdapter.notifyDataSetChanged();
 
 					handler.removeCallbacks(mHandlerTask);
-					success = true;
+					stop = true;
 					mLvThemBan.setAdapter(mThemBanAdapter);
 				}
 			}
@@ -369,5 +427,30 @@ public class ThemBanActivity extends FragmentActivity {
 		}
 		mMap.setMyLocationEnabled(true);
 
+	}
+
+	private void addLocation() {
+
+		HashMap<String, String> params = new HashMap<>();
+		params.put("longitude", String.valueOf(dLongitude) );
+		params.put("latitude", String.valueOf(dLatitude));
+		mLoginRequest = new LoginRequest(Method.PUT, ApiLink.addLocation()+ "/" + mUserPref.getUser()._id, null, params) {
+
+			@Override
+			protected void onStart() {
+
+			}
+
+			@Override
+			protected void onSuccess(LoginResponse entity, int statusCode, String message) {
+				Toast.makeText(getApplicationContext(), "da xoa vi tri", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			protected void onError(int statusCode, String message) {
+				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+			}
+		};
+		mLoginRequest.execute();
 	}
 }

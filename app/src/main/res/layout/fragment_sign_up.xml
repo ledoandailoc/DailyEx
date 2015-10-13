@@ -57,7 +57,7 @@
         android:layout_marginTop="7dp"
         android:background="@drawable/edit_text_border"
         android:gravity="center"
-        android:hint="Số điện thoại"
+        android:hint="Chiều cao"
         android:inputType="phone"
         android:singleLine="true" />
 
@@ -70,7 +70,7 @@
         android:layout_marginTop="7dp"
         android:background="@drawable/edit_text_border"
         android:gravity="center"
-        android:hint="Quê quán"
+        android:hint="Cân nặng"
         android:singleLine="true" />
 
     <RadioGroup
