@@ -35,4 +35,5 @@
     <dimen name="message_fragment_user_name_text_size">20dp</dimen>
     <dimen name="message_fragment_id_text_size">12dp</dimen>
     <dimen name="message_fragment_user_avatar_border_size">0dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

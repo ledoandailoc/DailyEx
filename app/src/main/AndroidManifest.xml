@@ -140,6 +140,11 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
+        <activity
+            android:name=".activity.MenuThemBanActivity"
+            android:label="@string/title_activity_menu_them_ban"
+            android:theme="@style/Theme.AppCompat.NoActionBar.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

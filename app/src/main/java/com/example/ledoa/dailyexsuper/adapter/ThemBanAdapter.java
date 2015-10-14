@@ -45,9 +45,14 @@ public class ThemBanAdapter extends ArrayAdapter<User> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.tvChieuCao.setText(mList.get(position).latitude);
-        viewHolder.tvCanNang.setText(mList.get(position).longitude);
-        //viewHolder.tvId.setText("ID: "+mList.get(position)._id);
+        if(mList.get(position).chieucao != null && mList.get(position).cannang != null){
+            int chieucao = Integer.parseInt(mList.get(position).chieucao);
+            int met = chieucao % 100;
+            String le = String.valueOf((chieucao - met)/100) + "m";
+            String chan = String.valueOf((met)) ;
+            viewHolder.tvChieuCao.setText(le + chan);
+            viewHolder.tvCanNang.setText(mList.get(position).cannang + "kg");
+        }
         viewHolder.tvDistanceTime.setText(mList.get(position).latitude +" | " + mList.get(position).longitude );
         viewHolder.tvUsername.setText(mList.get(position).username);
         if (mList.get(position).avatar != null) {

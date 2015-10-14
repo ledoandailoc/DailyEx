@@ -9,7 +9,7 @@ public class User implements Serializable {
 
     public String _id;
     public String username;
-    public String country;
+    public String cannang, chieucao;
     public int __v;
     public Statistic statistic;
     public String createdAt;
@@ -43,8 +43,11 @@ public class User implements Serializable {
         if (json.has("username")) {
             this.username = json.getString("username");
         }
+        if (json.has("phone")) {
+            this.chieucao = json.getString("phone");
+        }
         if (json.has("country")) {
-            this.country = json.getString("country");
+            this.cannang = json.getString("country");
         }
         if (json.has("__v")) {
             this.__v = json.getInt("__v");

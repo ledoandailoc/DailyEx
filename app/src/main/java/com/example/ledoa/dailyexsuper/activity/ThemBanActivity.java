@@ -233,7 +233,7 @@ public class ThemBanActivity extends FragmentActivity {
 						double dX = lat - dLatitude;
 						double dY = lng - dLongitude;
 						int dis = (int)(Math.sqrt( ( dX*dX ) + ( dY*dY ) )*100000);
-						String min = String.valueOf(dis / 400) + "phút";
+						String min = String.valueOf((dis / 200)+1) + "phút";
 						if(dis < 950){
 							distance = String.valueOf(
 									dis - dis%50 + 50
@@ -268,16 +268,6 @@ public class ThemBanActivity extends FragmentActivity {
 		mGetListUserRequest.execute();
 	}
 
-	public void CheckDistance(String latitude, String longitude){
-		double lat=Double.parseDouble(latitude);
-		double lng=Double.parseDouble(longitude);
-		LatLng origin = new LatLng(lat, lng);
-		LatLng dest  = new LatLng(dLatitude, dLongitude);
-		String url = getDirectionsUrl(origin, dest);
-		DownloadTaskDistance downloadTask1 = new DownloadTaskDistance();
-		// Start downloading json data from Google Directions API
-		downloadTask1.execute(url);
-	}
 
 	public void CreateLocation(){
 		myLocation = mMap.getMyLocation();
@@ -295,122 +285,6 @@ public class ThemBanActivity extends FragmentActivity {
 		}
 	}
 
-	private String downloadUrl(String strUrl) throws IOException {
-		String data = "";
-		InputStream iStream = null;
-		HttpURLConnection urlConnection = null;
-		try{
-
-			URL url = new URL(strUrl);
-			// Creating an http connection to communicate with url
-			urlConnection = (HttpURLConnection) url.openConnection();
-
-			urlConnection.connect();
-
-			iStream = urlConnection.getInputStream();
-			BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
-			StringBuffer sb  = new StringBuffer();
-			String line = "";
-			while( ( line = br.readLine())  != null) {
-				sb.append(line);
-			}
-			data = sb.toString();
-			br.close();
-		}catch(Exception e){
-			Toast.makeText(getBaseContext(),e.toString(),Toast.LENGTH_SHORT).show();
-		}finally{
-			iStream.close();
-			urlConnection.disconnect();
-		}
-		return data;
-	}
-
-	private String getDirectionsUrl(LatLng origin,LatLng dest){
-		// Origin of route
-		String str_origin = "origin="+origin.latitude+","+origin.longitude;
-		// Destination of route
-		String str_dest = "destination="+dest.latitude+","+dest.longitude;
-		// Sensor enabled
-		String sensor = "sensor=false";
-		// Building the parameters to the web service
-		String parameters = str_origin+"&"+str_dest+"&"+sensor;
-		// Output format
-		String output = "json";
-		// Building the url to the web service
-		String url = "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters;
-		return url;
-	}
-	private class DownloadTaskDistance extends AsyncTask<String,Void,String> {
-		@Override
-		protected String doInBackground(String... url) {
-			// For storing data from web service
-			String data = "";
-			try{
-				// Fetching the data from web service
-				data = downloadUrl(url[0]);
-
-			}catch(Exception e){
-			}
-			return data;
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-			super.onPostExecute(result);
-			ParserTaskDistance parserTask1 = new ParserTaskDistance();
-			// Invokes the thread for parsing the JSON data
-			parserTask1.execute(result);
-		}
-	}
-	private class ParserTaskDistance extends AsyncTask<String, Integer, List<List<HashMap<String,String>>>>{
-		@Override
-		protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
-			JSONObject jObject;
-			List<List<HashMap<String, String>>> routes = null;
-			try{
-				jObject = new JSONObject(jsonData[0]);
-				DirectionsJSONParser parser = new DirectionsJSONParser();
-				// Starts parsing data
-				routes = parser.parse(jObject);
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-			return routes;
-		}
-		@Override
-		protected void onPostExecute(List<List<HashMap<String, String>>> result) {
-			ArrayList<LatLng> points = null;
-
-			if(result == null){
-				Toast.makeText(ThemBanActivity.this, "No internet", Toast.LENGTH_SHORT).show();
-				return;
-			}
-			// Traversing through all the routes
-			for(int i=0;i<result.size();i++){
-				points = new ArrayList<LatLng>();
-
-				List<HashMap<String, String>> path = result.get(i);
-
-				for(int j=0;j<path.size();j++){
-					HashMap<String,String> point = path.get(j);
-
-					if(j==0){
-						distance = (String)point.get("distance");
-						continue;
-					}else if(j==1){
-						duration = (String)point.get("duration");
-						continue;
-					}
-					double lat = Double.parseDouble(point.get("lat"));
-					double lng = Double.parseDouble(point.get("lng"));
-					LatLng position = new LatLng(lat, lng);
-					points.add(position);
-				}
-			}
-
-			Toast.makeText(ThemBanActivity.this,"Distance:"+distance + ", Duration:"+duration, Toast.LENGTH_SHORT).show();
-		}
-	}
 
 	@Override
 	protected void onResume() {
