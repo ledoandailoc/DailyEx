@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.ledoa.dailyexsuper.R;
 import com.example.ledoa.dailyexsuper.adapter.ThongBaoAdapter;
+import com.example.ledoa.dailyexsuper.adapter.UserAdapter;
 import com.example.ledoa.dailyexsuper.connection.ApiLink;
 import com.example.ledoa.dailyexsuper.connection.base.Method;
 import com.example.ledoa.dailyexsuper.connection.request.GetListThongBaoRequest;
@@ -18,6 +19,7 @@ import com.example.ledoa.dailyexsuper.connection.request.GetListUserRequest;
 import com.example.ledoa.dailyexsuper.connection.response.ListThongBaoResponse;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.FriendsList;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.ThongBao;
+import com.example.ledoa.dailyexsuper.util.ThongBaoPref;
 import com.github.nkzawa.socketio.client.Socket;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class ThongBaoActivity extends Activity {
 	ThongBaoAdapter mThongBaoAdapter;
 	GetListThongBaoRequest mGetListUserRequest;
 	ListView mLvThongBao;
+	ThongBaoPref thongBaoPref;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,19 @@ public class ThongBaoActivity extends Activity {
 		TextView actionbar_tvTitile = (TextView)findViewById(R.id.actionbar_tvTitile);
 		actionbar_tvTitile.setText("Thông báo");
 
+		thongBaoPref = new ThongBaoPref();
+		showThongBaoOffline();
 		getListThongBao();
+	}
+
+	public void showThongBaoOffline(){
+		if(thongBaoPref.getListUser()!= null){
+			mLvThongBao = (ListView)findViewById(R.id.lvThongBao);
+			mUserList.addAll(thongBaoPref.getListUser());
+			mThongBaoAdapter = new ThongBaoAdapter(getApplicationContext(), mUserList);
+			mThongBaoAdapter.notifyDataSetChanged();
+			mLvThongBao.setAdapter(mThongBaoAdapter);
+		}
 	}
 
 	private void getListThongBao() {
@@ -51,7 +66,7 @@ public class ThongBaoActivity extends Activity {
 			protected void onSuccess(ListThongBaoResponse entity, int statusCode, String message) {
 				mUserList.clear();
 				mUserList.addAll(entity.data);
-
+				thongBaoPref.setListUser(entity.data);
 				mThongBaoAdapter = new ThongBaoAdapter(getApplicationContext(), mUserList);
 				mThongBaoAdapter.notifyDataSetChanged();
 				mLvThongBao.setAdapter(mThongBaoAdapter);

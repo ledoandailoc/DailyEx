@@ -27,6 +27,8 @@ import com.example.ledoa.dailyexsuper.socketio.MySocket;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.Chat;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.ItemMenuLeft;
 import com.example.ledoa.dailyexsuper.sqlite.DatabaseHandle;
+import com.example.ledoa.dailyexsuper.util.ThemBanPref;
+import com.example.ledoa.dailyexsuper.util.ThongBaoPref;
 import com.example.ledoa.dailyexsuper.util.UserPref;
 
 import java.util.ArrayList;
@@ -51,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
     ListView mLvMenuLeft;
     ViewPager viewPager;
     UserPref mUserPref;
-
+    ThemBanPref themBanPref;
+    ThongBaoPref thongBaoPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         MainApplication.setMySocket(new MySocket(this));
         MainApplication.getMySocket().connectSocket();
         mUserPref = new UserPref();
+        themBanPref = new ThemBanPref();
+        thongBaoPref = new ThongBaoPref();
 
         DatabaseHandle databaseHandle = new DatabaseHandle(this);
         databaseHandle.autoInsertDataBase();
@@ -126,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
                     case 3: startActivity(mIntentCaiDat); break;
                     case 4:
                         mUserPref.setUser(null);
+                        themBanPref.setListUser(null);
+                        thongBaoPref.setListUser(null);
                         MainApplication.getMySocket().disconnectSocket();
                         startActivity(mIntenLogin);
                         break;

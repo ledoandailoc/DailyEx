@@ -188,6 +188,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
                 SoLanLac++;
                 test.setText(String.valueOf(SoLanLac));
                 if (SoLanLac == MucTieu) {
+                    stopRepeatingTask();
                     status.setText("Finish");
                     finish_icon.setVisibility(View.VISIBLE);
                     time = choChronometer.getBase() - SystemClock.elapsedRealtime();

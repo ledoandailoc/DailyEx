@@ -245,8 +245,8 @@ public class ThemBanActivity extends FragmentActivity {
 						}
 						entity.data.get(i).latitude = distance;
 						entity.data.get(i).longitude = min;
-						Toast.makeText(ThemBanActivity.this, String.valueOf(dLatitude) + " "+ String.valueOf(dLongitude), Toast.LENGTH_LONG).show();	Toast.makeText(ThemBanActivity.this, String.valueOf(dLatitude) + " "+ String.valueOf(dLongitude), Toast.LENGTH_LONG).show();
 						mUserList.add(entity.data.get(i));
+						Toast.makeText(ThemBanActivity.this, String.valueOf(dLatitude) + " "+ String.valueOf(dLongitude), Toast.LENGTH_LONG).show();
 						success = true;
 					}
 				}

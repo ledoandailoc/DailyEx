@@ -14,6 +14,7 @@ import com.example.ledoa.dailyexsuper.connection.base.Method;
 import com.example.ledoa.dailyexsuper.connection.request.GetListUserRequest;
 import com.example.ledoa.dailyexsuper.connection.response.ListUserResponse;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.User;
+import com.example.ledoa.dailyexsuper.util.DanhBaPref;
 
 import java.util.ArrayList;
 
@@ -23,15 +24,27 @@ public class DanhBaActivity extends Activity {
 	UserAdapter mUserAdapter;
 	GetListUserRequest mGetListUserRequest;
 	ListView mLvDanhBa;
-
+	DanhBaPref danhBaPref;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_danh_ba);
 		TextView title = (TextView) findViewById(R.id.actionbar_tvTitile);
 		title.setText("Danh bạ");
-
 		getListUsers();
+		danhBaPref = new DanhBaPref();
+		showDanhBaOffline();
+
+	}
+
+	public void showDanhBaOffline(){
+		if(danhBaPref.getListUser()!=null){
+			mLvDanhBa = (ListView)findViewById(R.id.lvDanhBa);
+			mUserList.addAll(danhBaPref.getListUser());
+			mUserAdapter = new UserAdapter(getApplicationContext(), mUserList);
+			mUserAdapter.notifyDataSetChanged();
+			mLvDanhBa.setAdapter(mUserAdapter);
+		}
 	}
 
 	private void getListUsers() {
@@ -45,6 +58,7 @@ public class DanhBaActivity extends Activity {
 			protected void onSuccess(ListUserResponse entity, int statusCode, String message) {
 				mUserList.clear();
 				mUserList.addAll(entity.data);
+				danhBaPref.setListUser(entity.data);
 				mUserAdapter = new UserAdapter(getApplicationContext(), mUserList);
 				mUserAdapter.notifyDataSetChanged();
 				mLvDanhBa.setAdapter(mUserAdapter);

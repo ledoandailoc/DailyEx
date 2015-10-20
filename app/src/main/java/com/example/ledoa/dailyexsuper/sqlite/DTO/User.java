@@ -29,7 +29,7 @@ public class User implements Serializable {
 
     public User(JSONObject json) throws JSONException {
         statistic = new Statistic();
-
+        String s = json.toString();
         if (json.has("_id")) {
             this._id = json.getString("_id");
         }

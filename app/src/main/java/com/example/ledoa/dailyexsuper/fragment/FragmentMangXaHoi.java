@@ -16,6 +16,7 @@ import com.example.ledoa.dailyexsuper.connection.base.Method;
 import com.example.ledoa.dailyexsuper.connection.request.GetListNewsRequest;
 import com.example.ledoa.dailyexsuper.connection.response.ListNewsResponse;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.News;
+import com.example.ledoa.dailyexsuper.util.NewPref;
 
 import java.util.ArrayList;
 
@@ -27,18 +28,30 @@ public class FragmentMangXaHoi extends Fragment {
 	GetListNewsRequest mGetListUserRequest;
 	ListView mLvThongBao;
 	View view;
+	NewPref newPref;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		view = inflater.inflate(R.layout.layout_fragment5, container,false);
 		mLvThongBao = (ListView)view.findViewById(R.id.listViewMxh);
-
+		newPref = new NewPref();
+		showNewOffLine();
 		getNews();
 
 		return view;
 
 
+	}
+
+	public void showNewOffLine(){
+		if(newPref.getListUser("new")!= null){
+			mUserList.clear();
+			mUserList.addAll(newPref.getListUser("new"));
+			mThongBaoAdapter = new MangXaHoiAdapter(getActivity(), mUserList);
+			mThongBaoAdapter.notifyDataSetChanged();
+			mLvThongBao.setAdapter(mThongBaoAdapter);
+		}
 	}
 
 	public void getNews(){
@@ -51,6 +64,7 @@ public class FragmentMangXaHoi extends Fragment {
 			protected void onSuccess(ListNewsResponse entity, int statusCode, String message) {
 				mUserList.clear();
 				mUserList.addAll(entity.data);
+				newPref.setListUser(entity.data, "new");
 				mThongBaoAdapter = new MangXaHoiAdapter(getActivity(), mUserList);
 				mThongBaoAdapter.notifyDataSetChanged();
 				mLvThongBao.setAdapter(mThongBaoAdapter);
