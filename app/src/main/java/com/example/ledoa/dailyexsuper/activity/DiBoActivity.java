@@ -57,7 +57,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
     private GoogleMap mMap;
     Location myLocation;
     ArrayList<String> dLatitude, dLongitude;
-    double kinhdo = 0, vido = 0;
+    double kinhdo = 0, vido = 0, SumDistance = 0;
 
     Handler handler;
     Runnable mHandlerTask;
@@ -84,6 +84,8 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
 		setContentView(R.layout.activity_dibo);
         v = (TextView) findViewById(R.id.textView);
 
+        dLatitude = new ArrayList<String>();
+        dLongitude = new ArrayList<String>();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null)
         {
@@ -132,7 +134,8 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
         });
 
         databaseHandle = new DatabaseHandle(this);
-
+        LayDoanDuongDiDuoc();
+        stopRepeatingTask();
 
 
         if (mucTieuTG == true){
@@ -221,14 +224,12 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
 
     public void btn_start(View v1) {
         click = true;
-        if(intDemNguocStart == 0){
-            intDemNguocStart += 1;
-            statusCheck();
-        } else if(intDemNguocStart == 1){
+        statusCheck();
+        if(intDemNguocStart == 1){
+            stopRepeatingTask();
+            startRepeatingTask();
             status.setText("Walking...");
             if (ButtonVuaNhan.equals("start")) return;
-
-
             choChronometer.start();
             thoiGianTruocKhiLac = System.currentTimeMillis();
 
@@ -251,6 +252,8 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
     }
 
     public void btn_stop(View v1) {
+        stopRepeatingTask();
+        SumDistance = 0;
         click = false;
         status.setText("Stopped");
         if (ButtonVuaNhan.equals("stop")) return;
@@ -272,7 +275,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
     }
 
     public void btn_pause(View v1) {
-    	
+        stopRepeatingTask();
         click = false;
     	if (ButtonVuaNhan.equals("pause")) return;
     	if (ButtonVuaNhan.equals("stop")) return;
@@ -290,8 +293,29 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
             if (myLocation != null) {
                 double latitude = myLocation.getLatitude();
                 double longitude = myLocation.getLongitude();
-                Toast.makeText(DiBoActivity.this, "Da lay duoc" + String.valueOf(latitude), Toast.LENGTH_SHORT).show();
-            } else {
+
+                double s = myLocation.getAccuracy();
+
+                dLatitude.add(String.valueOf(latitude));
+                dLongitude.add(String.valueOf(longitude));
+                double doanduong = 0.00000000008;
+                if(dLatitude.size()>=2){
+
+                    doanduong = (Math.sqrt(
+                            Math.pow((latitude - kinhdo), 2)
+                            + Math.pow((longitude - vido), 2)
+                    ) * 100000);
+                }
+                if(s < 18 && doanduong < 22){
+                    SumDistance += doanduong;
+                }
+                kinhdo = latitude;
+                vido = longitude;
+                //if(SumDistance > 20){
+                    Toast.makeText(DiBoActivity.this, "Di duoc" + SumDistance + " " + s, Toast.LENGTH_SHORT).show();
+
+                //}
+               } else {
                 Toast.makeText(DiBoActivity.this, "Chua lay duoc vi tri", Toast.LENGTH_SHORT).show();
             }
         }catch (Exception ex)
@@ -324,7 +348,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
         if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
             buildAlertMessageNoGps();
         } else {
-            CreateLocation();
+            intDemNguocStart = 1;
         }
     }
 
@@ -354,8 +378,17 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
             public void run() {
                 CreateLocation();
                 handler = new Handler();
-                handler.postDelayed(this, 2000);
+                handler.postDelayed(this, 10000);
             }
-        }, 2000);
+        }, 10000);
+    }
+    void startRepeatingTask()
+    {
+        mHandlerTask.run();
+    }
+
+    void stopRepeatingTask()
+    {
+        handler.removeCallbacks(mHandlerTask);
     }
 }
