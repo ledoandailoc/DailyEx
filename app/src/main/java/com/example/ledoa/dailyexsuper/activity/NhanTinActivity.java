@@ -17,6 +17,7 @@ import com.example.ledoa.dailyexsuper.connection.request.GetListUserRequest;
 import com.example.ledoa.dailyexsuper.connection.response.ListUserResponse;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.FriendsList;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.User;
+import com.example.ledoa.dailyexsuper.util.ThemBanPref;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ public class NhanTinActivity extends AppCompatActivity {
     ArrayList<User> mUserList = new ArrayList<>();
     UserAdapter mUserAdapter;
     FriendsList friendsList;
+    ThemBanPref themBanPref;
     GetListUserRequest mGetListUserRequest;
     ListView mLvNhanTin;
     @Override
@@ -31,11 +33,21 @@ public class NhanTinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nhan_tin);
         getSupportActionBar().hide();
-
+        themBanPref = new ThemBanPref();
         TextView actionbar_tvTitile = (TextView)findViewById(R.id.actionbar_tvTitile);
         actionbar_tvTitile.setText("Trạng thái bạn bè");
-
+        showNhanTinOffline();
         getListUsers();
+    }
+
+    public void showNhanTinOffline(){
+        if(themBanPref.getListUser()!= null) {
+            mLvNhanTin = (ListView) findViewById(R.id.lvNhanTin);
+            mUserList.addAll(themBanPref.getListUser());
+            mUserAdapter = new UserAdapter(getApplicationContext(), mUserList);
+            mUserAdapter.notifyDataSetChanged();
+            mLvNhanTin.setAdapter(mUserAdapter);
+        }
     }
 
     private void getListUsers() {
@@ -50,7 +62,7 @@ public class NhanTinActivity extends AppCompatActivity {
             protected void onSuccess(ListUserResponse entity, int statusCode, String message) {
                 mUserList.clear();
                 mUserList.addAll(entity.data);
-                friendsList = new FriendsList();
+                themBanPref.setListUser(entity.data);
                 mUserAdapter = new UserAdapter(getApplicationContext(), mUserList);
                 mUserAdapter.notifyDataSetChanged();
                 mLvNhanTin.setAdapter(mUserAdapter);

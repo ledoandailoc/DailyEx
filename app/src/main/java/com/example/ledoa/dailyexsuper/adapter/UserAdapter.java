@@ -38,7 +38,7 @@ public class UserAdapter extends ArrayAdapter<User> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.tvId.setText("ID Number: "+mList.get(position)._id);
+        //viewHolder.tvId.setText("ID Number: "+mList.get(position)._id);
         viewHolder.tvUsername.setText(mList.get(position).username);
         if (mList.get(position).avatar != null) {
             ImageLoaderUtil.display(mList.get(position).avatar, viewHolder.ivUseravatar);

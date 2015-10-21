@@ -54,8 +54,9 @@ public class ApiLink {
     public static String addComment() {
         return MainApplication.getContext().getString(R.string.base_url) + "/comments/createComment";
     }
-
-
+    public static String addLocation() {
+        return MainApplication.getContext().getString(R.string.base_url) + "/users/addLocation";
+    }
 
     public static String isLike() {
         return MainApplication.getContext().getString(R.string.base_url) + "/likes";

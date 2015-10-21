@@ -9,7 +9,7 @@ public class User implements Serializable {
 
     public String _id;
     public String username;
-    public String country;
+    public String cannang, chieucao;
     public int __v;
     public Statistic statistic;
     public String createdAt;
@@ -20,6 +20,7 @@ public class User implements Serializable {
     public String avatar;
     public boolean isFollow;
     public String token;
+    public String latitude, longitude;
     public boolean isOnline;
 
     public User() {
@@ -28,15 +29,25 @@ public class User implements Serializable {
 
     public User(JSONObject json) throws JSONException {
         statistic = new Statistic();
-
+        String s = json.toString();
         if (json.has("_id")) {
             this._id = json.getString("_id");
+        }
+
+        if (json.has("latitude")) {
+            this.latitude = json.getString("latitude");
+        }
+        if (json.has("longitude")) {
+            this.longitude = json.getString("longitude");
         }
         if (json.has("username")) {
             this.username = json.getString("username");
         }
+        if (json.has("phone")) {
+            this.chieucao = json.getString("phone");
+        }
         if (json.has("country")) {
-            this.country = json.getString("country");
+            this.cannang = json.getString("country");
         }
         if (json.has("__v")) {
             this.__v = json.getInt("__v");

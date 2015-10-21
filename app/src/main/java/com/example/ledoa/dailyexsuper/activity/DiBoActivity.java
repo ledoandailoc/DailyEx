@@ -2,13 +2,20 @@ package com.example.ledoa.dailyexsuper.activity;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.EditText;
@@ -23,8 +30,14 @@ import com.example.ledoa.dailyexsuper.R;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.BaiTap;
 import com.example.ledoa.dailyexsuper.sqlite.DatabaseHandle;
 import com.example.ledoa.dailyexsuper.util.DoiGioPhutGiay;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
 
-public class DiBoActivity extends Activity implements SensorEventListener {
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class DiBoActivity extends FragmentActivity implements SensorEventListener {
 
 	ProgressBar progresss_bar;
 
@@ -41,8 +54,14 @@ public class DiBoActivity extends Activity implements SensorEventListener {
     TextView test;
     TextView status;
     TextView tocdo;
-    
-    
+    private GoogleMap mMap;
+    Location myLocation;
+    ArrayList<String> dLatitude, dLongitude;
+    double kinhdo = 0, vido = 0, SumDistance = 0;
+
+    Handler handler;
+    Runnable mHandlerTask;
+
     boolean finish = false;
     boolean click = false;
     boolean check_finish = false;
@@ -52,7 +71,7 @@ public class DiBoActivity extends Activity implements SensorEventListener {
     int MucTieu = 100;
     int MucTieuThoiGian;
     String IdBaiTap ;
-    int IdChuongTrinhGiamCan;
+    int IdChuongTrinhGiamCan, intDemNguocStart = 0;
     boolean mucTieuTG = false;
     long time = 0;
     long TongThoiGian = 0;
@@ -65,6 +84,8 @@ public class DiBoActivity extends Activity implements SensorEventListener {
 		setContentView(R.layout.activity_dibo);
         v = (TextView) findViewById(R.id.textView);
 
+        dLatitude = new ArrayList<String>();
+        dLongitude = new ArrayList<String>();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null)
         {
@@ -113,6 +134,10 @@ public class DiBoActivity extends Activity implements SensorEventListener {
         });
 
         databaseHandle = new DatabaseHandle(this);
+
+        LayDoanDuongDiDuoc();
+        stopRepeatingTask();
+
 
         if (mucTieuTG == true){
             test.setVisibility(View.VISIBLE);
@@ -164,6 +189,7 @@ public class DiBoActivity extends Activity implements SensorEventListener {
                 SoLanLac++;
                 test.setText(String.valueOf(SoLanLac));
                 if (SoLanLac == MucTieu) {
+                    stopRepeatingTask();
                     status.setText("Finish");
                     finish_icon.setVisibility(View.VISIBLE);
                     time = choChronometer.getBase() - SystemClock.elapsedRealtime();
@@ -200,29 +226,36 @@ public class DiBoActivity extends Activity implements SensorEventListener {
 
     public void btn_start(View v1) {
         click = true;
-        status.setText("Walking...");
-        if (ButtonVuaNhan.equals("start")) return;
-        
-        
-        choChronometer.start();
-        thoiGianTruocKhiLac = System.currentTimeMillis();
-        
-        if (ButtonVuaNhan.equals("pause")) {
-        	choChronometer.setBase(SystemClock.elapsedRealtime() +  time);
-		} else {
-			time = 0;
-			TongThoiGian = -time/1000;
-	        choChronometer.setBase(SystemClock.elapsedRealtime());
-	        SoLanLac = 0 ;
-	        tocdo.setText(SoLanLac + " Bước / " + DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
-		}
+        statusCheck();
+        if(intDemNguocStart == 1){
+            stopRepeatingTask();
+            startRepeatingTask();
+            status.setText("Walking...");
+            if (ButtonVuaNhan.equals("start")) return;
+            choChronometer.start();
+            thoiGianTruocKhiLac = System.currentTimeMillis();
 
-        progresss_bar.setMax(MucTieu);
-        
-        ButtonVuaNhan = "start";
+            if (ButtonVuaNhan.equals("pause")) {
+                choChronometer.setBase(SystemClock.elapsedRealtime() +  time);
+            } else {
+                time = 0;
+                TongThoiGian = -time/1000;
+                choChronometer.setBase(SystemClock.elapsedRealtime());
+                SoLanLac = 0 ;
+                tocdo.setText(SoLanLac + " Bước / " + DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
+            }
+
+            progresss_bar.setMax(MucTieu);
+
+            ButtonVuaNhan = "start";
+
+            intDemNguocStart = 0;
+        }
     }
 
     public void btn_stop(View v1) {
+        stopRepeatingTask();
+        SumDistance = 0;
         click = false;
         status.setText("Stopped");
         if (ButtonVuaNhan.equals("stop")) return;
@@ -232,21 +265,19 @@ public class DiBoActivity extends Activity implements SensorEventListener {
             TongThoiGian = -time/1000;
             tocdo.setText(SoLanLac + " Bước / " + DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
 		}
-        
-
 
        /* time = 0;
         choChronometer.setBase(SystemClock.elapsedRealtime());*/
         choChronometer.stop();
         SoLanLac = 0;
         v.setText(SoLanLac + "/" + MucTieu);
-        
+
         progresss_bar.setProgress(SoLanLac);
         finish_icon.setVisibility(View.INVISIBLE);
     }
 
     public void btn_pause(View v1) {
-    	
+        stopRepeatingTask();
         click = false;
     	if (ButtonVuaNhan.equals("pause")) return;
     	if (ButtonVuaNhan.equals("stop")) return;
@@ -254,7 +285,112 @@ public class DiBoActivity extends Activity implements SensorEventListener {
     	ButtonVuaNhan = "pause";
         time = choChronometer.getBase() - SystemClock.elapsedRealtime();
         TongThoiGian = -time/1000;
-        tocdo.setText(SoLanLac + " Bước / " +  DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
+        tocdo.setText(SoLanLac + " Bước / " + DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
         choChronometer.stop();
+    }
+
+    public void CreateLocation(){
+        myLocation = mMap.getMyLocation();
+        try {
+            if (myLocation != null) {
+                double latitude = myLocation.getLatitude();
+                double longitude = myLocation.getLongitude();
+
+                double s = myLocation.getAccuracy();
+
+                dLatitude.add(String.valueOf(latitude));
+                dLongitude.add(String.valueOf(longitude));
+                double doanduong = 0.00000000008;
+                if(dLatitude.size()>=2){
+
+                    doanduong = (Math.sqrt(
+                            Math.pow((latitude - kinhdo), 2)
+                            + Math.pow((longitude - vido), 2)
+                    ) * 100000);
+                }
+                if(s < 18 && doanduong < 22){
+                    SumDistance += doanduong;
+                }
+                kinhdo = latitude;
+                vido = longitude;
+                //if(SumDistance > 20){
+                    Toast.makeText(DiBoActivity.this, "Di duoc" + SumDistance + " " + s, Toast.LENGTH_SHORT).show();
+
+                //}
+               } else {
+                Toast.makeText(DiBoActivity.this, "Chua lay duoc vi tri", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception ex)
+        {
+            Toast.makeText(this, "Hardware Erorr!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpMapIfNeeded();
+    }
+    private void setUpMapIfNeeded() {
+        if (mMap == null) {
+            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
+            if (mMap != null) {
+                Toast.makeText(DiBoActivity.this, "Dang tim kiem xung quanh.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        mMap.setMyLocationEnabled(true);
+
+    }
+    public void statusCheck()
+    {
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+            buildAlertMessageNoGps();
+        } else {
+            intDemNguocStart = 1;
+        }
+    }
+
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Vui lòng bật chức năng xác định vị trí trong phần cài đặt.")
+                .setCancelable(false)
+                .setPositiveButton("Cài đặt", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog,  final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("Bỏ qua", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        dialog.cancel();
+                        intDemNguocStart = 0;
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+    public void LayDoanDuongDiDuoc(){
+        handler = new Handler();
+        handler.postDelayed(mHandlerTask = new Runnable() {
+
+            @Override
+            public void run() {
+                CreateLocation();
+                handler = new Handler();
+                handler.postDelayed(this, 10000);
+            }
+        }, 10000);
+    }
+    void startRepeatingTask()
+    {
+        mHandlerTask.run();
+    }
+
+    void stopRepeatingTask()
+    {
+        handler.removeCallbacks(mHandlerTask);
     }
 }

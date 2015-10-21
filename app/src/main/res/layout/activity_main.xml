@@ -25,7 +25,6 @@
             layout="@layout/tab_bottom" />
 
 
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -43,16 +42,17 @@
             android:layout_height="wrap_content"
             android:id="@+id/thongtincanhan"
             android:background="#009688"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical">
 
             <com.example.ledoa.dailyexsuper.customview.CircleImageView
                 android:id="@+id/ivAvatarMenuLeft"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="17dp"
                 android:layout_marginBottom="17dp"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="15dp"
                 app:border_color="@color/app_brown"
                 app:border_width="@dimen/message_fragment_user_avatar_border_size"
                 android:src="@drawable/avt" />
@@ -62,10 +62,20 @@
                 android:id="@+id/tvUsernameMenuLeft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="AnhtuanUit"
                 android:layout_gravity="center_vertical"
-                android:textSize="23dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
                 android:textColor="#fff" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 km, 6 Hoạt động"
+                android:layout_marginLeft="15dp"
+                android:textColor="#fff"
+                android:textSize="14dp"
+                android:layout_marginBottom="16dp"/>
 
         </LinearLayout>
 
@@ -74,12 +84,53 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/left_drawer"
-            android:paddingLeft="9dp"
-            android:paddingRight="9dp"
             android:divider="#fff"
             android:dividerHeight="0.01dp"
             android:layout_below="@+id/thongtincanhan"
             />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D4D4D4"
+            android:layout_above="@+id/setting"
+            >
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="#fff"
+            android:layout_above="@+id/lvNhanTin"
+            android:id="@+id/setting"
+            >
+
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/icon_thongtin" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Thông tin sản phẩm"
+                android:textSize="16dp"
+                android:layout_marginLeft="9dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -94,20 +145,19 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="12dp"
-                android:src="@drawable/icon_comment" />
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/icon_mesage" />
 
 
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nhắn tin"
+                android:text="  Nhắn tin"
                 android:textSize="16dp"
                 android:layout_marginLeft="9dp"
                 android:layout_gravity="center_vertical"
-                android:textColor="#fff"
-                android:textStyle="bold"/>
+                android:textColor="#fff" />
 
         </LinearLayout>
     </RelativeLayout>
