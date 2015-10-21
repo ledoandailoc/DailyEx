@@ -35,7 +35,7 @@ public class DanhSachLanAdapter extends ArrayAdapter<LanTap> {
 		
 		TextView textGio = (TextView) view.findViewById(R.id.textView_ngay);
 		TextView textTenTongThoiGian = (TextView) view.findViewById(R.id.textView_tongthoigian);
-		TextView textView1 = (TextView) view.findViewById(R.id.textView1);
+		TextView textView1 = (TextView) view.findViewById(R.id.tv_soluong);
 		TextView textView2 = (TextView) view.findViewById(R.id.textView2);
 		TextView textView3 = (TextView) view.findViewById(R.id.textView3);
 		ImageView imageView = (ImageView) view.findViewById(R.id.imageView_lichtapdetail);

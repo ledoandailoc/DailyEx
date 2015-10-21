@@ -134,6 +134,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
         });
 
         databaseHandle = new DatabaseHandle(this);
+
         LayDoanDuongDiDuoc();
         stopRepeatingTask();
 
@@ -178,7 +179,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
     public void onSensorChanged(SensorEvent event) {
         float luc = TinhLuc(event);
 
-        if (luc >= 1.2 && click == true && finish != true) {
+        if (luc >= 1.3 && click == true && finish != true) {
             long thoiGianSauKhiLac = event.timestamp;
 
             if (((thoiGianSauKhiLac - thoiGianTruocKhiLac) / 1000000) < 800) return;

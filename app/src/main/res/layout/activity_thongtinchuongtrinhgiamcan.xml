@@ -27,7 +27,7 @@
             android:textSize="15dp"
             android:textColor="#fff"
             android:id="@+id/btn_huybo"
-            android:layout_alignTop="@+id/txt_cannanghientai"
+            android:layout_alignTop="@+id/txt_chieucao"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -41,7 +41,7 @@
             android:textSize="15dp"
             android:textColor="#fff"
             android:id="@+id/btn_taochuongtrinh"
-            android:layout_alignTop="@+id/txt_cannanghientai"
+            android:layout_alignTop="@+id/txt_chieucao"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 

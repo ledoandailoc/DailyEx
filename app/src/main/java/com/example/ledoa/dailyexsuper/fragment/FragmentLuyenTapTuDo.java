@@ -50,7 +50,7 @@ public class FragmentLuyenTapTuDo extends Fragment {
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.custom_alert);
             Button btn_ok = (Button) dialog.findViewById(R.id.btn_alert_ok);
-            txtSoBuoc = (EditText) dialog.findViewById(R.id.txt_sobuoc);
+            txtSoBuoc = (EditText) dialog.findViewById(R.id.txt_soluong);
             int soBuoc;
             btn_ok.setOnClickListener(new View.OnClickListener() {
                 @Override

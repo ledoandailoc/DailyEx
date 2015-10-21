@@ -2,6 +2,7 @@ package com.example.ledoa.dailyexsuper.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,7 +11,10 @@ import android.widget.Toast;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.BaiTap;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.ChuongTrinhGiamCan;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.ChuongTrinhTangSucBen;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.DinhDuong;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.DonVi;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.LanTap;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.MonAn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,10 +108,10 @@ public class DatabaseHandle extends SQLiteOpenHelper {
 				.append(" ('B', 'Đi bộ 400 bước', 'DB', 400, 0),")
 				.append(" ('B', 'Đi bộ 500 bước', 'DB', 400, 0),")
 
-				.append(" ('TG', 'Đi bộ 30 phút', 'DB', 5, 0),")
-				.append(" ('TG', 'Đi bộ 1h', 'DB', 3600, 1),")
-				.append(" ('TG', 'Đi bộ 1h 30 phút ', 'DB', 5400, 0),")
-				.append(" ('TG', 'Đi bộ 2h', 'DB', 7200, 0);")
+				.append(" ('TG', 'Đi bộ 20 phút', 'DB', 1200, 0),")
+				.append(" ('TG', 'Đi bộ 30 phút', 'DB', 1800, 1),")
+				.append(" ('TG', 'Đi bộ 40 phút ', 'DB', 2400, 0),")
+				.append(" ('TG', 'Đi bộ 50 phút', 'DB', 3000, 0);")
 				.toString());
 
 		getWritableDatabase().execSQL((new StringBuilder())
@@ -251,6 +255,92 @@ public class DatabaseHandle extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
+	/*
+	Truy van mon an
+	 */
+	public List<MonAn> getMonAn() {
+		List<MonAn> list = new ArrayList<>();
+		SQLiteDatabase db = this.getReadableDatabase();
+		String sql = "select * from Foods";
+
+		Cursor cursor = db.rawQuery(sql, null);
+		cursor.moveToFirst();
+		while(!cursor.isAfterLast()) {
+			MonAn monAn = new MonAn();
+
+			monAn.setId(Integer.parseInt(cursor.getString(0)));
+			monAn.setCategoryId(Integer.parseInt(cursor.getString(1)));
+			monAn.setName(cursor.getString(2));
+			list.add(monAn);
+
+			cursor.moveToNext();
+
+		}
+
+		return list;
+	}
+
+	public MonAn getMonAnTheoId(int id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String sql = "select * from Foods where id = " + id +"";
+
+		Cursor cursor = db.rawQuery(sql, null);
+		cursor.moveToFirst();
+
+			MonAn monAn = new MonAn();
+			monAn.setId(Integer.parseInt(cursor.getString(0)));
+			monAn.setCategoryId(Integer.parseInt(cursor.getString(1)));
+			monAn.setName(cursor.getString(2));
+
+		return monAn;
+	}
+
+	public ArrayList<DonVi> getDonVi(int food_id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		ArrayList<DonVi> list = new ArrayList<>();
+		String sql = "select measure_id from Food_Measure where food_id = '" + food_id +"'";
+
+		Cursor cursor = db.rawQuery(sql, null);
+		cursor.moveToFirst();
+		while(!cursor.isAfterLast()) {
+
+			String sql1 = "select * from Measures where id = '" + Integer.parseInt(cursor.getString(0)) +"'";
+			Cursor cursor1 = db.rawQuery(sql1, null);
+			cursor1.moveToFirst();
+
+			DonVi donVi= new DonVi();
+			donVi.setId(Integer.parseInt(cursor1.getString(0)));
+			donVi.setName(cursor1.getString(1).toString());
+
+			list.add(donVi);
+
+			cursor.moveToNext();
+
+		}
+
+		return list;
+	}
+
+	public DinhDuong getDinhDuong(int food_id, int measure_id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String sql = "select * from Food_Measure where food_id = " + food_id +" and measure_id = " + measure_id;
+
+		Cursor cursor = db.rawQuery(sql, null);
+		cursor.moveToFirst();
+
+		DinhDuong dinhDuong = new DinhDuong();
+		dinhDuong.setId(Integer.parseInt(cursor.getString(0)));
+		dinhDuong.setCalories(Integer.parseInt(cursor.getString(4)));
+		dinhDuong.setProtein(Double.parseDouble(cursor.getString(12)));
+		dinhDuong.setCarbohydrates(Double.parseDouble(cursor.getString(9)));
+		dinhDuong.setFat(Double.parseDouble(cursor.getString(5)));
+		dinhDuong.setFiber(Double.parseDouble(cursor.getString(10)));
+		dinhDuong.setSugars(Double.parseDouble(cursor.getString(11)));
+		dinhDuong.setCholesterol(Double.parseDouble(cursor.getString(7)));
+
+
+		return dinhDuong;
+	}
 	/*
 	Truy van chuong trinh tang suc ben
 	*/

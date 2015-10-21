@@ -39,9 +39,9 @@ public class LichtapDetailActivity extends AppCompatActivity {
 
 		TextView title = (TextView) findViewById(R.id.actionbar_tvTitile);
 		title.setText("Chi Tiết Ngày Tập");
+		String arrMaMonTap[] = {"Tất cả môn tập", "Đi bộ", "Chạy bộ", "Đạp xe", "Hít Đất"};
 
 		getSupportActionBar().hide();
-		String arrMaMonTap[] = {"Tất cả môn tập", "Đi bộ", "Chạy bộ", "Đạp xe", "Hít Đất"};
 
 		Bundle bundle = getIntent().getExtras();
 		date = "087gyg";

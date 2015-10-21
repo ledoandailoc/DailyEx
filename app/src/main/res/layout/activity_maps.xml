@@ -44,7 +44,7 @@
             android:layout_width="50dp"
             android:layout_marginLeft="10dp"
             android:layout_height="40dp"
-           />
+            />
     </LinearLayout>
     <Button
         android:id="@+id/btNomal"
