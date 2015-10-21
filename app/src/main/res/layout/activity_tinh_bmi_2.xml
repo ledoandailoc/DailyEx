@@ -1,0 +1,147 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ledoa.dailyexsuper.activity.TaoChuongTrinhGiamCanActivity"
+    android:background="#000">
+
+    <include
+        android:id="@+id/actionbar"
+        layout="@layout/actionbar_top_step" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:id="@+id/relativeLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_trangthaicothe">
+
+        <TextView
+            android:gravity="center"
+            android:textColor="#ee5900"
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="* Cách đánh giá chỉ số BMI dành riêng cho người châu Á ( IDI &amp; WPRO)"/>
+
+        <TableLayout android:id="@+id/tabla_cuerpo" android:layout_height="match_parent" android:layout_width="match_parent">
+            <TableRow android:id="@+id/tableRow1" android:layout_width="match_parent" android:layout_height="wrap_content" android:weightSum="1">
+                <TextView android:layout_weight="0.5" android:background="@drawable/cell_shape" android:padding="5dp" android:id="@+id/tv_soluong" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="BMI" android:textColor="#ee5900" android:textStyle="bold" android:textSize="25dp"></TextView>
+                <TextView android:layout_weight="0.5" android:background="@drawable/cell_shape" android:padding="5dp" android:id="@+id/tv_soluong" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Trạng thái cơ thể"  android:textColor="#ee5900" android:textStyle="bold" android:textSize="25dp"></TextView>
+            </TableRow>
+            <TableRow android:id="@+id/tableRow2" android:layout_width="match_parent" android:layout_height="wrap_content" android:weightSum="1">
+                <TextView android:layout_weight="0.5" android:background="@drawable/cell_shape" android:padding="5dp" android:id="@+id/tv_soluong" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="&lt; 18.5" android:textColor="#fff"></TextView>
+                <TextView android:layout_weight="0.5" android:background="@drawable/cell_shape" android:padding="5dp" android:id="@+id/tv_soluong" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Người gầy"  android:textColor="#fff"></TextView>
+            </TableRow>
+            <TableRow android:id="@+id/tableRow3" android:layout_width="match_parent" android:layout_height="wrap_content" android:weightSum="1">
+                <TextView android:layout_weight="0.5" android:background="@drawable/cell_shape" android:padding="5dp" android:id="@+id/tv_soluong" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18.5 - 22.9" android:textColor="#fff"></TextView>
+                <TextView android:layout_weight="0.5" android:background="@drawable/cell_shape" android:padding="5dp" android:id="@+id/tv_soluong" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:textColor="#fff"
+                    android:text="Bình thường"></TextView>
+            </TableRow>
+            <TableRow android:id="@+id/tableRow4" android:layout_width="match_parent" android:layout_height="wrap_content" android:weightSum="1">
+                <TextView android:layout_weight="0.5" android:background="@drawable/cell_shape" android:padding="5dp" android:id="@+id/tv_soluong" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="23" android:textColor="#fff"></TextView>
+                <TextView android:layout_weight="0.5" android:background="@drawable/cell_shape" android:padding="5dp" android:id="@+id/tv_soluong" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Thừa cân"  android:textColor="#fff"></TextView>
+            </TableRow>
+            <TableRow android:id="@+id/tableRow5" android:layout_width="match_parent" android:layout_height="wrap_content" android:weightSum="1">
+                <TextView android:layout_weight="0.5" android:background="@drawable/cell_shape" android:padding="5dp" android:id="@+id/tv_soluong" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="23 - 24.9" android:textColor="#fff"></TextView>
+                <TextView android:layout_weight="0.5" android:background="@drawable/cell_shape" android:padding="5dp" android:id="@+id/tv_soluong" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tiền béo phì"  android:textColor="#fff"></TextView>
+            </TableRow>
+            <TableRow android:id="@+id/tableRow6" android:layout_width="match_parent" android:layout_height="wrap_content" android:weightSum="1">
+                <TextView android:layout_weight="0.5" android:background="@drawable/cell_shape" android:padding="5dp" android:id="@+id/tv_soluong" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25 - 24.9" android:textColor="#fff"></TextView>
+                <TextView android:layout_weight="0.5" android:background="@drawable/cell_shape" android:padding="5dp" android:id="@+id/tv_soluong" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Béo phì độ I"  android:textColor="#fff"></TextView>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1" >
+
+                <TextView
+                    android:layout_weight="0.5"
+                    android:background="@drawable/cell_shape"
+                    android:padding="5dp"
+                    android:id="@+id/textView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:layout_weight="0.5"
+                    android:background="@drawable/cell_shape"
+                    android:padding="5dp"
+                    android:id="@+id/textView35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Béo phì độ II"
+                    android:textColor="#fff" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1" >
+
+                <TextView
+                    android:layout_weight="0.5"
+                    android:background="@drawable/cell_shape"
+                    android:padding="5dp"
+                    android:id="@+id/textView36"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="40"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:layout_weight="0.5"
+                    android:background="@drawable/cell_shape"
+                    android:padding="5dp"
+                    android:id="@+id/textView37"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Béo phì độ III"
+                    android:textColor="#fff" />
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:background="@drawable/button_border_normal"
+        android:textAllCaps="false"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Hoàn thành"
+        android:textSize="20dp"
+        android:textColor="#fff"
+        android:id="@+id/btn_hoanthanh"
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:textColor="#fff"
+        android:textSize="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bình thường"
+        android:id="@+id/tv_trangthaicothe"
+        android:layout_below="@+id/tv_tdee"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:textColor="#fff"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BMI = 19"
+        android:id="@+id/tv_tdee"
+        android:layout_below="@+id/actionbar"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

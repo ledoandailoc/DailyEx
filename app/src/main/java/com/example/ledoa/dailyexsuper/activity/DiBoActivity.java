@@ -114,8 +114,6 @@ public class DiBoActivity extends Activity implements SensorEventListener {
 
         databaseHandle = new DatabaseHandle(this);
 
-
-
         if (mucTieuTG == true){
             test.setVisibility(View.VISIBLE);
             choChronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -156,7 +154,7 @@ public class DiBoActivity extends Activity implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         float luc = TinhLuc(event);
 
-        if (luc >= 1.2 && click == true && finish != true) {
+        if (luc >= 1.3 && click == true && finish != true) {
             long thoiGianSauKhiLac = event.timestamp;
 
             if (((thoiGianSauKhiLac - thoiGianTruocKhiLac) / 1000000) < 800) return;

@@ -9,7 +9,7 @@
     <string name="tab_luyentap">Luyện Tập</string>
     <string name="tab_lichtap">Lịch Tập</string>
     <string name="tab_baitap">Bài Tập</string>
-    <string name="tab_mangxahoi">Mạng Xã Hội</string>
+    <string name="tab_mangxahoi">Sức Khoẻ</string>
 
     <!-- Home Fragment -->
     <string name="home_title">Home Fragment</string>
@@ -72,6 +72,8 @@
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_comment">CommentActivity</string>
     <string name="title_activity_detail_news">DetailNewsActivity</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_khau_phan_an">KhauPhanAnActivity</string>
 
 
 

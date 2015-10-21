@@ -1,10 +1,12 @@
 package com.example.ledoa.dailyexsuper;
 
 import android.content.Intent;
+import android.provider.AlarmClock;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.ledoa.dailyexsuper.activity.CaiDatActivity;
 import com.example.ledoa.dailyexsuper.activity.DanhBaActivity;
+import com.example.ledoa.dailyexsuper.activity.KhauPhanAnActivity;
 import com.example.ledoa.dailyexsuper.activity.LoginActivity;
 import com.example.ledoa.dailyexsuper.activity.NhanTinActivity;
 import com.example.ledoa.dailyexsuper.activity.ThemBanActivity;
@@ -33,14 +36,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    int mIconMenuLeft[] = {R.drawable.icon_timban, R.drawable.icon_thongbao, R.drawable.icon_tab,
+    int mIconMenuLeft[] = {R.drawable.icon_timban,R.drawable.icon_timban, R.drawable.icon_thongbao, R.drawable.icon_tab,
             R.drawable.icon_thongbao, R.drawable.icon_logout};
-    String mTextMenuLeft[] = {"Thông báo mới","Thêm bạn", "Danh bạ","Cài đặt riêng tư","Thoát"};
+    String mTextMenuLeft[] = {"Khẩu phần ăn và các chỉ số cơ thể", "Thông báo mới","Thêm bạn", "Danh bạ","Cài đặt riêng tư","Thoát"};
 
     TextView mTvTabLuyenTap, mTvTabLichTap, mTvTabBaiTap, mTvTabMangXaHoi, mTvActionBarTitle, mTvUsernameMenuLeft;
     ImageView mIvTabLuyenTap, mIvTabLichTap, mIvTabBaiTap, mIvTabMangXaHoi, mIvTabMenuLeft, mIvAvatarMenuLeft;
     RelativeLayout mRlTabLuyenTap, mRlTabLichTap, mRlTabBaiTap, mRlTabMangXaHoi;
-    Intent mIntentNhanTin, mIntentThongbao, mIntentDanhBa, mIntentThemBan, mIntentCaiDat, mIntenLogin;
+    Intent mIntentNhanTin, mIntentThongbao, mIntentDanhBa, mIntentThemBan, mIntentCaiDat, mIntenLogin, mIntenKhauPhanAn;
 
     MainFragmentAdapter adapter;
     ItemMenuLeft mItemMenuLeft;
@@ -60,14 +63,16 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         MainApplication.setMySocket(new MySocket(this));
-        MainApplication.getMySocket().connectSocket();
+      /*  MainApplication.getMySocket().connectSocket();*/
         mUserPref = new UserPref();
 
         DatabaseHandle databaseHandle = new DatabaseHandle(this);
+/*
         databaseHandle.autoInsertDataBase();
+*/
 
         attachActionbar();
-        attachMenuHeader();
+        /*attachMenuHeader();*/
         attachMenu();
         attachFragment();
         attachTab();
@@ -103,9 +108,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        ImageView mIvAlarm = (ImageView) findViewById(R.id.iv_alarm);
+        mIvAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AlarmClock.ACTION_SET_ALARM);
+              /*  i.putExtra(AlarmClock.EXTRA_MESSAGE, "New Alarm");
+                i.putExtra(AlarmClock.EXTRA_HOUR, 11);
+                i.putExtra(AlarmClock.EXTRA_MINUTES, 20);*/
+                startActivity(i);
+            }
+        });
     }
 
     public void attachMenu() {
+        mIntenKhauPhanAn = new Intent(MainActivity.this, KhauPhanAnActivity.class);
+        mIntentThongbao = new Intent(MainActivity.this, ThongBaoActivity.class);
         mIntentThongbao = new Intent(MainActivity.this, ThongBaoActivity.class);
         mIntentThemBan = new Intent(MainActivity.this, ThemBanActivity.class);
         mIntentDanhBa = new Intent(MainActivity.this, DanhBaActivity.class);
@@ -134,11 +153,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                    case 0: startActivity(mIntentThongbao); break;
-                    case 1: startActivity(mIntentThemBan); break;
-                    case 2: startActivity(mIntentDanhBa); break;
-                    case 3: startActivity(mIntentCaiDat); break;
-                    case 4:
+                    case 0: startActivity(mIntenKhauPhanAn); break;
+                    case 1: startActivity(mIntentThongbao); break;
+                    case 2: startActivity(mIntentThemBan); break;
+                    case 3: startActivity(mIntentDanhBa); break;
+                    case 4: startActivity(mIntentCaiDat); break;
+                    case 5:
                         mUserPref.setUser(null);
                         MainApplication.getMySocket().disconnectSocket();
                         startActivity(mIntenLogin);
@@ -187,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
                     case 0:
                         mTvActionBarTitle.setText("Bài Tập");
                         unSelectAllTab();
+                        mRlTabBaiTap.setBackgroundColor(getResources().getColor(R.color.tab_active));
                         mIvTabBaiTap.setImageResource(R.drawable.icon_tab_baitap_vang);
                         mTvTabBaiTap.setTextColor(getResources().getColor(R.color.tab_text_active));
                         break;
@@ -194,18 +215,21 @@ public class MainActivity extends AppCompatActivity {
                     case 1:
                         mTvActionBarTitle.setText("Lịch Tập");
                         unSelectAllTab();
+                        mRlTabLichTap.setBackgroundColor(getResources().getColor(R.color.tab_active));
                         mIvTabLichTap.setImageResource(R.drawable.icon_tab_lichtap_vang);
                         mTvTabLichTap.setTextColor(getResources().getColor(R.color.tab_text_active));
                         break;
                     case 2:
                         mTvActionBarTitle.setText("Luyện Tập Tự Do");
                         unSelectAllTab();
+                        mRlTabLuyenTap.setBackgroundColor(getResources().getColor(R.color.tab_active));
                         mIvTabLuyenTap.setImageResource(R.drawable.icon_tab_tapluyen_vang);
                         mTvTabLuyenTap.setTextColor(getResources().getColor(R.color.tab_text_active));
                         break;
                     case 3:
-                        mTvActionBarTitle.setText("Mạng Xã Hội");
+                        mTvActionBarTitle.setText("Sức Khoẻ");
                         unSelectAllTab();
+                        mRlTabMangXaHoi.setBackgroundColor(getResources().getColor(R.color.tab_active));
                         mIvTabMangXaHoi.setImageResource(R.drawable.icon_mangxahoi_vang);
                         mTvTabMangXaHoi.setTextColor(getResources().getColor(R.color.tab_text_active));
                         break;
@@ -235,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
         mIvTabMangXaHoi = (ImageView) findViewById(R.id.tab_iv_mangxahoi);
         mTvTabMangXaHoi = (TextView) findViewById(R.id.tab_tv_mangxahoi);
 
+        mRlTabBaiTap.setBackgroundColor(getResources().getColor(R.color.tab_active));
         mIvTabBaiTap.setImageResource(R.drawable.icon_tab_baitap_vang);
         mTvTabBaiTap.setTextColor(getResources().getColor(R.color.tab_text_active));
 
@@ -244,6 +269,7 @@ public class MainActivity extends AppCompatActivity {
                 mTvActionBarTitle.setText("Luyện Tập");
                 viewPager.setCurrentItem(2);
                 unSelectAllTab();
+                mRlTabLuyenTap.setBackgroundColor(getResources().getColor(R.color.tab_active));
                 mIvTabLuyenTap.setImageResource(R.drawable.icon_tab_tapluyen_vang);
                 mTvTabLuyenTap.setTextColor(getResources().getColor(R.color.tab_text_active));
             }
@@ -255,6 +281,7 @@ public class MainActivity extends AppCompatActivity {
                 mTvActionBarTitle.setText("Lịch Tập");
                 viewPager.setCurrentItem(1);
                 unSelectAllTab();
+                mRlTabLichTap.setBackgroundColor(getResources().getColor(R.color.tab_active));
                 mIvTabLichTap.setImageResource(R.drawable.icon_tab_lichtap_vang);
                 mTvTabLichTap.setTextColor(getResources().getColor(R.color.tab_text_active));
             }
@@ -266,6 +293,7 @@ public class MainActivity extends AppCompatActivity {
                 mTvActionBarTitle.setText("Bài Tập");
                 viewPager.setCurrentItem(0);
                 unSelectAllTab();
+                mRlTabBaiTap.setBackgroundColor(getResources().getColor(R.color.tab_active));
                 mIvTabBaiTap.setImageResource(R.drawable.icon_tab_baitap_vang);
                 mTvTabBaiTap.setTextColor(getResources().getColor(R.color.tab_text_active));
             }
@@ -274,9 +302,10 @@ public class MainActivity extends AppCompatActivity {
         mRlTabMangXaHoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTvActionBarTitle.setText("Mạng Xã Hội");
+                mTvActionBarTitle.setText("Sức Khoẻ");
                 viewPager.setCurrentItem(3);
                 unSelectAllTab();
+                mRlTabMangXaHoi.setBackgroundColor(getResources().getColor(R.color.tab_active));
                 mIvTabMangXaHoi.setImageResource(R.drawable.icon_mangxahoi_vang);
                 mTvTabMangXaHoi.setTextColor(getResources().getColor(R.color.tab_text_active));
             }
@@ -286,12 +315,17 @@ public class MainActivity extends AppCompatActivity {
         mIvTabMenuLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //drawerLayout.openDrawer(Gravity.START);
+                mDlMenuLeft.openDrawer(Gravity.START);
             }
         });
     }
 
     public void unSelectAllTab(){
+        mRlTabLuyenTap.setBackgroundColor(getResources().getColor(R.color.tab));
+        mRlTabLichTap.setBackgroundColor(getResources().getColor(R.color.tab));
+        mRlTabBaiTap.setBackgroundColor(getResources().getColor(R.color.tab));
+        mRlTabMangXaHoi.setBackgroundColor(getResources().getColor(R.color.tab));
+
         mIvTabLuyenTap.setImageResource(R.drawable.icon_tab_tapluyen);
         mTvTabLuyenTap.setTextColor(getResources().getColor(R.color.tab_text));
         mIvTabLichTap.setImageResource(R.drawable.icon_tab_lichtap);

@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.ledoa.dailyexsuper.activity.TaoChuongTrinhGiamCanActivity"
-    android:background="#ee5911">
+    android:background="#000"
+    >
 
     <include
         android:id="@+id/actionbar"
@@ -13,21 +14,22 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:id="@+id/relativeLayout2"
-        android:layout_below="@+id/textView17"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_trangthaicothe">
 
         <TextView
             android:textColor="#fff"
             android:textSize="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cân nặng hiện tại (kg)"
+            android:text="Chiều cao (cm)"
             android:id="@+id/textView12"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
         <EditText
+            android:textColor="#fff"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:id="@+id/txt_chieucao"
@@ -39,12 +41,13 @@
             android:textSize="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cân nặng mục tiêu (kg)"
+            android:text="Cân nặng (kg)"
             android:id="@+id/textView13"
             android:layout_below="@+id/txt_chieucao"
             android:layout_centerHorizontal="true" />
 
         <EditText
+            android:textColor="#fff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txt_cannang"
@@ -53,16 +56,6 @@
             android:layout_alignStart="@+id/txt_chieucao"
             android:layout_alignRight="@+id/txt_chieucao"
             android:layout_alignEnd="@+id/txt_chieucao" />
-
-        <TextView
-            android:textColor="#fff"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lựa chọn môn tập"
-            android:id="@+id/textView23"
-            android:layout_below="@+id/txt_cannang"
-            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 
@@ -76,87 +69,29 @@
         android:textSize="20dp"
         android:textColor="#fff"
         android:id="@+id/btn_tieptuc"
-        android:layout_below="@+id/checkBox4"
         android:layout_alignRight="@+id/tv_tdee"
-        android:layout_alignEnd="@+id/tv_tdee" />
+        android:layout_alignEnd="@+id/tv_tdee"
+        android:layout_below="@+id/relativeLayout2" />
 
     <TextView
         android:textColor="#fff"
         android:textSize="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nhập vào những thông số cần thiết"
+        android:text="Là chỉ số đánh giá mức độ gầy hay béo của 1 người "
         android:id="@+id/tv_trangthaicothe"
         android:layout_below="@+id/tv_tdee"
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:textSize="15dp"
-        android:textColor="#fff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chương trình sẽ tính ra chương trình tập luyện"
-        android:id="@+id/textView16"
-        android:layout_below="@+id/tv_trangthaicothe"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:textSize="15dp"
-        android:textColor="#fff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="phù hợp với bạn"
-        android:id="@+id/textView17"
-        android:layout_below="@+id/textView16"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
+        android:layout_marginTop="10dp"
         android:textColor="#fff"
         android:textSize="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nhập thông số"
+        android:text="Tính chỉ số BMI"
         android:id="@+id/tv_tdee"
         android:layout_below="@+id/actionbar"
         android:layout_centerHorizontal="true" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Đi bộ"
-        android:id="@+id/checkBox"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_centerHorizontal="true"
-        android:checked="false" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chạy bộ"
-        android:id="@+id/checkBox3"
-        android:checked="false"
-        android:layout_below="@+id/checkBox"
-        android:layout_alignLeft="@+id/checkBox"
-        android:layout_alignStart="@+id/checkBox" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Đi bộ + Hít đất"
-        android:id="@+id/checkBox2"
-        android:checked="false"
-        android:layout_below="@+id/checkBox3"
-        android:layout_alignLeft="@+id/checkBox3"
-        android:layout_alignStart="@+id/checkBox3" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chạy bộ + Hít đất"
-        android:id="@+id/checkBox4"
-        android:checked="false"
-        android:layout_below="@+id/checkBox2"
-        android:layout_alignLeft="@+id/checkBox2"
-        android:layout_alignStart="@+id/checkBox2" />
 
 </RelativeLayout>

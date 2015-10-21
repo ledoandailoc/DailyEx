@@ -18,7 +18,7 @@
 
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/tv_soluong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/textView1"
+            android:layout_below="@+id/tv_soluong"
             android:text="2" />
 
         <TextView
