@@ -13,9 +13,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ledoa.dailyexsuper.R;
-import com.example.ledoa.dailyexsuper.adapter.DanhSachLanAdapter;
-
-import java.util.ArrayList;
 
 public class TinhTdeeActivity extends AppCompatActivity {
     CheckBox mCbNam, mCbNu;
@@ -23,7 +20,7 @@ public class TinhTdeeActivity extends AppCompatActivity {
     Button mBtnTiepTuc;
     Spinner spinner;
     String argLoaiVanDong[];
-    Double chieuCao, canNang, tdee, tuoi, heSo;
+    Double chieuCao, canNang, tdee, tuoi, heSo, bmi;
 
 
 
@@ -111,7 +108,10 @@ public class TinhTdeeActivity extends AppCompatActivity {
                 }
                 Intent intent = new Intent(TinhTdeeActivity.this, TinhTdee2Activity.class);
                 intent.putExtra("tdee", Math.round(tdee*100.0)/100.0);
+                intent.putExtra("chieuCao", chieuCao);
+                intent.putExtra("canNang", canNang);
                 startActivity(intent);
+                finish();
             }
         });
     }

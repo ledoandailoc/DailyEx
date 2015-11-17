@@ -160,7 +160,7 @@
             android:label="@string/title_activity_khau_phan_an" >
         </activity>
         <activity
-            android:name=".activity.TinhTdee2Activity"
+            android:name=".activity.TinhTdee3Activity"
             android:label="@string/title_activity_khau_phan_an" >
         </activity>
         <activity
@@ -190,6 +190,11 @@
         </activity>
         <activity
             android:name=".activity.MenuThemBanActivity"
+            android:label="@string/title_activity_menu_them_ban"
+            android:theme="@style/Theme.AppCompat.NoActionBar.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".activity.TinhTdee2Activity"
             android:label="@string/title_activity_menu_them_ban"
             android:theme="@style/Theme.AppCompat.NoActionBar.NoActionBar" >
         </activity>

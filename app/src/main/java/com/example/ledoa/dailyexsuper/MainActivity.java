@@ -71,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
         thongBaoPref = new ThongBaoPref();
 
         DatabaseHandle databaseHandle = new DatabaseHandle(this);
-/*
+
         databaseHandle.autoInsertDataBase();
-*/
+
 
         attachActionbar();
         /*attachMenuHeader();*/

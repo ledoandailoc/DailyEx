@@ -23,11 +23,18 @@ public class TimMonAnActivity extends AppCompatActivity {
     SearchView mSvMonAn;
     ListView mLvMonAn;
     List<MonAn> list;
+    String buoi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tim_mon_an);
         getSupportActionBar().hide();
+
+        Bundle bundle = getIntent().getExtras();
+        buoi = bundle.getString("buoi");
+
+
         InitView();
         attachButton();
 
@@ -46,7 +53,9 @@ public class TimMonAnActivity extends AppCompatActivity {
                 MonAn monAn = list.get(position);
                 Intent intent = new Intent(TimMonAnActivity.this, MonAnActivity.class);
                 intent.putExtra("id", monAn.getId());
+                intent.putExtra("buoi", buoi);
                 startActivity(intent);
+                finish();
             }
         });
 

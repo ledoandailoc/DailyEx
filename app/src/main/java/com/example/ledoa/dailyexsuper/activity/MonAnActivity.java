@@ -1,6 +1,7 @@
 package com.example.ledoa.dailyexsuper.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,7 +18,9 @@ import com.example.ledoa.dailyexsuper.R;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.DinhDuong;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.DonVi;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.MonAn;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.MonAnPref;
 import com.example.ledoa.dailyexsuper.sqlite.DatabaseHandle;
+import com.example.ledoa.dailyexsuper.util.KhauPhanAnPref;
 
 import java.util.ArrayList;
 
@@ -26,16 +29,18 @@ public class MonAnActivity extends AppCompatActivity {
     ImageView mBtnEditSoLuong, mBtnEditDonVi;
     EditText mTxtSoLuong;
     ListView mLvDonVi;
+    Button mBtnChonMon;
 
     MonAn monAn;
     DinhDuong dinhDuong;
 
     int monAnId;
     int soLuong = 1;
-    int donVi;
+    String donVi;
     ArrayList<DonVi> listDonVi;
     ArrayList<String> listTenDonVi;
     DatabaseHandle databaseHandle;
+    String buoi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,7 @@ public class MonAnActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
             monAnId = bundle.getInt("id");
+            buoi = bundle.getString("buoi");
         }
 
         databaseHandle = new DatabaseHandle(this);
@@ -64,6 +70,7 @@ public class MonAnActivity extends AppCompatActivity {
 
         //Dinh Duong
         dinhDuong = databaseHandle.getDinhDuong(monAnId,listDonVi.get(0).getId());
+        donVi = (listTenDonVi.get(0));
 
         InitView();
         attachButton();
@@ -111,8 +118,9 @@ public class MonAnActivity extends AppCompatActivity {
                 mLvDonVi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        donVi = listTenDonVi.get(position);
                         mTvDonvi.setText(listTenDonVi.get(position));
-                        dinhDuong = databaseHandle.getDinhDuong(monAnId,listDonVi.get(position).getId());
+                        dinhDuong = databaseHandle.getDinhDuong(monAnId, listDonVi.get(position).getId());
                         mTvDonvi.setText(listTenDonVi.get(position));
                         InitData();
                         dialog.dismiss();
@@ -120,9 +128,25 @@ public class MonAnActivity extends AppCompatActivity {
                 });
             }
         });
+
+        mBtnChonMon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                KhauPhanAnPref khauPhanAnPref = new KhauPhanAnPref();
+                MonAnPref monAnPref = new MonAnPref();
+                monAnPref.name = monAn.getName();
+                monAnPref.soLuong = soLuong;
+                monAnPref.donVi = donVi;
+                monAnPref.calo = dinhDuong.getCalories()*soLuong;
+                monAnPref.buoi = buoi;
+                khauPhanAnPref.addMonAn(monAnPref);
+                finish();
+            }
+        });
     }
 
     public void InitView(){
+        mBtnChonMon = (Button) findViewById(R.id.btn_chon_mon_an);
         mTvCalo = (TextView) findViewById(R.id.tv_calo);
         mTvTenMonAn = (TextView) findViewById(R.id.tv_tenmonan);
         mBtnEditSoLuong = (ImageView) findViewById(R.id.btn_edit_soluong);
