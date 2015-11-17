@@ -20,7 +20,8 @@
         android:gravity="center"
         android:hint="Tên đăng nhập"
         android:inputType="text"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:text="tuan" />
 
     <EditText
         android:id="@+id/edtEmail"
@@ -33,7 +34,8 @@
         android:gravity="center"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:text="tuan@gmail.com" />
 
     <EditText
         android:id="@+id/edtPassword"
@@ -46,7 +48,8 @@
         android:gravity="center"
         android:hint="Mật khẩu"
         android:inputType="textPassword"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:text="12345" />
 
     <EditText
         android:id="@+id/edtPhoneNumber"
@@ -59,7 +62,8 @@
         android:gravity="center"
         android:hint="Chiều cao"
         android:inputType="phone"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:text="172" />
 
     <EditText
         android:id="@+id/edtCountry"
@@ -71,7 +75,8 @@
         android:background="@drawable/edit_text_border"
         android:gravity="center"
         android:hint="Cân nặng"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:text="65" />
 
     <RadioGroup
         android:id="@+id/rgGender"

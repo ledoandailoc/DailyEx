@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         MainApplication.setMySocket(new MySocket(this));
-       MainApplication.getMySocket().connectSocket();
+        MainApplication.getMySocket().connectSocket();
         mUserPref = new UserPref();
         themBanPref = new ThemBanPref();
         thongBaoPref = new ThongBaoPref();
