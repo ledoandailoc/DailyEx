@@ -110,6 +110,9 @@ public class TinhTdeeActivity extends AppCompatActivity {
                 intent.putExtra("tdee", Math.round(tdee*100.0)/100.0);
                 intent.putExtra("chieuCao", chieuCao);
                 intent.putExtra("canNang", canNang);
+                intent.putExtra("tuoi", tuoi);
+                intent.putExtra("heSo", heSo);
+                intent.putExtra("gioiTinh", mCbNam.isChecked());
                 startActivity(intent);
                 finish();
             }

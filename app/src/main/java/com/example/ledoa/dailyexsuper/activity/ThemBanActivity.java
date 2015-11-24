@@ -246,7 +246,6 @@ public class ThemBanActivity extends FragmentActivity {
 						entity.data.get(i).latitude = distance;
 						entity.data.get(i).longitude = min;
 						mUserList.add(entity.data.get(i));
-						Toast.makeText(ThemBanActivity.this, String.valueOf(dLatitude) + " "+ String.valueOf(dLongitude), Toast.LENGTH_LONG).show();
 						success = true;
 					}
 				}

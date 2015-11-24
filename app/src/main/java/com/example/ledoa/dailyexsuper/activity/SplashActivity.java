@@ -15,6 +15,7 @@ public class SplashActivity extends Activity {
 
         UserPref userPref = new UserPref();
 
+
         if (true) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);

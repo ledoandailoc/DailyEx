@@ -1,7 +1,6 @@
 package com.example.ledoa.dailyexsuper.activity;
 
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,15 +26,12 @@ import android.widget.Toast;
 
 
 import com.example.ledoa.dailyexsuper.R;
-import com.example.ledoa.dailyexsuper.sqlite.DTO.BaiTap;
 import com.example.ledoa.dailyexsuper.sqlite.DatabaseHandle;
 import com.example.ledoa.dailyexsuper.util.DoiGioPhutGiay;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DiBoActivity extends FragmentActivity implements SensorEventListener {
 
@@ -54,6 +50,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
     TextView test;
     TextView status;
     TextView tocdo;
+    TextView tvQuangDuong;
     private GoogleMap mMap;
     Location myLocation;
     ArrayList<String> dLatitude, dLongitude;
@@ -107,9 +104,10 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
 	        btn_pause = (ImageButton) findViewById(R.id.btn_pause);
 	        btn_stop = (ImageButton) findViewById(R.id.btn_stop);
 	        editText_sobuoc = (EditText) findViewById(R.id.editText_sobuoc);
-	        test = (TextView) findViewById(R.id.test);
+	        test = (TextView) findViewById(R.id.tv_buoc);
 	        status = (TextView) findViewById(R.id.TrangThai);
 	        tocdo = (TextView) findViewById(R.id.TocDo);
+            tvQuangDuong = (TextView) findViewById(R.id.tv_km);
 	        
 	        finish_icon = (ImageView) findViewById(R.id.finishIcon);
 	        progresss_bar = (ProgressBar) findViewById(R.id.progressBar);
@@ -156,10 +154,10 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
                         choChronometer.stop();
                         finish = true;
 
-                        if (IdBaiTap != null) {
+                        /*if (IdBaiTap != null) {*/
                             databaseHandle.updateBaiTap(IdBaiTap);
-                        }
-                        else if(IdChuongTrinhGiamCan >= 0){
+                        /*}*/
+                        if(IdChuongTrinhGiamCan >= 0){
 
                             databaseHandle.updateChuongTrinhGiamCan(IdChuongTrinhGiamCan);
                         }
@@ -179,7 +177,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
     public void onSensorChanged(SensorEvent event) {
         float luc = TinhLuc(event);
 
-        if (luc >= 1.3 && click == true && finish != true) {
+        if (luc >= 1.2 && click == true && finish != true) {
             long thoiGianSauKhiLac = event.timestamp;
 
             if (((thoiGianSauKhiLac - thoiGianTruocKhiLac) / 1000000) < 800) return;
@@ -197,9 +195,11 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
                     tocdo.setText(SoLanLac + " Bước / " + DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
                     choChronometer.stop();
                     finish = true;
+/*
                     if (!IdBaiTap.equals("")) {
+*/
                         databaseHandle.updateBaiTap(IdBaiTap);
-                    }
+                    /*}*/
                 }
             v.setText(SoLanLac + "/" + MucTieu);
             test.setText(String.valueOf(SoLanLac) + " bước");
@@ -315,7 +315,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
                 vido = longitude;
                 //if(SumDistance > 20){
                     Toast.makeText(DiBoActivity.this, "Di duoc" + SumDistance + " " + s, Toast.LENGTH_SHORT).show();
-
+                tvQuangDuong.setText(String.valueOf(SumDistance) + " km");
                 //}
                } else {
                 Toast.makeText(DiBoActivity.this, "Chua lay duoc vi tri", Toast.LENGTH_SHORT).show();
@@ -372,6 +372,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
         final AlertDialog alert = builder.create();
         alert.show();
     }
+
     public void LayDoanDuongDiDuoc(){
         handler = new Handler();
         handler.postDelayed(mHandlerTask = new Runnable() {
@@ -384,6 +385,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
             }
         }, 10000);
     }
+
     void startRepeatingTask()
     {
         mHandlerTask.run();

@@ -15,7 +15,8 @@ public class TinhTdee2Activity extends AppCompatActivity {
     TextView title;
     EditText mTxtCanNangMucTieu;
     Button mBtnHoanThanh;
-    double tdee, chieuCao, canNangHienTai, canNangMucTieu, tongCaloCatGiam, soNgayTap, soCaloCatGiamMotNgay, canNangLiTuong1, canNangLiTuong2;
+    double tdee, tuoi, chieuCao, heSo, canNangHienTai, canNangMucTieu, tongCaloCatGiam, soNgayTap, soCaloCatGiamMotNgay, canNangLiTuong1, canNangLiTuong2;
+    boolean gioiTinh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +28,10 @@ public class TinhTdee2Activity extends AppCompatActivity {
             tdee = bundle.getDouble("tdee");
             chieuCao = bundle.getDouble("chieuCao");
             canNangHienTai = bundle.getDouble("canNang");
+            heSo = bundle.getDouble("heSo");
+            tuoi = bundle.getDouble("tuoi");
+            gioiTinh = bundle.getBoolean("gioiTinh");
         }
-
 
         InitView();
         attachButton();
@@ -44,12 +47,13 @@ public class TinhTdee2Activity extends AppCompatActivity {
                 soNgayTap = (canNangHienTai - canNangMucTieu) / 0.045;
                 soCaloCatGiamMotNgay = (tongCaloCatGiam/soNgayTap);
 
-/*
+
                 tdee = tdee - soCaloCatGiamMotNgay;
-*/
+
 
                 Intent intent = new Intent(TinhTdee2Activity.this, TinhTdee3Activity.class);
                 intent.putExtra("tdee", Math.round(tdee*100.0)/100.0);
+                intent.putExtra("canNang", canNangMucTieu);
                 startActivity(intent);
                 finish();
             }

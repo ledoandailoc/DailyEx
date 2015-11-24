@@ -53,8 +53,8 @@ public class TinhTdee3Activity extends AppCompatActivity {
 
     public void InitData(){
         title.setText("Kết quả");
-        mTvKetQua.setText(String.valueOf("Bạn cần nạp vào cơ thể " + (int)tdee + " calo 1 ngày từ thức ăn, nước uống để có thể duy trì cân nặng hiện tại là "+ (int)canNang +" với cường độ luyện tập và lối sống không đổi"));
-        mTvTdee.setText(String.valueOf("TDEE: " + tdee));
+        mTvKetQua.setText(String.valueOf("Bạn cần nạp vào cơ thể " + (int)tdee + " calo 1 ngày từ thức ăn, nước uống để có thể đạt được cân nặng là "+ (int)canNang +" kg với cường độ luyện tập và lối sống không đổi"));
+        mTvTdee.setText(String.valueOf("TDEE: " + (int)tdee));
     }
 
 }

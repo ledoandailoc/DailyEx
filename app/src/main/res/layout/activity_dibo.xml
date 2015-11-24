@@ -81,12 +81,11 @@
 
     <TextView
         android:textSize="30dp"
-        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0 bước"
-        android:id="@+id/test"
+        android:text="0 km"
+        android:id="@+id/tv_km"
         android:layout_below="@+id/chronometer"
         android:layout_alignRight="@+id/chronometer"
         android:layout_alignEnd="@+id/chronometer" />
@@ -116,7 +115,7 @@
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_above="@+id/TocDo"
-        android:layout_toRightOf="@+id/test"
+        android:layout_toRightOf="@+id/tv_buoc"
         android:layout_toStartOf="@+id/textView"
         android:src="@drawable/finish_do"
         android:visibility="invisible" />
@@ -148,5 +147,17 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         />
+
+    <TextView
+        android:textSize="30dp"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0 bước"
+        android:id="@+id/tv_buoc"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

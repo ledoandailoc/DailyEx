@@ -123,7 +123,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="test"
-        android:id="@+id/test"
+        android:id="@+id/tv_buoc"
         android:layout_below="@+id/finishIcon"
         android:layout_centerHorizontal="true" />
 
@@ -166,7 +166,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/TocDo"
-        android:layout_below="@+id/test"
+        android:layout_below="@+id/tv_buoc"
         android:textSize="80sp" />
 
 </RelativeLayout>

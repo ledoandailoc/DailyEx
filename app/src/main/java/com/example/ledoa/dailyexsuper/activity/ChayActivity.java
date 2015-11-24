@@ -37,7 +37,7 @@ public class ChayActivity extends Activity implements SensorEventListener {
         btn_pause = (ImageButton) findViewById(R.id.btn_pause);
         btn_stop = (ImageButton) findViewById(R.id.btn_stop);
         editText_sobuoc = (EditText) findViewById(R.id.editText_sobuoc);
-        test = (TextView) findViewById(R.id.test);
+        test = (TextView) findViewById(R.id.tv_buoc);
         status = (TextView) findViewById(R.id.TrangThai);
         tocdo = (TextView) findViewById(R.id.TocDo);
         

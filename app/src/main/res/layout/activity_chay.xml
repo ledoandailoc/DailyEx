@@ -27,10 +27,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0/0"
+        android:text="0/0 km"
         android:id="@+id/textView"
         android:textSize="30sp"
-        android:textColor="#060000"
+        android:textColor="#fff"
         android:singleLine="true"
         android:longClickable="true"
         android:layout_below="@+id/progressBar"
@@ -50,33 +50,6 @@
         android:layout_alignParentEnd="true"
         android:layout_row="23"
         android:layout_column="12" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-
-        android:text="Mục tiêu: "
-        android:textColor="#060000"
-        android:id="@+id/textView2"
-        android:layout_gravity="center_vertical"
-        style="@style/AppTheme"
-        android:layout_above="@+id/btn_start"
-        android:layout_alignLeft="@+id/btn_pause"
-        android:layout_alignStart="@+id/btn_pause" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText_sobuoc"
-        android:layout_marginLeft="-6dp"
-        android:text="100"
-        android:paddingTop="0dp"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
-        android:textColor="#fff" 
-        android:maxLength="4"/>
 
     <ImageButton
         android:background="#002b172e"
@@ -106,14 +79,14 @@
 
 
     <ImageButton
+        android:layout_marginTop="10dp"
         android:background="#002b172e"
         android:layout_width="50dp"
-        android:layout_marginTop="5px"
         android:layout_height="50dp"
         android:id="@+id/btn_pause"
         android:onClick="btn_pause"
         android:src="@drawable/pause"
-        android:layout_below="@+id/editText_sobuoc"
+        android:layout_alignTop="@+id/btn_start"
         android:layout_toLeftOf="@+id/btn_start"
         android:layout_toStartOf="@+id/btn_start" />
 
@@ -123,12 +96,13 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="test"
-        android:id="@+id/test"
+        android:id="@+id/tv_buoc"
         android:layout_below="@+id/finishIcon"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/TocDo"
+        android:textColor="#fff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textView"
@@ -149,24 +123,34 @@
         android:textSize="29sp"
         android:textStyle="italic" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editText_sobuoc"
-        android:layout_toEndOf="@+id/editText_sobuoc"
-        android:layout_toRightOf="@+id/editText_sobuoc"
-        android:text="bước"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#060000"
-        android:textIsSelectable="true" />
-
     <Chronometer
+        android:textColor="#fff"
         android:id="@+id/chronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/TocDo"
-        android:layout_below="@+id/test"
+        android:layout_below="@+id/tv_buoc"
         android:textSize="80sp" />
 
+    <TextView
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0 km"
+        android:id="@+id/tv_km"
+        android:textColor="#fff"
+        android:layout_below="@+id/chronometer"
+        android:layout_alignRight="@+id/chronometer"
+        android:layout_alignEnd="@+id/chronometer" />
+
+    <ImageView
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/iv_back"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
