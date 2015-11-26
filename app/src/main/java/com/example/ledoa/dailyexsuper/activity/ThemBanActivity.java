@@ -182,7 +182,8 @@ public class ThemBanActivity extends FragmentActivity {
 				.setCancelable(false)
 				.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
 					public void onClick(final DialogInterface dialog,  final int id) {
-						addLocation();
+						addLocation(1);
+						Toast.makeText(getApplicationContext(), "da xoa vi tri", Toast.LENGTH_SHORT).show();
 					}
 				})
 				.setNegativeButton("Bỏ qua", new DialogInterface.OnClickListener() {
@@ -226,7 +227,8 @@ public class ThemBanActivity extends FragmentActivity {
 				mUserList.clear();
 				//mUserList.addAll(entity.data);
 				for(int i=0; i< entity.data.size(); i++){
-					if(entity.data.get(i).latitude != null && entity.data.get(i).latitude != "null"){
+					if(entity.data.get(i).latitude != null && !entity.data.get(i).latitude.equals("null")
+							&& !entity.data.get(i).latitude.equals("1")){
 						//CheckDistance(entity.data.get(i).latitude, entity.data.get(i).longitude);
 						double lat=Double.parseDouble(entity.data.get(i).latitude);
 						double lng=Double.parseDouble(entity.data.get(i).longitude);
@@ -255,6 +257,7 @@ public class ThemBanActivity extends FragmentActivity {
 
 					handler.removeCallbacks(mHandlerTask);
 					stop = true;
+					addLocation(0);
 					mLvThemBan.setAdapter(mThemBanAdapter);
 				}
 			}
@@ -302,11 +305,16 @@ public class ThemBanActivity extends FragmentActivity {
 
 	}
 
-	private void addLocation() {
+	private void addLocation(int xoavitri) {
 
 		HashMap<String, String> params = new HashMap<>();
-		params.put("longitude", String.valueOf(dLongitude) );
-		params.put("latitude", String.valueOf(dLatitude));
+		if(xoavitri == 0){
+			params.put("longitude", String.valueOf(dLongitude) );
+			params.put("latitude", String.valueOf(dLatitude));
+		} else {
+			params.put("longitude", "1" );
+			params.put("latitude", "1");
+		}
 		mLoginRequest = new LoginRequest(Method.PUT, ApiLink.addLocation()+ "/" + mUserPref.getUser()._id, null, params) {
 
 			@Override
@@ -316,7 +324,6 @@ public class ThemBanActivity extends FragmentActivity {
 
 			@Override
 			protected void onSuccess(LoginResponse entity, int statusCode, String message) {
-				Toast.makeText(getApplicationContext(), "da xoa vi tri", Toast.LENGTH_SHORT).show();
 			}
 
 			@Override

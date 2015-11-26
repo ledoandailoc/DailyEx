@@ -149,4 +149,13 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tv_dem_nguoc"
+        android:layout_below="@+id/chronometer"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

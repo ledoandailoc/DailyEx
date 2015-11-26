@@ -43,7 +43,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
 
     SensorManager sensorManager;
     Sensor accelerometer;
-    
+    int i = 3;
     TextView v;
     EditText editText_sobuoc;
     ImageView finish_icon;
@@ -54,12 +54,13 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
     TextView test;
     TextView status;
     TextView tocdo;
+    TextView tvDemNguoc;
     private GoogleMap mMap;
     Location myLocation;
     ArrayList<String> dLatitude, dLongitude;
     double kinhdo = 0, vido = 0, SumDistance = 0;
 
-    Handler handler;
+    Handler handler, handler_dem;
     Runnable mHandlerTask;
 
     boolean finish = false;
@@ -110,7 +111,8 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
 	        test = (TextView) findViewById(R.id.test);
 	        status = (TextView) findViewById(R.id.TrangThai);
 	        tocdo = (TextView) findViewById(R.id.TocDo);
-	        
+            tvDemNguoc = (TextView)findViewById(R.id.tv_dem_nguoc);
+
 	        finish_icon = (ImageView) findViewById(R.id.finishIcon);
 	        progresss_bar = (ProgressBar) findViewById(R.id.progressBar);
 	        choChronometer = (Chronometer) findViewById(R.id.chronometer);
@@ -230,7 +232,9 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
         if(intDemNguocStart == 1){
             stopRepeatingTask();
             startRepeatingTask();
+            DemNguoc();
             status.setText("Walking...");
+
             if (ButtonVuaNhan.equals("start")) return;
             choChronometer.start();
             thoiGianTruocKhiLac = System.currentTimeMillis();
@@ -238,6 +242,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
             if (ButtonVuaNhan.equals("pause")) {
                 choChronometer.setBase(SystemClock.elapsedRealtime() +  time);
             } else {
+
                 time = 0;
                 TongThoiGian = -time/1000;
                 choChronometer.setBase(SystemClock.elapsedRealtime());
@@ -392,5 +397,33 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
     void stopRepeatingTask()
     {
         handler.removeCallbacks(mHandlerTask);
+    }
+
+    void DemNguoc(){
+        handler_dem = new Handler();
+        handler_dem.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                CreateLocation();
+                handler_dem = new Handler();
+
+                if(i == 3){
+                    tvDemNguoc.setText("3");
+                    i--;
+                } else
+                if(i == 2){
+                    tvDemNguoc.setText("2");
+                    i--;
+                } else
+                if(i==1){
+                    tvDemNguoc.setText("1");
+                    i--;
+                } else {
+                    tvDemNguoc.setText("Let GO");
+                }
+                handler_dem.postDelayed(this, 3000);
+            }
+        }, 3000);
     }
 }

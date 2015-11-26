@@ -40,8 +40,6 @@ public class FragmentMangXaHoi extends Fragment {
 		getNews();
 
 		return view;
-
-
 	}
 
 	public void showNewOffLine(){
