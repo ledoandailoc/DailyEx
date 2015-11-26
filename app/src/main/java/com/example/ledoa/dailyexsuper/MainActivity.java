@@ -35,6 +35,8 @@ import com.example.ledoa.dailyexsuper.util.ThemBanPref;
 import com.example.ledoa.dailyexsuper.util.ThongBaoPref;
 import com.example.ledoa.dailyexsuper.util.UserPref;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,20 +68,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-        MainApplication.setMySocket(new MySocket(this));
-        MainApplication.getMySocket().connectSocket();
+  /*      MainApplication.setMySocket(new MySocket(this));
+        MainApplication.getMySocket().connectSocket();*/
         mUserPref = new UserPref();
         themBanPref = new ThemBanPref();
         thongBaoPref = new ThongBaoPref();
         newPref = new NewPref();
 
-        DatabaseHandle databaseHandle = new DatabaseHandle(this);
 
-        databaseHandle.autoInsertDataBase();
+        // Copy databasefromassets
+        DatabaseHandle databaseHandle = new DatabaseHandle(this);
+        try {
+            databaseHandle.createDataBase();
+            databaseHandle.openDataBase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
         attachActionbar();
-        attachMenuHeader();
+        /*attachMenuHeader();*/
         attachMenu();
         attachFragment();
         attachTab();

@@ -3,161 +3,185 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.dailyex.MainActivity" >
 
-   <ProgressBar
-       android:id="@+id/progressBar"
-       style="?android:attr/progressBarStyleHorizontal"
-       android:layout_width="wrap_content"
-       android:layout_height="38dp"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentStart="true"
-       android:layout_alignRight="@+id/textView"
-       android:indeterminate="false"
-       android:max="100"
-       android:progress="0"
-       android:progressDrawable="@drawable/theme_progress"
-       android:secondaryProgress="0" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0/0"
-        android:id="@+id/textView"
-        android:textSize="30sp"
-        android:textColor="#060000"
-        android:singleLine="true"
-        android:longClickable="true"
-        android:layout_below="@+id/progressBar"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textIsSelectable="false" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_start"
-        android:src="@drawable/start2"
-        android:onClick="btn_start"
-        android:background="#002b172e"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_row="23"
-        android:layout_column="12" />
-
-
-
-    <ImageButton
-        android:layout_marginTop="10dp"
-        android:background="#002b172e"
-        android:layout_marginBottom="5dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/btn_stop"
-        android:onClick="btn_stop"
-        android:src="@drawable/stop"
-        android:layout_alignBottom="@+id/btn_start"
-        android:layout_alignLeft="@+id/btn_pause"
-        android:layout_alignStart="@+id/btn_pause" />
-
-
-
-    <ImageButton
-        android:background="#002b172e"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/btn_pause"
-        android:onClick="btn_pause"
-        android:src="@drawable/pause"
-        android:layout_above="@+id/btn_stop"
-        android:layout_toLeftOf="@+id/btn_start"
-        android:layout_toStartOf="@+id/btn_start" />
-
-    <TextView
-        android:textSize="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0 km"
-        android:id="@+id/tv_km"
-        android:layout_below="@+id/chronometer"
-        android:layout_alignRight="@+id/chronometer"
-        android:layout_alignEnd="@+id/chronometer" />
-
-    <TextView
-        android:id="@+id/TocDo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView"
-        android:layout_below="@+id/textView"
-        android:text="Tốc Độ: ? bước / ?  Phút"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="15sp" />
-
-
-    <Chronometer
-        android:id="@+id/chronometer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="80sp"
-        android:layout_below="@+id/TocDo"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <ImageView
-        android:id="@+id/finishIcon"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_above="@+id/TocDo"
-        android:layout_toRightOf="@+id/tv_buoc"
-        android:layout_toStartOf="@+id/textView"
-        android:src="@drawable/finish_do"
-        android:visibility="invisible" />
-
-    <TextView
-        android:id="@+id/TrangThai"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/progressBar"
-        android:layout_centerHorizontal="true"
-        android:text="Waiting..."
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#fff"
-        android:textSize="29sp"
-        android:textStyle="italic" />
-
-    <ImageView
-        android:layout_marginBottom="5dp"
-        android:src="@drawable/back"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/iv_back"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        />
-
-    <TextView
-        android:textSize="30dp"
+    <RelativeLayout
         android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0 bước"
-        android:id="@+id/tv_buoc"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:id="@+id/rl_bg_tranparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#55000000"></RelativeLayout>
+
+    <RelativeLayout
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/textView"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/theme_progress"
+            android:secondaryProgress="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0/0"
+            android:id="@+id/textView"
+            android:textSize="30sp"
+            android:textColor="#060000"
+            android:singleLine="true"
+            android:longClickable="true"
+            android:layout_below="@+id/progressBar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textIsSelectable="false" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_start"
+            android:src="@drawable/start2"
+            android:onClick="btn_start"
+            android:background="#002b172e"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_row="23"
+            android:layout_column="12" />
+
+        <ImageButton
+            android:layout_marginTop="10dp"
+            android:background="#002b172e"
+            android:layout_marginBottom="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/btn_stop"
+            android:onClick="btn_stop"
+            android:src="@drawable/stop"
+            android:layout_alignBottom="@+id/btn_start"
+            android:layout_alignLeft="@+id/btn_pause"
+            android:layout_alignStart="@+id/btn_pause" />
+
+        <ImageButton
+            android:background="#002b172e"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/btn_pause"
+            android:onClick="btn_pause"
+            android:src="@drawable/pause"
+            android:layout_above="@+id/btn_stop"
+            android:layout_toLeftOf="@+id/btn_start"
+            android:layout_toStartOf="@+id/btn_start" />
+
+        <TextView
+            android:textSize="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0 km"
+            android:id="@+id/tv_km"
+            android:layout_below="@+id/chronometer"
+            android:layout_alignRight="@+id/chronometer"
+            android:layout_alignEnd="@+id/chronometer" />
+
+        <TextView
+            android:id="@+id/TocDo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/textView"
+            android:layout_below="@+id/textView"
+            android:text="Tốc Độ: ? bước / ?  Phút"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="15sp" />
+
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="80sp"
+            android:layout_below="@+id/TocDo"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:id="@+id/finishIcon"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_above="@+id/TocDo"
+            android:layout_toRightOf="@+id/tv_buoc"
+            android:layout_toStartOf="@+id/textView"
+            android:src="@drawable/finish_do"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/TrangThai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/progressBar"
+            android:layout_centerHorizontal="true"
+            android:text="Waiting..."
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#fff"
+            android:textSize="29sp"
+            android:textStyle="italic" />
+
+        <ImageView
+            android:layout_marginBottom="7dp"
+            android:src="@drawable/back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/iv_back"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            />
+
+        <TextView
+            android:textSize="30dp"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0 bước"
+            android:id="@+id/tv_buoc"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:visibility="invisible"
+            android:gravity="center"
+            android:textSize="300dp"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:id="@+id/tv_dem_nguoc"
+            android:layout_below="@+id/TrangThai"
+            android:layout_above="@+id/btn_start"
+            android:layout_toRightOf="@+id/map"
+            android:layout_alignRight="@+id/textView"
+            android:layout_alignEnd="@+id/textView" />
+    </RelativeLayout>
 
 </RelativeLayout>

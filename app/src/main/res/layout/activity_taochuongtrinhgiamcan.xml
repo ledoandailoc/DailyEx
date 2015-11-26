@@ -28,6 +28,8 @@
             android:layout_centerHorizontal="true" />
 
         <EditText
+            android:singleLine="true"
+            android:imeOptions="actionNext"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:id="@+id/txt_chieucao"
@@ -45,6 +47,8 @@
             android:layout_centerHorizontal="true" />
 
         <EditText
+            android:singleLine="true"
+            android:imeOptions="actionDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txt_cannang"

@@ -24,6 +24,7 @@
         android:hint="@string/txtemail"
         android:inputType="textEmailAddress"
         android:singleLine="true"
+        android:imeOptions="actionNext"
         android:text="tuan1@gmail.com" />
 
     <EditText
@@ -38,6 +39,7 @@
         android:hint="@string/edtPassword"
         android:inputType="textPassword"
         android:singleLine="true"
+        android:imeOptions="actionDone"
         android:text="12345" />
 
     <Button

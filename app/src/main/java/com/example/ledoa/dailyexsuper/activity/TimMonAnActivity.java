@@ -10,17 +10,23 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ledoa.dailyexsuper.R;
 import com.example.ledoa.dailyexsuper.adapter.DanhSachMonAnAdapter;
+import com.example.ledoa.dailyexsuper.adapter.UserAdapter;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.MonAn;
+import com.example.ledoa.dailyexsuper.sqlite.DTO.User;
 import com.example.ledoa.dailyexsuper.sqlite.DatabaseHandle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class TimMonAnActivity extends AppCompatActivity {
     SearchView mSvMonAn;
+    ArrayList<MonAn> mStudentListSearching, mStudentList;
+    SearchView searchView;
     ListView mLvMonAn;
     List<MonAn> list;
     String buoi;
@@ -59,14 +65,48 @@ public class TimMonAnActivity extends AppCompatActivity {
             }
         });
 
+        attackSearchView();
     }
 
 
     public void attachButton() {
+    }
 
+    public void attackSearchView(){
+        searchView = (SearchView) findViewById(R.id.sv_monan);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText.toString().toLowerCase(Locale.getDefault()));
+                Toast.makeText(TimMonAnActivity.this, newText.toString().toLowerCase(Locale.getDefault()), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
     }
 
     public void InitView(){
         mLvMonAn = (ListView) findViewById(R.id.lv_monan);
+    }
+
+    public void filter(String charSearching) {
+        mStudentListSearching = new ArrayList<>();
+        charSearching = charSearching.toLowerCase(Locale.getDefault());
+        mStudentListSearching.clear();
+        if (charSearching.length() == 0) {
+            this.mStudentListSearching.addAll(list);
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                if ((list.get(i)).getName().toLowerCase(Locale.getDefault()).contains(charSearching)) {
+                    mStudentListSearching.add(list.get(i));
+                }
+            }
+        }
+        DanhSachMonAnAdapter anAdapter = new DanhSachMonAnAdapter(getBaseContext(), R.layout.item_monan, mStudentListSearching);
+        mLvMonAn.setAdapter(anAdapter);
     }
 }

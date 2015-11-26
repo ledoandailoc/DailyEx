@@ -53,13 +53,11 @@ public class HitDatActivity extends Activity implements SensorEventListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_hitdat);
-			
-	
+
 			v = (TextView) findViewById(R.id.textView);
 	        btn_start = (ImageButton) findViewById(R.id.btn_start);
 	        btn_pause = (ImageButton) findViewById(R.id.btn_pause);
 	        btn_stop = (ImageButton) findViewById(R.id.btn_stop);
-	        editText_sobuoc = (EditText) findViewById(R.id.editText_sobuoc);
 	        test = (TextView) findViewById(R.id.tv_buoc);
 	        status = (TextView) findViewById(R.id.TrangThai);
 	        tocdo = (TextView) findViewById(R.id.TocDo);

@@ -56,6 +56,8 @@
         android:layout_centerHorizontal="true" />
 
     <EditText
+        android:singleLine="true"
+        android:imeOptions="actionDone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/txt_can_nang_muc_tieu"

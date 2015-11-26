@@ -3,154 +3,162 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.dailyex.MainActivity" >
 
-   <ProgressBar
-       android:id="@+id/progressBar"
-       style="?android:attr/progressBarStyleHorizontal"
-       android:layout_width="wrap_content"
-       android:layout_height="38dp"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentStart="true"
-       android:layout_alignRight="@+id/textView"
-       android:indeterminate="false"
-       android:max="100"
-       android:progress="0"
-       android:progressDrawable="@drawable/theme_progress"
-       android:secondaryProgress="0" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000">
+    </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0/0 km"
-        android:id="@+id/textView"
-        android:textSize="30sp"
-        android:textColor="#fff"
-        android:singleLine="true"
-        android:longClickable="true"
-        android:layout_below="@+id/progressBar"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textIsSelectable="false" />
+    <RelativeLayout
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_start"
-        android:src="@drawable/start2"
-        android:onClick="btn_start"
-        android:background="#002b172e"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_row="23"
-        android:layout_column="12" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/textView"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/theme_progress"
+            android:secondaryProgress="0" />
 
-    <ImageButton
-        android:background="#002b172e"
-        android:layout_marginBottom="5dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/btn_stop"
-        android:onClick="btn_stop"
-        android:src="@drawable/stop"
-        android:layout_alignBottom="@+id/btn_start"
-        android:layout_alignLeft="@+id/btn_pause"
-        android:layout_alignStart="@+id/btn_pause" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0/0 km"
+            android:id="@+id/textView"
+            android:textSize="30sp"
+            android:textColor="#fff"
+            android:singleLine="true"
+            android:longClickable="true"
+            android:layout_below="@+id/progressBar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textIsSelectable="false" />
 
-    <ImageView
-        android:visibility="invisible"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="6dp"
-        android:id="@+id/finishIcon"
-        android:src="@drawable/finish_do"
-        android:contentDescription=""
-        android:layout_alignTop="@+id/textView"
-        android:layout_toLeftOf="@+id/textView"
-        android:layout_toStartOf="@+id/textView" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_start"
+            android:src="@drawable/start2"
+            android:onClick="btn_start"
+            android:background="#002b172e"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_row="23"
+            android:layout_column="12" />
+
+        <ImageButton
+            android:background="#002b172e"
+            android:layout_marginBottom="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/btn_stop"
+            android:onClick="btn_stop"
+            android:src="@drawable/stop"
+            android:layout_alignBottom="@+id/btn_start"
+            android:layout_alignLeft="@+id/btn_pause"
+            android:layout_alignStart="@+id/btn_pause" />
+
+        <ImageView
+            android:visibility="invisible"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="6dp"
+            android:id="@+id/finishIcon"
+            android:src="@drawable/finish_do"
+            android:contentDescription=""
+            android:layout_alignTop="@+id/textView"
+            android:layout_toLeftOf="@+id/textView"
+            android:layout_toStartOf="@+id/textView" />
 
 
 
-    <ImageButton
-        android:layout_marginTop="10dp"
-        android:background="#002b172e"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/btn_pause"
-        android:onClick="btn_pause"
-        android:src="@drawable/pause"
-        android:layout_alignTop="@+id/btn_start"
-        android:layout_toLeftOf="@+id/btn_start"
-        android:layout_toStartOf="@+id/btn_start" />
+        <ImageButton
+            android:layout_marginTop="10dp"
+            android:background="#002b172e"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/btn_pause"
+            android:onClick="btn_pause"
+            android:src="@drawable/pause"
+            android:layout_alignTop="@+id/btn_start"
+            android:layout_toLeftOf="@+id/btn_start"
+            android:layout_toStartOf="@+id/btn_start" />
 
-    <TextView
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="test"
-        android:id="@+id/tv_buoc"
-        android:layout_below="@+id/finishIcon"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="test"
+            android:id="@+id/tv_buoc"
+            android:layout_below="@+id/finishIcon"
+            android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:id="@+id/TocDo"
-        android:textColor="#fff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView"
-        android:layout_below="@+id/textView"
-        android:text="Tốc Độ: ? bước / ?  Phút"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="15sp" />
+        <TextView
+            android:id="@+id/TocDo"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/textView"
+            android:layout_below="@+id/textView"
+            android:text="Tốc Độ: 0 km / 0  Phút"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/TrangThai"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/finishIcon"
-        android:layout_centerHorizontal="true"
-        android:text="Waiting..."
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#fff"
-        android:textSize="29sp"
-        android:textStyle="italic" />
+        <TextView
+            android:id="@+id/TrangThai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/finishIcon"
+            android:layout_centerHorizontal="true"
+            android:text="Waiting..."
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#fff"
+            android:textSize="29sp"
+            android:textStyle="italic" />
 
-    <Chronometer
-        android:textColor="#fff"
-        android:id="@+id/chronometer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/TocDo"
-        android:layout_below="@+id/tv_buoc"
-        android:textSize="80sp" />
+        <Chronometer
+            android:textColor="#fff"
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/TocDo"
+            android:layout_below="@+id/tv_buoc"
+            android:textSize="80sp" />
 
-    <TextView
-        android:textSize="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0 km"
-        android:id="@+id/tv_km"
-        android:textColor="#fff"
-        android:layout_below="@+id/chronometer"
-        android:layout_alignRight="@+id/chronometer"
-        android:layout_alignEnd="@+id/chronometer" />
+        <TextView
+            android:textSize="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0 km"
+            android:id="@+id/tv_km"
+            android:textColor="#fff"
+            android:layout_below="@+id/chronometer"
+            android:layout_alignRight="@+id/chronometer"
+            android:layout_alignEnd="@+id/chronometer" />
 
-    <ImageView
-        android:layout_marginBottom="5dp"
-        android:src="@drawable/back"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/iv_back"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <ImageView
+            android:layout_marginBottom="7dp"
+            android:src="@drawable/back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/iv_back"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
 </RelativeLayout>

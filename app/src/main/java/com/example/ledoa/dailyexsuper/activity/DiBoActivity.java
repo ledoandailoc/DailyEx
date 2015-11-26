@@ -11,6 +11,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ import com.example.ledoa.dailyexsuper.util.DoiGioPhutGiay;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class DiBoActivity extends FragmentActivity implements SensorEventListener {
@@ -39,10 +42,13 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
 
     SensorManager sensorManager;
     Sensor accelerometer;
-    
+    MediaPlayer mp;
+
+    RelativeLayout rlBackgroundTranparent;
     TextView v;
     EditText editText_sobuoc;
     ImageView finish_icon;
+    TextView tvDemNguoc;
     ImageButton btn_stop;
     ImageButton btn_pause;
     ImageButton btn_start;
@@ -58,6 +64,8 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
 
     Handler handler;
     Runnable mHandlerTask;
+    Handler handler_dem;
+    int i = 7;
 
     boolean finish = false;
     boolean click = false;
@@ -103,11 +111,12 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
 	        btn_start = (ImageButton) findViewById(R.id.btn_start);
 	        btn_pause = (ImageButton) findViewById(R.id.btn_pause);
 	        btn_stop = (ImageButton) findViewById(R.id.btn_stop);
-	        editText_sobuoc = (EditText) findViewById(R.id.editText_sobuoc);
 	        test = (TextView) findViewById(R.id.tv_buoc);
 	        status = (TextView) findViewById(R.id.TrangThai);
 	        tocdo = (TextView) findViewById(R.id.TocDo);
             tvQuangDuong = (TextView) findViewById(R.id.tv_km);
+            tvDemNguoc = (TextView) findViewById(R.id.tv_dem_nguoc);
+            rlBackgroundTranparent = (RelativeLayout) findViewById(R.id.rl_bg_tranparent);
 	        
 	        finish_icon = (ImageView) findViewById(R.id.finishIcon);
 	        progresss_bar = (ProgressBar) findViewById(R.id.progressBar);
@@ -195,7 +204,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
                     tocdo.setText(SoLanLac + " Bước / " + DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
                     choChronometer.stop();
                     finish = true;
-/*
+/*00
                     if (!IdBaiTap.equals("")) {
 */
                         databaseHandle.updateBaiTap(IdBaiTap);
@@ -225,32 +234,11 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
     }
 
     public void btn_start(View v1) {
-        click = true;
-        statusCheck();
-        if(intDemNguocStart == 1){
-            stopRepeatingTask();
-            startRepeatingTask();
-            status.setText("Walking...");
-            if (ButtonVuaNhan.equals("start")) return;
-            choChronometer.start();
-            thoiGianTruocKhiLac = System.currentTimeMillis();
 
-            if (ButtonVuaNhan.equals("pause")) {
-                choChronometer.setBase(SystemClock.elapsedRealtime() +  time);
-            } else {
-                time = 0;
-                TongThoiGian = -time/1000;
-                choChronometer.setBase(SystemClock.elapsedRealtime());
-                SoLanLac = 0 ;
-                tocdo.setText(SoLanLac + " Bước / " + DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
-            }
+        if (ButtonVuaNhan.equals("start")) return;
+        DemNguoc();
 
-            progresss_bar.setMax(MucTieu);
 
-            ButtonVuaNhan = "start";
-
-            intDemNguocStart = 0;
-        }
     }
 
     public void btn_stop(View v1) {
@@ -264,6 +252,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
             time = choChronometer.getBase() - SystemClock.elapsedRealtime();
             TongThoiGian = -time/1000;
             tocdo.setText(SoLanLac + " Bước / " + DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
+            test.setText("0 bước");
 		}
 
        /* time = 0;
@@ -313,10 +302,12 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
                 }
                 kinhdo = latitude;
                 vido = longitude;
-                //if(SumDistance > 20){
+                if(SumDistance > 100){
+/*
                     Toast.makeText(DiBoActivity.this, "Di duoc" + SumDistance + " " + s, Toast.LENGTH_SHORT).show();
-                tvQuangDuong.setText(String.valueOf(SumDistance) + " km");
-                //}
+*/
+                   tvQuangDuong.setText(String.valueOf(Math.round(SumDistance * 100.0) / 100.0) + " m");
+                }
                } else {
                 Toast.makeText(DiBoActivity.this, "Chua lay duoc vi tri", Toast.LENGTH_SHORT).show();
             }
@@ -394,5 +385,96 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
     void stopRepeatingTask()
     {
         handler.removeCallbacks(mHandlerTask);
+    }
+
+    void DemNguoc(){
+
+        setInvisibleTextView();
+        handler_dem = new Handler();
+        handler_dem.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                CreateLocation();
+                handler_dem = new Handler();
+
+                if (i == 7) {
+                    // Audio
+                    mp = MediaPlayer.create(getBaseContext(), R.raw.countdowm_cut);
+                    mp.start();
+                    tvDemNguoc.setText("5");
+                    i--;
+                } else if(i == 6) {
+                    tvDemNguoc.setText("4");
+                    i--;
+                } else if(i == 5) {
+                    tvDemNguoc.setText("3");
+                    i--;
+                } else if (i == 4) {
+                    tvDemNguoc.setText("2");
+                    i--;
+                } else if (i == 3) {
+                    tvDemNguoc.setText("1");
+                    i--;
+                } else if (i == 2){
+                    tvDemNguoc.setText("Go");
+                    i--;
+                }
+                else if (i == 1){
+                    mp.stop();
+                    click = true;
+                    statusCheck();
+                    setVisibleTextView();
+                    stopRepeatingTask();
+                    startRepeatingTask();
+                    status.setText("Walking...");
+                    if (ButtonVuaNhan.equals("start")) return;
+                    choChronometer.start();
+                    thoiGianTruocKhiLac = System.currentTimeMillis();
+
+                    if (ButtonVuaNhan.equals("pause")) {
+                        choChronometer.setBase(SystemClock.elapsedRealtime() + time);
+                    } else {
+                        time = 0;
+                        TongThoiGian = -time / 1000;
+                        choChronometer.setBase(SystemClock.elapsedRealtime());
+                        SoLanLac = 0;
+                        tocdo.setText(SoLanLac + " Bước / " + DoiGioPhutGiay.GiaySangPhut(TongThoiGian));
+
+                    }
+
+                    progresss_bar.setMax(MucTieu);
+
+                    ButtonVuaNhan = "start";
+
+                    intDemNguocStart = 0;
+                }
+                handler_dem.postDelayed(this, 1000);
+            }
+        }, 1000);
+    }
+
+    public void setInvisibleTextView(){
+        tvQuangDuong.setVisibility(View.INVISIBLE);
+        test.setVisibility(View.INVISIBLE);
+        status.setVisibility(View.INVISIBLE);
+        tocdo.setVisibility(View.INVISIBLE);
+        v.setVisibility(View.INVISIBLE);
+        choChronometer.setVisibility(View.INVISIBLE);
+
+        rlBackgroundTranparent.setVisibility(View.VISIBLE);
+        tvDemNguoc.setVisibility(View.VISIBLE);
+    }
+
+    public void setVisibleTextView(){
+        tvQuangDuong.setVisibility(View.VISIBLE);
+        test.setVisibility(View.VISIBLE);
+        status.setVisibility(View.VISIBLE);
+        tocdo.setVisibility(View.VISIBLE);
+        v.setVisibility(View.VISIBLE);
+        choChronometer.setVisibility(View.VISIBLE);
+
+        rlBackgroundTranparent.setVisibility(View.INVISIBLE);
+        tvDemNguoc.setVisibility(View.INVISIBLE);
     }
 }

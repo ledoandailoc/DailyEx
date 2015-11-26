@@ -49,7 +49,6 @@ public class DanhBaActivity extends Activity {
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-
 				return false;
 			}
 

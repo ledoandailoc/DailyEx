@@ -29,6 +29,8 @@
             android:layout_centerHorizontal="true" />
 
         <EditText
+            android:singleLine="true"
+            android:nextFocusUp="@id/txt_cannang"
             android:textColor="#fff"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -47,6 +49,8 @@
             android:layout_centerHorizontal="true" />
 
         <EditText
+            android:singleLine="true"
+            android:imeOptions="actionDone"
             android:textColor="#fff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

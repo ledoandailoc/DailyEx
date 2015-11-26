@@ -1,5 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:background="@drawable/room2"
+     android:background="@drawable/bg_dap_xe"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0/0"
+        android:text="0/10"
         android:id="@+id/textView"
         android:textSize="30sp"
         android:textColor="#060000"
@@ -50,33 +50,6 @@
         android:layout_alignParentEnd="true"
         android:layout_row="23"
         android:layout_column="12" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-
-        android:text="Mục tiêu: "
-        android:textColor="#060000"
-        android:id="@+id/textView2"
-        android:layout_gravity="center_vertical"
-        style="@style/AppTheme"
-        android:layout_above="@+id/btn_start"
-        android:layout_alignLeft="@+id/btn_pause"
-        android:layout_alignStart="@+id/btn_pause" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText_sobuoc"
-        android:layout_marginLeft="-6dp"
-        android:text="100"
-        android:paddingTop="0dp"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
-        android:textColor="#fff" 
-        android:maxLength="4"/>
 
     <ImageButton
         android:background="#002b172e"
@@ -106,14 +79,14 @@
 
 
     <ImageButton
+        android:layout_marginTop="10dp"
         android:background="#002b172e"
         android:layout_width="50dp"
-        android:layout_marginTop="5px"
         android:layout_height="50dp"
         android:id="@+id/btn_pause"
         android:onClick="btn_pause"
         android:src="@drawable/pause"
-        android:layout_below="@+id/editText_sobuoc"
+        android:layout_alignTop="@+id/btn_start"
         android:layout_toLeftOf="@+id/btn_start"
         android:layout_toStartOf="@+id/btn_start" />
 
@@ -133,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textView"
         android:layout_below="@+id/textView"
-        android:text="Tốc Độ: ? bước / ?  Phút"
+        android:text="Tốc Độ: 0 Km / 0  Phút"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="15sp" />
 
@@ -149,18 +122,6 @@
         android:textSize="29sp"
         android:textStyle="italic" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editText_sobuoc"
-        android:layout_toEndOf="@+id/editText_sobuoc"
-        android:layout_toRightOf="@+id/editText_sobuoc"
-        android:text="bước"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#060000"
-        android:textIsSelectable="true" />
-
     <Chronometer
         android:id="@+id/chronometer"
         android:layout_width="wrap_content"
@@ -168,5 +129,15 @@
         android:layout_alignRight="@+id/TocDo"
         android:layout_below="@+id/tv_buoc"
         android:textSize="80sp" />
+
+    <ImageView
+        android:layout_marginBottom="7dp"
+        android:src="@drawable/back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/iv_back"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

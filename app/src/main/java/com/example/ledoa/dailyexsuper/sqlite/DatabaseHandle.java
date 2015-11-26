@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
@@ -16,10 +17,19 @@ import com.example.ledoa.dailyexsuper.sqlite.DTO.DonVi;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.LanTap;
 import com.example.ledoa.dailyexsuper.sqlite.DTO.MonAn;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHandle extends SQLiteOpenHelper {
+
+	SQLiteDatabase myDataBase;
+	String DATABASE_PATH = "/data/data/com.example.ledoa.dailyexsuper/databases/";
 
 	private static String DATABASE_NAME = "DailyExcercise";
 	private static int DATABASE_VERSION = 4 ;
@@ -72,187 +82,16 @@ public class DatabaseHandle extends SQLiteOpenHelper {
 	public DatabaseHandle(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		this.context = context;
-	}
-
-	/*
-	Auto insertdata
-	*/
-	public void autoInsertDataBase()
-	{
-		getWritableDatabase().execSQL((new StringBuilder())
-				.append("INSERT INTO ")
-				.append(TABLE_MONTAP)
-				.append(" (Ngay, IdMonTap, TongThoiGian, SoDongTac, TocDoCaoNhat, TocDoTrungBinh, Calo)")
-				.append(" VALUES")
-				.append(" ('02-07-2015 11:22:33', 'DB', 300, 2, 3.0, 1.5, 0),")
-				.append(" ('17-11-2015 11:22:33', 'DB', 500, 2, 3.0, 1.5, 0),")
-				.append(" ('17-11-2015 11:22:33', 'CB', 500, 2, 3.0, 1.5, 0),")
-				.append(" ('17-11-2015 11:22:33', 'DX', 600, 2, 3.0, 1.5, 0),")
-				.append(" ('17-11-2015 11:22:33', 'HD', 200, 2, 3.0, 1.5, 0),")
-				.append(" ('17-11-2015 11:22:33', 'DX', 400, 2, 3.0, 1.5, 0),")
-				.append(" ('08-07-2015 11:22:33', 'DB', 2000, 2, 3.0, 1.5, 0),")
-				.append(" ('09-07-2015 11:22:33', 'DB', 3600, 2, 3.0, 1.5, 0),")
-				.append(" ('15-07-2015 11:22:33', 'DB', 1000, 2, 3.0, 1.5, 0),")
-				.append(" ('31-07-2015 11:22:33', 'CB', 500, 2, 3.0, 1.0, 0);")
-				.toString());
-
-
-		getWritableDatabase().execSQL((new StringBuilder())
-				.append("INSERT INTO ")
-				.append(TABLE_BAITAP)
-				.append(" (LoaiMucTieu, TenBaiTap, LoaiBaiTap, MucTieu, HoanThanh)")
-				.append(" VALUES")
-				.append(" ('B', 'Đi bộ 100 bước', 'DB', 100, 1),")
-				.append(" ('B', 'Đi bộ 200 bước', 'DB', 200, 1),")
-				.append(" ('B', 'Đi bộ 300 bước', 'DB', 300, 0),")
-				.append(" ('B', 'Đi bộ 400 bước', 'DB', 400, 0),")
-				.append(" ('B', 'Đi bộ 500 bước', 'DB', 400, 0),")
-
-				.append(" ('TG', 'Đi bộ 20 phút', 'DB', 1200, 0),")
-				.append(" ('TG', 'Đi bộ 30 phút', 'DB', 1800, 1),")
-				.append(" ('TG', 'Đi bộ 40 phút ', 'DB', 2400, 0),")
-				.append(" ('TG', 'Đi bộ 50 phút', 'DB', 3000, 0);")
-				.toString());
-
-		getWritableDatabase().execSQL((new StringBuilder())
-				.append("INSERT INTO ")
-				.append(TABLE_CHUONGTRINHGIAMCAN)
-				.append(" (TenChuongTrinh, NoiDungChuongTrinh, NgayTaoChuongTrinh, MaMonTap, CanNangHienTai, CanNangMucTieu, SoCanNangCatGiam, SoGioMoiNgay, SoNgayTap, TienDo)")
-				.append(" VALUES")
-				.append(" ('Đi bộ giảm cân', 'Đi bộ mỗi ngày 1.2 giờ trong vòng 56 ngày', '01-07-2015 11:22:33', 'DB', 70, 66, 5, 1.2, 56, 56),")
-				.append(" ('Đi bộ giảm cân', 'Đi bộ mỗi ngày 0.001 giờ trong vòng 56 ngày', '01-07-2015 11:22:33', 'DB', 70, 66, 5, 0.001, 56, 0);")
-				.toString());
-
-		getWritableDatabase().execSQL((new StringBuilder())
-				.append("INSERT INTO ")
-				.append(TABLE_CHUONGTRINHTANGSUCBEN)
-				.append(" (TenChuongTrinh, MaMonTap, NoiDungChuongTrinh, MucTieuQuangDuong, MucTieuThoiGian, HoanThanh, Tuan)")
-				.append(" VALUES")
-				.append(" ('2.5 km Đi bộ/Chạy bộ', 'DBCB', 'Chạy Chậm 2,5 km mệt thì đi bộ nhanh', 2500, 0, 1, 1),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ (tuyệt đối không chạy 2 ngày liên tiếp)', 0, 0, 1, 1),")
-				.append(" ('2.5 km Đi bộ/Chạy bộ', 'DBCB', 'Chạy Chậm 2,5 km mệt thì đi bộ nhanh', 2500, 0, 1, 1),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 1),")
-				.append(" ('2.5 km Đi bộ/Chạy bộ', 'DBCB', 'Cố Chạy Chậm 2,5 km hạn chế đi bộ', 2500, 0, 0, 1),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 1),")
-				.append(" ('40 - 45 phút Đi bộ', 'DB', 'Đi bộ nhanh trong vòng 45 phút không nghỉ', 0, 2700, 0, 1),")
-
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 2),")
-				.append(" ('3 km Chạy bộ', 'CB', 'Chạy Chậm ít nhất 3 km, hạn chế đi bộ', 3000, 0, 0, 2),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 2),")
-				.append(" ('3 km Chạy bộ', 'CB', 'Chạy Chậm ít nhất 3 km, hạn chế đi bộ', 3000, 0, 0, 2),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 2),")
-				.append(" ('3 km Chạy bộ', 'CB', 'Chạy Chậm ít nhất 3 km, hạn chế đi bộ', 3000, 0, 0, 2),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 2),")
-
-				.append(" ('45 phút Đi bộ', 'DB', 'Đi bộ nhanh trong vòng 45 phút không nghỉ', 0, 2700, 0, 3),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 3),")
-				.append(" ('3.4 km Chạy bộ', 'CB', 'Chạy Chậm ít nhất 3.4 km, hạn chế đi bộ', 3400, 0, 0, 3),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 3),")
-				.append(" ('3.4 km Chạy bộ', 'CB', 'Chạy Chậm ít nhất 3.4 km, hạn chế đi bộ', 3400, 0, 0, 3),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 3),")
-				.append(" ('3.4 km Chạy bộ', 'CB', 'Chạy Chậm ít nhất 3.4 km, hạn chế đi bộ', 3400, 0, 0, 3),")
-
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 4),")
-				.append(" ('50 phút Đi bộ', 'DB', 'Đi bộ nhanh trong vòng 50 phút không nghỉ', 0, 3000, 0, 4),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 4),")
-				.append(" ('4 km Chạy bộ', 'CB', 'Chạy Chậm 4 km', 4000, 0, 0, 4),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 4),")
-				.append(" ('4 km Chạy bộ', 'CB', 'Chạy Chậm 4 km', 4000, 0, 0, 4),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 4),")
-
-				.append(" ('4 km Chạy bộ', 'CB', 'Chạy Chậm 5 km', 4000, 0, 0, 5),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 5),")
-				.append(" ('5 km Chạy bộ', 'CB', 'Chạy Chậm 5 km', 5000, 0, 0, 5),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 5),")
-				.append(" ('5 km Chạy bộ', 'CB', 'Chạy Chậm 5 km', 5000, 0, 0, 5),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 5),")
-				.append(" ('50 phút Đi bộ', 'DB', 'Đi bộ nhanh trong vòng 50 phút không nghỉ', 0, 3000, 0, 5),")
-
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 6),")
-				.append(" ('5 km Chạy bộ', 'CB', 'Chạy Chậm 5 km', 5000, 0, 0, 6),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 6),")
-				.append(" ('6 km Chạy bộ', 'CB', 'Chạy Chậm 6 km', 6000, 0, 0, 6),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 6),")
-				.append(" ('6 km Chạy bộ', 'CB', 'Chạy Chậm 6 km', 6000, 0, 0, 6),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 6),")
-
-				.append(" ('50 - 55 phút Đi bộ', 'DB', 'Đi bộ nhanh trong vòng 55 phút không nghỉ', 0, 3300, 0, 7),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 7),")
-				.append(" ('7 km Chạy bộ', 'CB', 'Chạy Chậm 7 km', 7000, 0, 0, 7),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 7),")
-				.append(" ('7 km Chạy bộ', 'CB', 'Chạy Chậm 7 km', 7000, 0, 0, 7),")
-				.append(" ('Nghỉ ngơi', '', 'Nghĩ hoặc tập tạ hoặc đi bộ, bơi lội...', 0, 0, 0, 7),")
-				.append(" ('> 7 km Chạy bộ', 'CB', 'Chạy Chậm 7 km', 7000, 0, 0, 7);")
-
-				.toString());
-
 
 	}
+
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		//db.execSQL("drop table if exists " + TABLE_MONTAP);
-		String taoMonTap = "create table " + TABLE_MONTAP
-				+ " ( "
-				+ KEY_ID + " Integer primary key AUTOINCREMENT, "
-				+ KEY_IDMONTAP + " text, "
-				+ KEY_NGAYTAP + " text, "
-				+ KEY_TONGTHOIGIAN + " Integer, "
-				+ KEY_SODONGTAC + " Integer, "
-				+ KEY_TOCDOCAONHAT + " Real, "
-				+ KEY_TOCDOTRUNGBINH + " Real, "
-				+ KEY_CALO + " Integer"
-				+ " ) ";
-
-		String taoBangBaiTap = "create table " + TABLE_BAITAP
-				+ " ( "
-				+ KEY_IDBAITAP +" Integer primary key AUTOINCREMENT, "
-				+ KEY_LOAIMUCTIEU +" text, "
-				+ KEY_TENBAITAP + " text, "
-				+ KEY_LOAIBAITAP + " text, "
-				+ KEY_MUCTIEU + " Integer, "
-				+ KEY_HOANTHANH + " Integer "
-				+ " ) ";
-
-		String taoChuongTrinhTap = "create table " + TABLE_CHUONGTRINHTANGSUCBEN
-				+ " ( "
-				+ KEY_IDCHUONGTRINH +" Integer primary key AUTOINCREMENT, "
-				+ KEY_TENCHUONGTRINH + " text, "
-				+ KEY_MAMONTAP + " text, "
-				+ KEY_NOIDUNGCHUONGTRINH +" text, "
-				+ KEY_MUCTIEUQUANGDUONG + " Integer, "
-				+ KEY_MUCTIEUTHOIGIAN + " Integer, "
-				+ KEY_HOANTHANH + " Integer, "
-				+ KEY_TUAN + " Integer "
-				+ " ) ";
-
-		String taoChuongTrinhTangSucBen = "create table " + TABLE_CHUONGTRINHGIAMCAN
-				+ " ( "
-				+ KEY_IDCHUONGTRINH +" Integer primary key AUTOINCREMENT, "
-				+ KEY_TENCHUONGTRINH + " text, "
-				+ KEY_NOIDUNGCHUONGTRINH +" text, "
-				+ KEY_NGAYTAOCHUONGTRINH + " text, "
-				+ KEY_MAMONTAP + " text, "
-				+ KEY_CANNANGHIENTAI + " Integer, "
-				+ KEY_CANNANGMUCTIEU + " Integer, "
-				+ KEY_SOCANNANGCATGIAM + " Integer, "
-				+ KEY_SOGIOMOINGAY + " Real, "
-				+ KEY_SONGAYTAP + " Integer, "
-				+ KEY_TIENDO + " Integer "
-				+ " ) ";
-
-		db.execSQL(taoMonTap);
-		db.execSQL(taoBangBaiTap);
-		db.execSQL(taoChuongTrinhTap);
-		db.execSQL(taoChuongTrinhTangSucBen);
-
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		db.execSQL("drop table if exists " + TABLE_MONTAP);
-		db.execSQL("drop table if exists " + TABLE_BAITAP);
-		onCreate(db);
 	}
 
 	/*
@@ -669,6 +508,80 @@ public class DatabaseHandle extends SQLiteOpenHelper {
 			Toast.makeText(context, "Thêm thất bại!", Toast.LENGTH_SHORT).show();
 		}
 		db.close();
+	}
+
+	/**
+	 * This method will create database in application package /databases
+	 * directory when first time application launched
+	 **/
+	public void createDataBase() throws IOException {
+		boolean mDataBaseExist = checkDataBase();
+		if (!mDataBaseExist) {
+			this.getReadableDatabase();
+			try {
+				copyDataBase();
+			} catch (IOException mIOException) {
+				mIOException.printStackTrace();
+				throw new Error("Error copying database");
+			} finally {
+				this.close();
+			}
+		}
+	}
+
+	/** This method checks whether database is exists or not **/
+	private boolean checkDataBase() {
+		try {
+			final String mPath = DATABASE_PATH + DATABASE_NAME;
+			final File file = new File(mPath);
+			if (file.exists())
+				return true;
+			else
+				return false;
+		} catch (SQLiteException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * This method will copy database from /assets directory to application
+	 * package /databases directory
+	 **/
+	private void copyDataBase() throws IOException {
+		try {
+
+			InputStream mInputStream = context.getAssets().open(DATABASE_NAME);
+			String outFileName = DATABASE_PATH + DATABASE_NAME;
+			OutputStream mOutputStream = new FileOutputStream(outFileName);
+			byte[] buffer = new byte[1024];
+			int length;
+			while ((length = mInputStream.read(buffer)) > 0) {
+				mOutputStream.write(buffer, 0, length);
+			}
+			mOutputStream.flush();
+			mOutputStream.close();
+			mInputStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/** This method open database for operations **/
+	public boolean openDataBase() throws SQLException {
+		String mPath = DATABASE_PATH + DATABASE_NAME;
+		 myDataBase = SQLiteDatabase.openDatabase(mPath, null,
+				SQLiteDatabase.OPEN_READWRITE);
+		return myDataBase.isOpen();
+	}
+
+	/** This method close database connection and released occupied memory **/
+	@Override
+	public synchronized void close() {
+		if (myDataBase != null)
+			myDataBase.close();
+		SQLiteDatabase.releaseMemory();
+		super.close();
 	}
 
 }
