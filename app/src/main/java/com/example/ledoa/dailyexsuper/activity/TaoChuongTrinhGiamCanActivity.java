@@ -40,6 +40,7 @@ public class TaoChuongTrinhGiamCanActivity extends AppCompatActivity {
                 intent.putExtra("canNangHienTai", canNangHienTai);
                 intent.putExtra("canNangMucTieu", canNangMucTieu);
                 startActivity(intent);
+                finish();
             }
         });
 

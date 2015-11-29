@@ -46,6 +46,7 @@ public class MySocket {
         UserPref userPref = new UserPref();
         /*Log.d(TAG, userPref.getUser().token);*/
         try {
+
             mSocket = IO.socket(MainApplication.getContext().getString(R.string.base_url) + "/?token=" + userPref.getUser().token);
             mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
             mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectTimeout);
