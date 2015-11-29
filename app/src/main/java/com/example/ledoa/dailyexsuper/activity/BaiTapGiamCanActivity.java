@@ -61,6 +61,7 @@ public class BaiTapGiamCanActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(BaiTapGiamCanActivity.this, TaoChuongTrinhGiamCanActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

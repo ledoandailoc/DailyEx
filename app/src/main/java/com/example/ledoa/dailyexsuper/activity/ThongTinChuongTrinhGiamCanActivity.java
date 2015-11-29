@@ -65,6 +65,7 @@ public class ThongTinChuongTrinhGiamCanActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ThongTinChuongTrinhGiamCanActivity.this, ChuongTrinhGiamCan.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -89,6 +90,7 @@ public class ThongTinChuongTrinhGiamCanActivity extends AppCompatActivity {
                 databaseHandle.addChuongTrinhGiamCan(chuongTrinhGiamCan);
                 Intent intent = new Intent(ThongTinChuongTrinhGiamCanActivity.this, BaiTapGiamCanActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

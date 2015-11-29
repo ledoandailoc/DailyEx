@@ -45,7 +45,7 @@ public class MySocket {
         UserPref userPref = new UserPref();
         /*Log.d(TAG, userPref.getUser().token);*/
         try {
-            mSocket = IO.socket("http://192.168.198.1:3000" + "/?token=" + userPref.getUser().token);
+            mSocket = IO.socket("http://128.199.157.4:3000" + "/?token=" + userPref.getUser().token);
             mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
             mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectTimeout);
             mSocket.on(Socket.EVENT_CONNECT, onConnect);
