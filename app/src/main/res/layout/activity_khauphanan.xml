@@ -74,7 +74,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20.76"
+                        android:text="22.49"
                         android:id="@+id/tv_bmi"
                         android:textColor="#fff"
                         android:textStyle="bold"
@@ -166,7 +166,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2423 calo"
+                        android:text="2509 calo"
                         android:id="@+id/tv_tdee"
                         android:textColor="#fff"
                         android:textStyle="bold"
@@ -175,7 +175,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mỗi ngày bạn cần nạp vào 2423 calo để đạt được cân nặng mục tiêu"
+                        android:text="Mỗi ngày bạn cần nạp vào 2509 calo để đạt được cân nặng mục tiêu"
                         android:id="@+id/textView26"
                         android:textColor="#9c9c9c" />
                 </LinearLayout>
