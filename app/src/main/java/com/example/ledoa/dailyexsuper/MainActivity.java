@@ -182,7 +182,13 @@ public class MainActivity extends AppCompatActivity {
                         thongBaoPref.setListUser(null);
                         newPref.setListUser(null, "new");
                         MainApplication.getMySocket().disconnectSocket();
-                        startActivity(mIntenLogin);
+                        //startActivity(mIntenLogin);
+                        Intent intent = new Intent(MainActivity.this,
+                                LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
                         break;
                 }
             }

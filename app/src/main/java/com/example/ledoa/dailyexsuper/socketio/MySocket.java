@@ -5,6 +5,7 @@ import android.nfc.Tag;
 import android.util.Log;
 
 import com.example.ledoa.dailyexsuper.MainApplication;
+import com.example.ledoa.dailyexsuper.R;
 import com.example.ledoa.dailyexsuper.connection.response.ChatResponse;
 
 import com.example.ledoa.dailyexsuper.util.Constant;
@@ -45,7 +46,7 @@ public class MySocket {
         UserPref userPref = new UserPref();
         /*Log.d(TAG, userPref.getUser().token);*/
         try {
-            mSocket = IO.socket("http://192.168.198.1:3000" + "/?token=" + userPref.getUser().token);
+            mSocket = IO.socket(MainApplication.getContext().getString(R.string.base_url) + "/?token=" + userPref.getUser().token);
             mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
             mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectTimeout);
             mSocket.on(Socket.EVENT_CONNECT, onConnect);
@@ -64,6 +65,7 @@ public class MySocket {
     }
 
     public void disconnectSocket() {
+        mSocket.disconnect();
         if (mSocket != null) {
             mSocket.disconnect();
             mSocket.off(Socket.EVENT_CONNECT_ERROR, onConnectError);
