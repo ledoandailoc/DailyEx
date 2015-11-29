@@ -42,7 +42,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     String mTextMenuLeft[] = {"Khẩu phần ăn và các chỉ số cơ thể", "Thông báo mới","Thêm bạn", "Danh bạ","Cài đặt riêng tư","Thoát"};
-    int mIconMenuLeft[] = {R.drawable.icon_thongbao,R.drawable.icon_thongbao, R.drawable.icon_tab_timban_nau, R.drawable.icon_danhba,
+    int mIconMenuLeft[] = {R.drawable.icon_meal,R.drawable.icon_thongbao, R.drawable.icon_tab_timban_nau, R.drawable.icon_danhba,
             R.drawable.icon_caidat, R.drawable.icon_logout};
     TextView mTvTabLuyenTap, mTvTabLichTap, mTvTabBaiTap, mTvTabMangXaHoi, mTvActionBarTitle, mTvUsernameMenuLeft;
     ImageView mIvTabLuyenTap, mIvTabLichTap, mIvTabBaiTap, mIvTabMangXaHoi, mIvTabMenuLeft, mIvAvatarMenuLeft;
@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-  /*      MainApplication.setMySocket(new MySocket(this));
-        MainApplication.getMySocket().connectSocket();*/
+        MainApplication.setMySocket(new MySocket(this));
+        MainApplication.getMySocket().connectSocket();
         mUserPref = new UserPref();
         themBanPref = new ThemBanPref();
         thongBaoPref = new ThongBaoPref();
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         attachActionbar();
-        /*attachMenuHeader();*/
+        attachMenuHeader();
         attachMenu();
         attachFragment();
         attachTab();

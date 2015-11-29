@@ -45,10 +45,11 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
     MediaPlayer mp;
 
     RelativeLayout rlBackgroundTranparent;
+
+
     TextView v;
     EditText editText_sobuoc;
     ImageView finish_icon;
-    TextView tvDemNguoc;
     ImageButton btn_stop;
     ImageButton btn_pause;
     ImageButton btn_start;
@@ -57,6 +58,8 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
     TextView status;
     TextView tocdo;
     TextView tvQuangDuong;
+    TextView tvDemNguoc;
+
     private GoogleMap mMap;
     Location myLocation;
     ArrayList<String> dLatitude, dLongitude;
@@ -114,10 +117,11 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
 	        test = (TextView) findViewById(R.id.tv_buoc);
 	        status = (TextView) findViewById(R.id.TrangThai);
 	        tocdo = (TextView) findViewById(R.id.TocDo);
+
             tvQuangDuong = (TextView) findViewById(R.id.tv_km);
             tvDemNguoc = (TextView) findViewById(R.id.tv_dem_nguoc);
             rlBackgroundTranparent = (RelativeLayout) findViewById(R.id.rl_bg_tranparent);
-	        
+
 	        finish_icon = (ImageView) findViewById(R.id.finishIcon);
 	        progresss_bar = (ProgressBar) findViewById(R.id.progressBar);
 	        choChronometer = (Chronometer) findViewById(R.id.chronometer);
@@ -235,9 +239,9 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
 
     public void btn_start(View v1) {
 
-        if (ButtonVuaNhan.equals("start")) return;
+        click = true;
+        statusCheck();
         DemNguoc();
-
 
     }
 
@@ -389,7 +393,10 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
 
     void DemNguoc(){
 
+
         setInvisibleTextView();
+
+
         handler_dem = new Handler();
         handler_dem.postDelayed(new Runnable() {
 
@@ -397,6 +404,7 @@ public class DiBoActivity extends FragmentActivity implements SensorEventListene
             public void run() {
                 CreateLocation();
                 handler_dem = new Handler();
+
 
                 if (i == 7) {
                     // Audio
